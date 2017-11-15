@@ -28,13 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.SuspendLayout();
+            // 
+            // appBar1
+            // 
+            this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.appBar1.Location = new System.Drawing.Point(1, 33);
+            this.appBar1.Name = "appBar1";
+            this.appBar1.Size = new System.Drawing.Size(725, 64);
+            this.appBar1.TabIndex = 0;
+            this.appBar1.Text = "appBar1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(727, 372);
+            this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(144, 39);
             this.Name = "Form1";
@@ -44,6 +55,8 @@
         }
 
         #endregion
+
+        private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
     }
 }
 

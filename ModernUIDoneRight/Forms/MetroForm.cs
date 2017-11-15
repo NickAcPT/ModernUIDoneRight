@@ -3,6 +3,7 @@ using NickAc.ModernUIDoneRight.Objects.Interaction;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,61 @@ namespace NickAc.ModernUIDoneRight.Forms
 {
     public class MetroForm : Form
     {
-        private const int DEFAULT_TITLEBAR_HEIGHT = 32;
+
+        #region Mouse-Resize Anywhere 
+        void MouseMoveEvent(object sender, MouseEventArgs e)
+        {
+            Control c = ((Control)sender);
+
+            if (!(WindowState != FormWindowState.Maximized)) return;
+            var result = HitTest(e.Location, c.Location);
+            c.Cursor = FormUtils.HitTestToCursor(FormUtils.ConvertToResizeResult(result));
+        }
+
+        void HandleMouseEventHandler(object sender, MouseEventArgs e)
+        {
+            Control c = (Control)sender;
+            if ((WindowState != FormWindowState.Maximized) && e.Clicks != 1) return;
+            var result = HitTest(e.Location, c.Location);
+            FormUtils.StartFormResizeFromEdge(this, FormUtils.ConvertToResizeResult(result), c);
+        }
+
+        public void HandleMouseMoveAndChild(Control c)
+        {
+            c.MouseDown += HandleMouseEventHandler;
+            c.MouseMove += MouseMoveEvent;
+            foreach (Control c2 in c.Controls)
+            {
+                HandleMouseMoveAndChild(c2);
+            }
+        }
+        public void UnhandleMouseMoveAndChild(Control c)
+        {
+            c.MouseDown -= HandleMouseEventHandler;
+            c.MouseMove -= MouseMoveEvent;
+            foreach (Control c2 in c.Controls)
+            {
+                UnhandleMouseMoveAndChild(c2);
+            }
+        }
+
+        protected override void OnControlAdded(ControlEventArgs e)
+        {
+            base.OnControlAdded(e);
+            HandleMouseMoveAndChild(e.Control);
+        }
+
+
+        protected override void OnControlRemoved(ControlEventArgs e)
+        {
+            base.OnControlRemoved(e);
+            UnhandleMouseMoveAndChild(e.Control);
+        }
+        #endregion
+
+
+
+        public const int DEFAULT_TITLEBAR_HEIGHT = 32;
         private const int SIZING_BORDER = 7;
 
         #region Global Variables
@@ -52,11 +107,20 @@ namespace NickAc.ModernUIDoneRight.Forms
                 Refresh();
             }
         }
-
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle LeftSide => Rectangle.FromLTRB(0, TitlebarRectangle.Bottom, SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER);
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle LeftBottom => Rectangle.FromLTRB(0, FormBounds.Bottom - SIZING_BORDER, SIZING_BORDER, FormBounds.Bottom);
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle BottomSide => Rectangle.FromLTRB(SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER, FormBounds.Right - SIZING_BORDER, FormBounds.Bottom);
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle RightBottom => Rectangle.FromLTRB(FormBounds.Right - SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER, FormBounds.Right, FormBounds.Bottom);
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle RightSide => Rectangle.FromLTRB(FormBounds.Right - SIZING_BORDER, TitlebarRectangle.Bottom, FormBounds.Right, FormBounds.Bottom - SIZING_BORDER);
 
         public Rectangle FormBounds => new Rectangle(Point.Empty, Size);
@@ -152,6 +216,34 @@ namespace NickAc.ModernUIDoneRight.Forms
                 return WindowHitTestResult.BottomRight;
 
             if (RightSide.Contains(loc))
+                return WindowHitTestResult.Right;
+
+            return WindowHitTestResult.None;
+        }
+
+
+        public WindowHitTestResult HitTest(Point loc, Point offset)
+        {
+            Point negativeOffset = new Point(-offset.X, -offset.Y);
+            if (TitlebarButtonsRectangle.OffsetAndReturn(negativeOffset).Contains(loc))
+                return WindowHitTestResult.TitleBarButtons;
+
+            if (TextBarRectangle.OffsetAndReturn(negativeOffset).Contains(loc))
+                return WindowHitTestResult.TitleBar;
+
+            if (LeftBottom.OffsetAndReturn(negativeOffset).Contains(loc))
+                return WindowHitTestResult.BottomLeft;
+
+            if (LeftSide.OffsetAndReturn(negativeOffset).Contains(loc))
+                return WindowHitTestResult.Left;
+
+            if (BottomSide.OffsetAndReturn(negativeOffset).Contains(loc))
+                return WindowHitTestResult.Bottom;
+
+            if (RightBottom.OffsetAndReturn(negativeOffset).Contains(loc))
+                return WindowHitTestResult.BottomRight;
+
+            if (RightSide.OffsetAndReturn(negativeOffset).Contains(loc))
                 return WindowHitTestResult.Right;
 
             return WindowHitTestResult.None;

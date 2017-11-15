@@ -8,6 +8,25 @@ namespace NickAc.ModernUIDoneRight.Utils
 {
     public static class GraphicUtils
     {
+
+        public static Rectangle OffsetAndReturn(this Rectangle rect, Point offset)
+        {
+            if (offset.Equals(Point.Empty))
+                return rect;
+            Rectangle newR = new Rectangle(rect.Location, rect.Size);
+            newR.Offset(offset);
+            return newR;
+        }
+
+        public static Rectangle OffsetAndReturn(this Rectangle rect, int x, int y)
+        {
+            if (x.Equals(Point.Empty.X) && y.Equals(Point.Empty.Y))
+                return rect;
+            Rectangle newR = new Rectangle(rect.Location, rect.Size);
+            newR.Offset(x, y);
+            return newR;
+        }
+
         //Method taken from https://stackoverflow.com/a/2241471
         //All credits go to the author: JYelton(https://stackoverflow.com/users/161052/jyelton)
         public static int PerceivedBrightness(Color c)
