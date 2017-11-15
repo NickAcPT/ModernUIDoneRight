@@ -13,8 +13,10 @@ namespace NickAc.ModernUIDoneRight.Forms
     public class MetroForm : Form
     {
         private const int DEFAULT_TITLEBAR_HEIGHT = 32;
+        private const int SIZING_BORDER = 7;
 
         #region Global Variables
+        WindowHitTestResult windowHit = WindowHitTestResult.None;
         ColorScheme colorScheme;
         readonly List<ModernTitlebarButton> titlebarButtons;
         #endregion
@@ -35,7 +37,6 @@ namespace NickAc.ModernUIDoneRight.Forms
             titlebarButtons = InitTitleBarButtonList(DEFAULT_TITLEBAR_HEIGHT, this);
 
             BackColor = Color.White;
-
             FormBorderStyle = FormBorderStyle.None;
         }
         #endregion
@@ -51,6 +52,13 @@ namespace NickAc.ModernUIDoneRight.Forms
                 Refresh();
             }
         }
+
+        public Rectangle LeftSide => Rectangle.FromLTRB(0, TitlebarRectangle.Bottom, SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER);
+        public Rectangle LeftBottom => Rectangle.FromLTRB(0, FormBounds.Bottom - SIZING_BORDER, SIZING_BORDER, FormBounds.Bottom);
+        public Rectangle BottomSide => Rectangle.FromLTRB(SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER, FormBounds.Right - SIZING_BORDER, FormBounds.Bottom);
+        public Rectangle RightBottom => Rectangle.FromLTRB(FormBounds.Right - SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER, FormBounds.Right, FormBounds.Bottom);
+        public Rectangle RightSide => Rectangle.FromLTRB(FormBounds.Right - SIZING_BORDER, TitlebarRectangle.Bottom, FormBounds.Right, FormBounds.Bottom - SIZING_BORDER);
+
         public Rectangle FormBounds => new Rectangle(Point.Empty, Size);
         public Rectangle TitlebarRectangle => Rectangle.FromLTRB(1, 1, FormBounds.Right - 1, TitlebarHeight + 1);
         public Rectangle TitlebarButtonsRectangle {
@@ -60,6 +68,7 @@ namespace NickAc.ModernUIDoneRight.Forms
                 return Rectangle.FromLTRB(titlebarRect.Right - btnWidth, titlebarRect.Top, titlebarRect.Right, titlebarRect.Bottom);
             }
         }
+        public Rectangle TextBarRectangle => Rectangle.FromLTRB(TitlebarRectangle.Left, TitlebarRectangle.Top, TitlebarRectangle.Right - GetTitleBarButtonsWidth(), TitlebarRectangle.Bottom);
         #endregion
 
         #region Methods
@@ -120,9 +129,49 @@ namespace NickAc.ModernUIDoneRight.Forms
 
             return list;
         }
+
+
+        public WindowHitTestResult HitTest(Point loc)
+        {
+            if (TitlebarButtonsRectangle.Contains(loc))
+                return WindowHitTestResult.TitleBarButtons;
+
+            if (TextBarRectangle.Contains(loc))
+                return WindowHitTestResult.TitleBar;
+
+            if (LeftBottom.Contains(loc))
+                return WindowHitTestResult.BottomLeft;
+
+            if (LeftSide.Contains(loc))
+                return WindowHitTestResult.Left;
+
+            if (BottomSide.Contains(loc))
+                return WindowHitTestResult.Bottom;
+
+            if (RightBottom.Contains(loc))
+                return WindowHitTestResult.BottomRight;
+
+            if (RightSide.Contains(loc))
+                return WindowHitTestResult.Right;
+
+            return WindowHitTestResult.None;
+        }
+
         #endregion
 
         #region Overriden Methods
+        protected override void OnLoad(EventArgs e)
+        {
+            if (!DesignMode)
+                CenterToScreen();
+            base.OnLoad(e);
+            if (MinimumSize.Equals(Size.Empty))
+            {
+                int v = GetTitleBarButtonsWidth();
+                base.MinimumSize = new Size(v + (int)Math.Round(v / 2D), TitlebarHeight + SIZING_BORDER);
+            }
+        }
+
         public override Size MaximumSize {
             get {
                 return Screen.GetWorkingArea(this).Size;
@@ -138,6 +187,9 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+            var hitResult = HitTest(e.Location);
+            var resizeResult = FormUtils.ConvertToResizeResult(hitResult);
+            if (this.WindowState != FormWindowState.Maximized) Cursor = FormUtils.HitTestToCursor(resizeResult);
             if (TitlebarButtonsRectangle.Contains(e.Location)) { this.Invalidate(TitlebarButtonsRectangle); }
         }
         protected override void OnMouseEnter(EventArgs e)
@@ -153,31 +205,51 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            if (TitlebarButtonsRectangle.Contains(e.Location)) { this.Invalidate(TitlebarButtonsRectangle); }
+            var hitResult = HitTest(e.Location);
+
+            windowHit = hitResult;
+            this.Invalidate(TitlebarButtonsRectangle);
+
+            if (hitResult == WindowHitTestResult.TitleBar)
+            {
+                FormUtils.StartFormDragFromTitlebar(this);
+            }
+            else if (hitResult != WindowHitTestResult.TitleBarButtons && hitResult != WindowHitTestResult.None)
+            {
+                FormUtils.StartFormResizeFromEdge(this, FormUtils.ConvertToResizeResult(hitResult));
+            }
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            if (TitlebarButtonsRectangle.Contains(e.Location)) { this.Invalidate(TitlebarButtonsRectangle); }
+            Cursor = Cursors.Default;
+            this.Invalidate(TitlebarButtonsRectangle);
         }
 
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
-            int titlebarButtonOffset = 0;
-            if (TitlebarButtonsRectangle.Contains(e.Location))
+            if (windowHit != WindowHitTestResult.None && windowHit != WindowHitTestResult.TitleBar && windowHit != WindowHitTestResult.TitleBarButtons)
             {
-                for (int i = 0; i < titlebarButtons.Count; i++)
-                {
-                    var btn = titlebarButtons[i];
-                    if (!btn.Visible) continue;
-                    Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
-                    titlebarButtonOffset += btn.Width;
-                    if (rect.Contains(e.Location))
+                windowHit = WindowHitTestResult.None;
+                return;
+            }
+            int titlebarButtonOffset = 0;
+            switch (HitTest(e.Location))
+            {
+                case WindowHitTestResult.TitleBarButtons:
+                    for (int i = 0; i < titlebarButtons.Count; i++)
                     {
-                        btn.OnClick(e);
+                        var btn = titlebarButtons[i];
+                        if (!btn.Visible) continue;
+                        Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
+                        titlebarButtonOffset += btn.Width;
+                        if (rect.Contains(e.Location))
+                        {
+                            btn.OnClick(e);
+                        }
                     }
-                }
+                    break;
             }
         }
 
@@ -191,7 +263,6 @@ namespace NickAc.ModernUIDoneRight.Forms
                 {
                     e.Graphics.FillRectangle(primary, TitlebarRectangle);
                     GraphicUtils.DrawRectangleBorder(FormBounds, e.Graphics, ColorScheme.SecondaryColor);
-
                     int titlebarButtonOffset = 0;
                     for (int i = 0; i < titlebarButtons.Count; i++)
                     {
