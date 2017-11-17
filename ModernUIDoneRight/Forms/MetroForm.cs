@@ -159,9 +159,12 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// </summary>
         public Rectangle FormBounds => new Rectangle(Point.Empty, Size);
         /// <summary>
-        /// Rectangle 
+        /// Rectangle that represents the complete titlebar
         /// </summary>
         public Rectangle TitlebarRectangle => Rectangle.FromLTRB(1, 1, FormBounds.Right - 1, TitlebarHeight + 1);
+        /// <summary>
+        /// Rectangle that represents all caption/titlebar buttons
+        /// </summary>
         public Rectangle TitlebarButtonsRectangle {
             get {
                 var btnWidth = GetTitleBarButtonsWidth();
@@ -169,15 +172,23 @@ namespace NickAc.ModernUIDoneRight.Forms
                 return Rectangle.FromLTRB(titlebarRect.Right - btnWidth, titlebarRect.Top, titlebarRect.Right, titlebarRect.Bottom);
             }
         }
+        /// <summary>
+        /// Rectangle that represents the titlebar text
+        /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle TextBarRectangle => Rectangle.FromLTRB(TitlebarRectangle.Left, TitlebarRectangle.Top, TitlebarRectangle.Right - GetTitleBarButtonsWidth(), TitlebarRectangle.Bottom);
-
+        /// <summary>
+        /// The font used in the titlebar
+        /// </summary>
         public Font TitleBarFont { get; set; } = SystemFonts.CaptionFont;
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// Get total width of all the caption buttons
+        /// </summary>
+        /// <returns></returns>
         private int GetTitleBarButtonsWidth()
         {
             int titlebarButtonOffset = 0;
@@ -190,18 +201,37 @@ namespace NickAc.ModernUIDoneRight.Forms
             }
             return titlebarButtonOffset;
         }
-
+        /// <summary>
+        /// Get rectangle of a button
+        /// </summary>
+        /// <param name="offset">Offset</param>
+        /// <param name="btn">The button</param>
+        /// <returns></returns>
         private Rectangle GetTitlebarButtonRectangle(int offset, ModernTitlebarButton btn)
         {
             return Rectangle.FromLTRB(TitlebarRectangle.Right - btn.Width - offset, 0, TitlebarRectangle.Right - offset, TitlebarRectangle.Bottom);
         }
-
+        /// <summary>
+        /// Start titlebar button list.
+        /// This method adds the default titlebar buttons.
+        /// 
+        /// In the future:
+        /// A different method will be used to only get the default buttons.
+        /// Then in the property, we would join the real list with the fake one.
+        /// Allowing then, to hide default buttons easily
+        /// </summary>
+        /// <param name="width">Button width</param>
+        /// <param name="parent">Form containing the buttons</param>
+        /// <returns></returns>
         private static List<ModernTitlebarButton> InitTitleBarButtonList(int width, Form parent)
         {
+            //Make use of the Marlett font.
+            //This font provides characters that can be used to display a caption button
             Font fMarlett = new Font("Marlett", 10f);
+            //Create a temporary list
             List<ModernTitlebarButton> list = new List<ModernTitlebarButton>();
 
-            //Close
+            //Add the close button
             var close = new ModernTitlebarButton();
             close.Font = fMarlett;
             close.Text = "r";
@@ -215,13 +245,14 @@ namespace NickAc.ModernUIDoneRight.Forms
             list.Add(close);
 
 
-            //Maximize
+            //Add the maximize/restore button
+            //Here we make use of a different class to allow the icon to change dinamically
             var max = new MaximizeTitlebarButton(parent);
             max.Font = fMarlett;
             max.Width = width;
             list.Add(max);
 
-            //Minimize
+            //Add the minimize button
             var min = new ModernTitlebarButton();
             min.Font = fMarlett;
             min.Text = "0";
