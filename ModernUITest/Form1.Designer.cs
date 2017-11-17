@@ -36,7 +36,7 @@
             this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
-            this.appBar1.Size = new System.Drawing.Size(725, 64);
+            this.appBar1.Size = new System.Drawing.Size(725, 50);
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "appBar1";
             // 

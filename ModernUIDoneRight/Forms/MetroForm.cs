@@ -1,4 +1,5 @@
-﻿using NickAc.ModernUIDoneRight.Objects;
+﻿using NickAc.ModernUIDoneRight.Controls;
+using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Objects.Interaction;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace NickAc.ModernUIDoneRight.Forms
@@ -17,36 +17,52 @@ namespace NickAc.ModernUIDoneRight.Forms
         #region Mouse-Resize Anywhere 
         void MouseMoveEvent(object sender, MouseEventArgs e)
         {
+            //Get the control
             Control c = ((Control)sender);
 
+            //Check if window is maximized, if it is, stop!
             if (!(WindowState != FormWindowState.Maximized)) return;
+            //Try to see where the mouse was
             var result = HitTest(e.Location, c.Location);
-            c.Cursor = FormUtils.HitTestToCursor(FormUtils.ConvertToResizeResult(result));
+            var cur = FormUtils.HitTestToCursor(FormUtils.ConvertToResizeResult(result));
+            //Change the mouse accordingly
+            if (!c.Cursor.Equals(cur))
+                c.Cursor = cur;
         }
 
         void HandleMouseEventHandler(object sender, MouseEventArgs e)
         {
+            //Get the control
             Control c = (Control)sender;
+            //Check if the window isn't and there isn't more than one click
             if ((WindowState != FormWindowState.Maximized) && e.Clicks != 1) return;
+            //Check where clicked
             var result = HitTest(e.Location, c.Location);
+            //Invoke method that will start firm resizing
             FormUtils.StartFormResizeFromEdge(this, FormUtils.ConvertToResizeResult(result), c);
         }
 
         public void HandleMouseMoveAndChild(Control c)
         {
+            //Listen to mouse events
             c.MouseDown += HandleMouseEventHandler;
             c.MouseMove += MouseMoveEvent;
             foreach (Control c2 in c.Controls)
             {
+                //Do the same for child controls
+                //(Recursive method call)
                 HandleMouseMoveAndChild(c2);
             }
         }
         public void UnhandleMouseMoveAndChild(Control c)
         {
+            //Remove mouse events listeners
             c.MouseDown -= HandleMouseEventHandler;
             c.MouseMove -= MouseMoveEvent;
             foreach (Control c2 in c.Controls)
             {
+                //Do the same for child controls
+                //(Recursive method call)
                 UnhandleMouseMoveAndChild(c2);
             }
         }
@@ -54,6 +70,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnControlAdded(ControlEventArgs e)
         {
             base.OnControlAdded(e);
+            //Detect when control is added and handle form resizing
             HandleMouseMoveAndChild(e.Control);
         }
 
@@ -61,13 +78,19 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnControlRemoved(ControlEventArgs e)
         {
             base.OnControlRemoved(e);
+            //Detect when control is removed and remove all mouse listeners
             UnhandleMouseMoveAndChild(e.Control);
         }
         #endregion
 
 
-
+        /// <summary>
+        /// The default height of the titlebar
+        /// </summary>
         public const int DEFAULT_TITLEBAR_HEIGHT = 32;
+        /// <summary>
+        /// The size of the border
+        /// </summary>
         private const int SIZING_BORDER = 7;
 
         #region Global Variables
@@ -97,16 +120,23 @@ namespace NickAc.ModernUIDoneRight.Forms
         #endregion
 
         #region Properties
+        /// <summary>
+        /// The actual height of the titlebar
+        /// </summary>
         public int TitlebarHeight { get; set; } = DEFAULT_TITLEBAR_HEIGHT;
-
+        /// <summary>
+        /// The color scheme on this window
+        /// </summary>
         public ColorScheme ColorScheme {
             get { return colorScheme; }
             set {
                 colorScheme = value;
-                ForeColor = GraphicUtils.ForegroundColorForBackground(value.SecondaryColor);
+                //Update the foreground color accordingly
+                ForeColor = value.ForegroundColor;
                 Refresh();
             }
         }
+        /* Rectangles used to allow window resizing */
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle LeftSide => Rectangle.FromLTRB(0, TitlebarRectangle.Bottom, SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER);
@@ -122,8 +152,15 @@ namespace NickAc.ModernUIDoneRight.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle RightSide => Rectangle.FromLTRB(FormBounds.Right - SIZING_BORDER, TitlebarRectangle.Bottom, FormBounds.Right, FormBounds.Bottom - SIZING_BORDER);
+        /* Rectangles used to allow window resizing */
 
+        /// <summary>
+        /// The form bounds rectangle relative to 0,0
+        /// </summary>
         public Rectangle FormBounds => new Rectangle(Point.Empty, Size);
+        /// <summary>
+        /// Rectangle 
+        /// </summary>
         public Rectangle TitlebarRectangle => Rectangle.FromLTRB(1, 1, FormBounds.Right - 1, TitlebarHeight + 1);
         public Rectangle TitlebarButtonsRectangle {
             get {
@@ -132,7 +169,11 @@ namespace NickAc.ModernUIDoneRight.Forms
                 return Rectangle.FromLTRB(titlebarRect.Right - btnWidth, titlebarRect.Top, titlebarRect.Right, titlebarRect.Bottom);
             }
         }
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public Rectangle TextBarRectangle => Rectangle.FromLTRB(TitlebarRectangle.Left, TitlebarRectangle.Top, TitlebarRectangle.Right - GetTitleBarButtonsWidth(), TitlebarRectangle.Bottom);
+
+        public Font TitleBarFont { get; set; } = SystemFonts.CaptionFont;
         #endregion
 
         #region Methods
@@ -197,28 +238,7 @@ namespace NickAc.ModernUIDoneRight.Forms
 
         public WindowHitTestResult HitTest(Point loc)
         {
-            if (TitlebarButtonsRectangle.Contains(loc))
-                return WindowHitTestResult.TitleBarButtons;
-
-            if (TextBarRectangle.Contains(loc))
-                return WindowHitTestResult.TitleBar;
-
-            if (LeftBottom.Contains(loc))
-                return WindowHitTestResult.BottomLeft;
-
-            if (LeftSide.Contains(loc))
-                return WindowHitTestResult.Left;
-
-            if (BottomSide.Contains(loc))
-                return WindowHitTestResult.Bottom;
-
-            if (RightBottom.Contains(loc))
-                return WindowHitTestResult.BottomRight;
-
-            if (RightSide.Contains(loc))
-                return WindowHitTestResult.Right;
-
-            return WindowHitTestResult.None;
+            return HitTest(loc, Point.Empty);
         }
 
 
@@ -248,6 +268,8 @@ namespace NickAc.ModernUIDoneRight.Forms
 
             return WindowHitTestResult.None;
         }
+
+        public bool IsAppBarAvailable => Controls.OfType<AppBar>().Any();
 
         #endregion
 
@@ -365,6 +387,10 @@ namespace NickAc.ModernUIDoneRight.Forms
                             e.Graphics.FillRectangle(secondary, rect);
                         GraphicUtils.DrawCenteredText(e.Graphics, btn.Text, btn.Font, rect, ForeColor);
                         titlebarButtonOffset += btn.Width;
+                    }
+                    if (!IsAppBarAvailable)
+                    {
+                        GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SIZING_BORDER, TextBarRectangle.Top, TextBarRectangle.Right - SIZING_BORDER, TextBarRectangle.Bottom), ForeColor, false, true);
                     }
                 }
 

@@ -2,23 +2,20 @@
 using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace NickAc.ModernUIDoneRight.Controls
 {
     public class AppBar : Control
     {
+        public int XTextOffset => /*Height*/20;
         #region Constructor
         public AppBar()
         {
-            Size = new System.Drawing.Size(10, MetroForm.DEFAULT_TITLEBAR_HEIGHT * 2);
+            Size = new Size(10, RoundUp((int)(MetroForm.DEFAULT_TITLEBAR_HEIGHT * 1.5d)));
             Dock = DockStyle.Top;
             Load += AppBar_Load;
-            
         }
         ColorScheme colorScheme = DefaultColorSchemes.Blue;
 
@@ -63,10 +60,18 @@ namespace NickAc.ModernUIDoneRight.Controls
         #endregion
 
         #region Properties
+        public Font TextFont { get; set; } = new Font(SystemFonts.CaptionFont.FontFamily, 14f);
         public Rectangle ControlBounds => new Rectangle(Point.Empty, Size);
+        public Rectangle TextRectangle => Rectangle.FromLTRB(XTextOffset, 0, ControlBounds.Right - XTextOffset, ControlBounds.Bottom);
         #endregion
 
-        #region Overrided Methods
+
+        #region Methods
+        int RoundDown(int toRound) => toRound - toRound % 10;
+        int RoundUp(int toRound) => (10 - toRound % 10) + toRound;
+        #endregion
+
+        #region Overriden Methods
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -85,6 +90,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                 using (var secondary = new SolidBrush(ColorScheme.SecondaryColor))
                 {
                     pevent.Graphics.FillRectangle(primary, ControlBounds);
+                    GraphicUtils.DrawCenteredText(pevent.Graphics, Parent.Text, TextFont, TextRectangle, ColorScheme.ForegroundColor, false, true);
                 }
             }
         }

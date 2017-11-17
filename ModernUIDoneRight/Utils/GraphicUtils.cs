@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 
 namespace NickAc.ModernUIDoneRight.Utils
@@ -61,12 +58,16 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         public static void DrawCenteredText(Graphics g, string text, Font f, Rectangle rect, Color textColor)
         {
+            DrawCenteredText(g, text, f, rect, textColor, true, true);
+        }
+
+        public static void DrawCenteredText(Graphics g, string text, Font f, Rectangle rect, Color textColor, bool horizontal, bool vertical)
+        {
             var sb = new SolidBrush(textColor);
-            var stringFormat = new StringFormat
-            {
-                Alignment = StringAlignment.Center,      // -- Horizontal Alignment
-                LineAlignment = StringAlignment.Center      // || Vertical Alignment
-            };
+            var stringFormat = new StringFormat();
+            if (horizontal) stringFormat.Alignment = StringAlignment.Center;      // -- Horizontal Alignment
+            if (vertical) stringFormat.LineAlignment = StringAlignment.Center;      // || Vertical Alignment
+
             g.DrawString(text, f, sb, rect, stringFormat);
             stringFormat.Dispose();
             sb.Dispose();

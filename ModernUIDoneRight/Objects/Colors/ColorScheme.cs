@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NickAc.ModernUIDoneRight.Utils;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using static NickAc.ModernUIDoneRight.Utils.GraphicUtils;
 
 namespace NickAc.ModernUIDoneRight.Objects
 {
@@ -20,6 +18,7 @@ namespace NickAc.ModernUIDoneRight.Objects
         #region Properties
         public Color PrimaryColor { get; set; }
         public Color SecondaryColor { get; set; }
+        public Color ForegroundColor => ForegroundColorForBackground(SecondaryColor);
         #endregion
 
         #region Static Methods

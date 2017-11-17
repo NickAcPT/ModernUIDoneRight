@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace NickAc.ModernUIDoneRight.Objects.Interaction
@@ -22,11 +19,12 @@ namespace NickAc.ModernUIDoneRight.Objects.Interaction
         #endregion
 
         #region Properties
-        public virtual Font Font { get; set; } = SystemFonts.DialogFont;
+        public virtual Font Font { get; set; } = new Font(SystemFonts.CaptionFont.FontFamily, 20f);
         public virtual String Text { get; set; }
         public virtual int Width { get; set; }
         public virtual Boolean Visible { get; set; } = true;
 
         #endregion
+
     }
 }

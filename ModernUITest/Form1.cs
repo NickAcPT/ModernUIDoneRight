@@ -16,7 +16,6 @@ namespace ModernUITest
         public Form1()
         {
             InitializeComponent();
-            ColorScheme = DefaultColorSchemes.Red;
         }
     }
 }
