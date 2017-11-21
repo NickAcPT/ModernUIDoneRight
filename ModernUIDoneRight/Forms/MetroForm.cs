@@ -332,19 +332,23 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+            if (DesignMode) return;
             var hitResult = HitTest(e.Location);
             var resizeResult = FormUtils.ConvertToResizeResult(hitResult);
-            if (this.WindowState != FormWindowState.Maximized) Cursor = FormUtils.HitTestToCursor(resizeResult);
+            if (this.WindowState != FormWindowState.Maximized)
+                Cursor = FormUtils.HitTestToCursor(resizeResult);
             if (TitlebarButtonsRectangle.Contains(e.Location)) { this.Invalidate(TitlebarButtonsRectangle); }
         }
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
+            if (DesignMode) return;
             this.Invalidate(TitlebarButtonsRectangle);
         }
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
+            if (DesignMode) return;
             this.Invalidate(TitlebarButtonsRectangle);
         }
         protected override void OnMouseDown(MouseEventArgs e)

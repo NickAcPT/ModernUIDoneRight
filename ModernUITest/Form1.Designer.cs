@@ -39,6 +39,7 @@
             this.appBar1.Size = new System.Drawing.Size(725, 50);
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "appBar1";
+            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
             // Form1
             // 
