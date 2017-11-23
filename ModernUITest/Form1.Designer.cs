@@ -28,25 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // appBar1
+            // button1
             // 
-            this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.appBar1.Location = new System.Drawing.Point(1, 33);
-            this.appBar1.Name = "appBar1";
-            this.appBar1.Size = new System.Drawing.Size(725, 50);
-            this.appBar1.TabIndex = 0;
-            this.appBar1.Text = "appBar1";
-            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.button1.Location = new System.Drawing.Point(104, 132);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(727, 372);
-            this.Controls.Add(this.appBar1);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(655, 374);
+            this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
+            this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.button1);
             this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(144, 39);
             this.Name = "Form1";
@@ -57,7 +59,7 @@
 
         #endregion
 
-        private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -129,15 +129,25 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// <summary>
         /// The color scheme on this window
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ColorScheme ColorScheme {
             get { return colorScheme; }
             set {
                 colorScheme = value;
-                //Update the foreground color accordingly
-                ForeColor = value.ForegroundColor;
                 Refresh();
             }
         }
+        public override Color BackColor { get => base.BackColor; set {
+                base.BackColor = value;
+                //Update the foreground color accordingly
+                ForeColor = GraphicUtils.ForegroundColorForBackground(BackColor);
+            }
+        }
+        void ResetColorScheme()
+        {
+            ColorScheme = DefaultColorSchemes.Blue;
+        }
+
         /* Rectangles used to allow window resizing */
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -212,7 +222,7 @@ namespace NickAc.ModernUIDoneRight.Forms
                 Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
                 if (rect.Contains(curLoc))
                     e.Graphics.FillRectangle(secondary, rect);
-                GraphicUtils.DrawCenteredText(e.Graphics, btn.Text, btn.Font, rect, ForeColor);
+                GraphicUtils.DrawCenteredText(e.Graphics, btn.Text, btn.Font, rect, ColorScheme.ForegroundColor);
                 titlebarButtonOffset += btn.Width;
             }
 
@@ -345,7 +355,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             var resizeResult = FormUtils.ConvertToResizeResult(hitResult);
             if (WindowState != FormWindowState.Maximized)
                 Cursor = FormUtils.HitTestToCursor(resizeResult);
-            if (TitlebarButtonsRectangle.Contains(e.Location)) { Invalidate(TitlebarButtonsRectangle); }
+            Invalidate(TitlebarButtonsRectangle);
         }
         protected override void OnMouseEnter(EventArgs e)
         {
@@ -411,7 +421,7 @@ namespace NickAc.ModernUIDoneRight.Forms
                     titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary, NativeTitlebarButtons, ref titlebarButtonOffset);
                     titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary, TitlebarButtons, ref titlebarButtonOffset);
                     if (!IsAppBarAvailable) {
-                        GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SIZING_BORDER, TextBarRectangle.Top, TextBarRectangle.Right - SIZING_BORDER, TextBarRectangle.Bottom), ForeColor, false, true);
+                        GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SIZING_BORDER, TextBarRectangle.Top, TextBarRectangle.Right - SIZING_BORDER, TextBarRectangle.Bottom), ColorScheme.ForegroundColor, false, true);
                     }
                 }
 

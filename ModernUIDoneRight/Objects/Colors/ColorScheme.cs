@@ -1,10 +1,12 @@
 ﻿using NickAc.ModernUIDoneRight.Utils;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using static NickAc.ModernUIDoneRight.Utils.GraphicUtils;
 
 namespace NickAc.ModernUIDoneRight.Objects
 {
+    [TypeConverter(typeof(ColorSchemeConverter))]
     public class ColorScheme
     {
         #region Constructor
@@ -18,7 +20,7 @@ namespace NickAc.ModernUIDoneRight.Objects
         #region Properties
         public Color PrimaryColor { get; set; }
         public Color SecondaryColor { get; set; }
-        public Color ForegroundColor => ForegroundColorForBackground(SecondaryColor);
+        public Color ForegroundColor => ForegroundColorForBackground(PrimaryColor);
         #endregion
 
         #region Static Methods

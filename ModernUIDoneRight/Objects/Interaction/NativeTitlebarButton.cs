@@ -22,8 +22,7 @@ namespace NickAc.ModernUIDoneRight.Objects.Interaction
 
         private void TitlebarButton_Click(object sender, MouseEventArgs e)
         {
-            switch (action)
-            {
+            switch (action) {
                 case TitlebarAction.Minimize:
                     parent.WindowState = FormWindowState.Minimized;
                     break;
@@ -41,8 +40,7 @@ namespace NickAc.ModernUIDoneRight.Objects.Interaction
 
         private string GetButtonText()
         {
-            switch (action)
-            {
+            switch (action) {
                 case TitlebarAction.Minimize:
                     return "0"; //In Marlett, "0" represents minimize button
                 case TitlebarAction.Maximize:
@@ -58,6 +56,19 @@ namespace NickAc.ModernUIDoneRight.Objects.Interaction
                 return GetButtonText();
             }
             set => base.Text = value;
+        }
+
+        public override bool Visible {
+            get {
+                switch (action) {
+                    case TitlebarAction.Minimize:
+                        return parent.MinimizeBox;
+                    case TitlebarAction.Maximize:
+                        return parent.MaximizeBox;
+                }
+                return true;
+            }
+            set => base.Visible = value;
         }
 
         public enum TitlebarAction

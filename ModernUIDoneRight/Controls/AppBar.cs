@@ -34,8 +34,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             //The control was drawn.
             //This means we can add the drop shadow
             ShadowUtils.CreateDropShadow(this);
-            if (Parent != null)
-            {
+            if (Parent != null) {
                 Parent.Invalidate();
             }
         }
@@ -43,6 +42,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         #region Variables
         bool hasStartedYet;
+        bool iconVisible = false;
         #endregion
 
         #region Events
@@ -60,9 +60,10 @@ namespace NickAc.ModernUIDoneRight.Controls
         #endregion
 
         #region Properties
+        public bool IconVisible { get { return iconVisible; } set { iconVisible = value; Invalidate(); } }
         public Font TextFont { get; set; } = new Font(SystemFonts.CaptionFont.FontFamily, 14f);
         public Rectangle ControlBounds => new Rectangle(Point.Empty, Size);
-        public Rectangle TextRectangle => Rectangle.FromLTRB(XTextOffset, 0, ControlBounds.Right - XTextOffset, ControlBounds.Bottom);
+        public Rectangle TextRectangle => Rectangle.FromLTRB(XTextOffset * (IconVisible ? 2 : 1), 0, ControlBounds.Right - XTextOffset, ControlBounds.Bottom);
         #endregion
 
 
@@ -75,8 +76,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!hasStartedYet)
-            {
+            if (!hasStartedYet) {
                 hasStartedYet = true;
                 OnLoad(EventArgs.Empty);
             }
@@ -85,11 +85,12 @@ namespace NickAc.ModernUIDoneRight.Controls
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
             base.OnPaintBackground(pevent);
-            using (var primary = new SolidBrush(ColorScheme.PrimaryColor))
-            {
-                using (var secondary = new SolidBrush(ColorScheme.SecondaryColor))
-                {
+            using (var primary = new SolidBrush(ColorScheme.PrimaryColor)) {
+                using (var secondary = new SolidBrush(ColorScheme.SecondaryColor)) {
                     pevent.Graphics.FillRectangle(primary, ControlBounds);
+                    if (IconVisible) {
+                        pevent.Graphics.DrawIcon(((Form)Parent).Icon, Rectangle.FromLTRB(XTextOffset / 2, XTextOffset / 2, XTextOffset * 2, Height - (XTextOffset / 2)));
+                    }
                     GraphicUtils.DrawCenteredText(pevent.Graphics, Parent.Text, TextFont, TextRectangle, ColorScheme.ForegroundColor, false, true);
                 }
             }
