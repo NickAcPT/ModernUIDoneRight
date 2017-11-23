@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NickAc.ModernUIDoneRight.Forms;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -19,9 +20,9 @@ namespace NickAc.ModernUIDoneRight.Objects.Interaction
         #endregion
 
         #region Properties
-        public virtual Font Font { get; set; } = new Font(SystemFonts.CaptionFont.FontFamily, 20f);
+        public virtual Font Font { get; set; } = SystemFonts.CaptionFont;
         public virtual String Text { get; set; }
-        public virtual int Width { get; set; }
+        public virtual int Width { get; set; } = MetroForm.DEFAULT_TITLEBAR_HEIGHT;
         public virtual Boolean Visible { get; set; } = true;
 
         #endregion

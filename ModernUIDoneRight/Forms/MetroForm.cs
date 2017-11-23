@@ -47,8 +47,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             //Listen to mouse events
             c.MouseDown += HandleMouseEventHandler;
             c.MouseMove += MouseMoveEvent;
-            foreach (Control c2 in c.Controls)
-            {
+            foreach (Control c2 in c.Controls) {
                 //Do the same for child controls
                 //(Recursive method call)
                 HandleMouseMoveAndChild(c2);
@@ -59,8 +58,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             //Remove mouse events listeners
             c.MouseDown -= HandleMouseEventHandler;
             c.MouseMove -= MouseMoveEvent;
-            foreach (Control c2 in c.Controls)
-            {
+            foreach (Control c2 in c.Controls) {
                 //Do the same for child controls
                 //(Recursive method call)
                 UnhandleMouseMoveAndChild(c2);
@@ -96,8 +94,8 @@ namespace NickAc.ModernUIDoneRight.Forms
         #region Global Variables
         WindowHitTestResult windowHit = WindowHitTestResult.None;
         ColorScheme colorScheme;
-        readonly List<ModernTitlebarButton> titlebarButtons;
         #endregion
+        readonly List<ModernTitlebarButton> titlebarButtons, nativeTitlebarButtons;
 
         #region Constructor
         public MetroForm()
@@ -112,7 +110,8 @@ namespace NickAc.ModernUIDoneRight.Forms
             SetStyle(ControlStyles.ContainerControl, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
 
-            titlebarButtons = InitTitleBarButtonList(DEFAULT_TITLEBAR_HEIGHT, this);
+            titlebarButtons = new List<ModernTitlebarButton>();
+            nativeTitlebarButtons = GenerateNativeButtons(DEFAULT_TITLEBAR_HEIGHT, this);
 
             BackColor = Color.White;
             FormBorderStyle = FormBorderStyle.None;
@@ -120,6 +119,9 @@ namespace NickAc.ModernUIDoneRight.Forms
         #endregion
 
         #region Properties
+        public List<ModernTitlebarButton> TitlebarButtons => titlebarButtons;
+
+        List<ModernTitlebarButton> NativeTitlebarButtons => nativeTitlebarButtons;
         /// <summary>
         /// The actual height of the titlebar
         /// </summary>
@@ -185,6 +187,38 @@ namespace NickAc.ModernUIDoneRight.Forms
         #endregion
 
         #region Methods
+
+
+        private int HandleTitlebarButtonClick(MouseEventArgs e, ref int titlebarButtonOffset, List<ModernTitlebarButton> buttons)
+        {
+            for (int i = 0; i < buttons.Count; i++) {
+                var btn = buttons[i];
+                if (!btn.Visible) continue;
+                Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
+                titlebarButtonOffset += btn.Width;
+                if (rect.Contains(e.Location)) {
+                    btn.OnClick(e);
+                }
+            }
+
+            return titlebarButtonOffset;
+        }
+
+        private int RenderTitlebarButtons(PaintEventArgs e, Point curLoc, SolidBrush secondary, List<ModernTitlebarButton> buttons, ref int titlebarButtonOffset)
+        {
+            for (int i = 0; i < buttons.Count; i++) {
+                var btn = buttons[i];
+                if (!btn.Visible) continue;
+                Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
+                if (rect.Contains(curLoc))
+                    e.Graphics.FillRectangle(secondary, rect);
+                GraphicUtils.DrawCenteredText(e.Graphics, btn.Text, btn.Font, rect, ForeColor);
+                titlebarButtonOffset += btn.Width;
+            }
+
+            return titlebarButtonOffset;
+        }
+
         /// <summary>
         /// Get total width of all the caption buttons
         /// </summary>
@@ -192,9 +226,14 @@ namespace NickAc.ModernUIDoneRight.Forms
         private int GetTitleBarButtonsWidth()
         {
             int titlebarButtonOffset = 0;
-            for (int i = 0; i < titlebarButtons.Count; i++)
-            {
-                var btn = titlebarButtons[i];
+            for (int i = 0; i < NativeTitlebarButtons.Count; i++) {
+                var btn = NativeTitlebarButtons[i];
+                if (!btn.Visible) continue;
+                Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
+                titlebarButtonOffset += btn.Width;
+            }
+            for (int i = 0; i < TitlebarButtons.Count; i++) {
+                var btn = TitlebarButtons[i];
                 if (!btn.Visible) continue;
                 Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
                 titlebarButtonOffset += btn.Width;
@@ -223,45 +262,15 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// <param name="width">Button width</param>
         /// <param name="parent">Form containing the buttons</param>
         /// <returns></returns>
-        private static List<ModernTitlebarButton> InitTitleBarButtonList(int width, Form parent)
+        private static List<ModernTitlebarButton> GenerateNativeButtons(int width, Form parent)
         {
-            //Make use of the Marlett font.
-            //This font provides characters that can be used to display a caption button
-            Font fMarlett = new Font("Marlett", 10f);
+
             //Create a temporary list
             List<ModernTitlebarButton> list = new List<ModernTitlebarButton>();
 
-            //Add the close button
-            var close = new ModernTitlebarButton();
-            close.Font = fMarlett;
-            close.Text = "r";
-            close.Width = width;
-
-            close.Click += (sender, e) =>
-            {
-                parent.Close();
-            };
-
-            list.Add(close);
-
-
-            //Add the maximize/restore button
-            //Here we make use of a different class to allow the icon to change dinamically
-            var max = new MaximizeTitlebarButton(parent);
-            max.Font = fMarlett;
-            max.Width = width;
-            list.Add(max);
-
-            //Add the minimize button
-            var min = new ModernTitlebarButton();
-            min.Font = fMarlett;
-            min.Text = "0";
-            min.Width = width;
-            min.Click += (sender, e) =>
-            {
-                parent.WindowState = FormWindowState.Minimized;
-            };
-            list.Add(min);
+            list.Add(new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Close));
+            list.Add(new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Maximize));
+            list.Add(new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Minimize));
 
             return list;
         }
@@ -310,8 +319,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             if (!DesignMode)
                 CenterToScreen();
             base.OnLoad(e);
-            if (MinimumSize.Equals(Size.Empty))
-            {
+            if (MinimumSize.Equals(Size.Empty)) {
                 int v = GetTitleBarButtonsWidth();
                 base.MinimumSize = new Size(v + (int)Math.Round(v / 2D), TitlebarHeight + SIZING_BORDER);
             }
@@ -335,21 +343,21 @@ namespace NickAc.ModernUIDoneRight.Forms
             if (DesignMode) return;
             var hitResult = HitTest(e.Location);
             var resizeResult = FormUtils.ConvertToResizeResult(hitResult);
-            if (this.WindowState != FormWindowState.Maximized)
+            if (WindowState != FormWindowState.Maximized)
                 Cursor = FormUtils.HitTestToCursor(resizeResult);
-            if (TitlebarButtonsRectangle.Contains(e.Location)) { this.Invalidate(TitlebarButtonsRectangle); }
+            if (TitlebarButtonsRectangle.Contains(e.Location)) { Invalidate(TitlebarButtonsRectangle); }
         }
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
             if (DesignMode) return;
-            this.Invalidate(TitlebarButtonsRectangle);
+            Invalidate(TitlebarButtonsRectangle);
         }
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
             if (DesignMode) return;
-            this.Invalidate(TitlebarButtonsRectangle);
+            Invalidate(TitlebarButtonsRectangle);
         }
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -357,14 +365,12 @@ namespace NickAc.ModernUIDoneRight.Forms
             var hitResult = HitTest(e.Location);
 
             windowHit = hitResult;
-            this.Invalidate(TitlebarButtonsRectangle);
+            Invalidate(TitlebarButtonsRectangle);
 
-            if (hitResult == WindowHitTestResult.TitleBar)
-            {
+            if (hitResult == WindowHitTestResult.TitleBar) {
                 FormUtils.StartFormDragFromTitlebar(this);
             }
-            else if (hitResult != WindowHitTestResult.TitleBarButtons && hitResult != WindowHitTestResult.None)
-            {
+            else if (hitResult != WindowHitTestResult.TitleBarButtons && hitResult != WindowHitTestResult.None) {
                 FormUtils.StartFormResizeFromEdge(this, FormUtils.ConvertToResizeResult(hitResult));
             }
         }
@@ -372,59 +378,39 @@ namespace NickAc.ModernUIDoneRight.Forms
         {
             base.OnMouseUp(e);
             Cursor = Cursors.Default;
-            this.Invalidate(TitlebarButtonsRectangle);
+            Invalidate(TitlebarButtonsRectangle);
         }
 
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
-            if (windowHit != WindowHitTestResult.None && windowHit != WindowHitTestResult.TitleBar && windowHit != WindowHitTestResult.TitleBarButtons)
-            {
+            if (windowHit != WindowHitTestResult.None && windowHit != WindowHitTestResult.TitleBar && windowHit != WindowHitTestResult.TitleBarButtons) {
                 windowHit = WindowHitTestResult.None;
                 return;
             }
             int titlebarButtonOffset = 0;
-            switch (HitTest(e.Location))
-            {
+            switch (HitTest(e.Location)) {
                 case WindowHitTestResult.TitleBarButtons:
-                    for (int i = 0; i < titlebarButtons.Count; i++)
-                    {
-                        var btn = titlebarButtons[i];
-                        if (!btn.Visible) continue;
-                        Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
-                        titlebarButtonOffset += btn.Width;
-                        if (rect.Contains(e.Location))
-                        {
-                            btn.OnClick(e);
-                        }
-                    }
+                    titlebarButtonOffset = 0;
+                    HandleTitlebarButtonClick(e, ref titlebarButtonOffset, NativeTitlebarButtons);
+                    HandleTitlebarButtonClick(e, ref titlebarButtonOffset, TitlebarButtons);
                     break;
             }
         }
+
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             base.OnPaintBackground(e);
             Point curLoc = PointToClient(Cursor.Position);
-            using (SolidBrush primary = new SolidBrush(ColorScheme.PrimaryColor))
-            {
-                using (SolidBrush secondary = new SolidBrush(ColorScheme.SecondaryColor))
-                {
+            using (SolidBrush primary = new SolidBrush(ColorScheme.PrimaryColor)) {
+                using (SolidBrush secondary = new SolidBrush(ColorScheme.SecondaryColor)) {
                     e.Graphics.FillRectangle(primary, TitlebarRectangle);
                     GraphicUtils.DrawRectangleBorder(FormBounds, e.Graphics, ColorScheme.SecondaryColor);
                     int titlebarButtonOffset = 0;
-                    for (int i = 0; i < titlebarButtons.Count; i++)
-                    {
-                        var btn = titlebarButtons[i];
-                        if (!btn.Visible) continue;
-                        Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
-                        if (rect.Contains(curLoc))
-                            e.Graphics.FillRectangle(secondary, rect);
-                        GraphicUtils.DrawCenteredText(e.Graphics, btn.Text, btn.Font, rect, ForeColor);
-                        titlebarButtonOffset += btn.Width;
-                    }
-                    if (!IsAppBarAvailable)
-                    {
+                    titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary, NativeTitlebarButtons, ref titlebarButtonOffset);
+                    titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary, TitlebarButtons, ref titlebarButtonOffset);
+                    if (!IsAppBarAvailable) {
                         GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SIZING_BORDER, TextBarRectangle.Top, TextBarRectangle.Right - SIZING_BORDER, TextBarRectangle.Bottom), ForeColor, false, true);
                     }
                 }
