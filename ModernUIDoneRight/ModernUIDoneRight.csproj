@@ -52,6 +52,7 @@
     <Compile Include="Forms\MetroForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Native\DwmNative.cs" />
     <Compile Include="Objects\Colors\ColorScheme.cs" />
     <Compile Include="Objects\Colors\DefaultColors.cs" />
     <Compile Include="Objects\Colors\DefaultColorSchemes.cs" />

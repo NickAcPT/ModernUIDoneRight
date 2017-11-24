@@ -1,4 +1,5 @@
 ﻿using NickAc.ModernUIDoneRight.Controls;
+using NickAc.ModernUIDoneRight.Native;
 using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Objects.Interaction;
 using NickAc.ModernUIDoneRight.Utils;
@@ -287,11 +288,12 @@ namespace NickAc.ModernUIDoneRight.Forms
         {
 
             //Create a temporary list
-            List<ModernTitlebarButton> list = new List<ModernTitlebarButton>();
-
-            list.Add(new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Close));
-            list.Add(new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Maximize));
-            list.Add(new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Minimize));
+            List<ModernTitlebarButton> list = new List<ModernTitlebarButton>
+            {
+                new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Close),
+                new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Maximize),
+                new NativeTitlebarButton(parent, width, NativeTitlebarButton.TitlebarAction.Minimize)
+            };
 
             return list;
         }
@@ -311,6 +313,9 @@ namespace NickAc.ModernUIDoneRight.Forms
 
             if (TextBarRectangle.OffsetAndReturn(negativeOffset).Contains(loc))
                 return WindowHitTestResult.TitleBar;
+
+            if (!Sizable)
+                return WindowHitTestResult.None;
 
             if (LeftBottom.OffsetAndReturn(negativeOffset).Contains(loc))
                 return WindowHitTestResult.BottomLeft;
@@ -343,8 +348,17 @@ namespace NickAc.ModernUIDoneRight.Forms
         }
         protected override void OnLoad(EventArgs e)
         {
-            if (!DesignMode)
+            if (!DesignMode) {
                 CenterToScreen();
+                //Check if we can use the aero shadow
+                if (DwmNative.ExtendFrameIntoClientArea(this, 0, 0, 0, 1)) {
+                    //We can! Tell windows to allow the rendering to happen on our borderless form
+                    DwmNative.AllowRenderInBorderless(this);
+                } else {
+                    //No aero for us! We must create the typical flat shadow.
+                    //TODO: Flat Shadow
+                }
+            }
             base.OnLoad(e);
             int v = GetTitleBarButtonsWidth();
             base.MinimumSize = new Size(v, TitlebarHeight + SIZING_BORDER);
