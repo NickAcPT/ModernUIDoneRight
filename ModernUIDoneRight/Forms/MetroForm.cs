@@ -92,10 +92,10 @@ namespace NickAc.ModernUIDoneRight.Forms
         private const int SIZING_BORDER = 7;
 
         #region Global Variables
+        readonly List<ModernTitlebarButton> titlebarButtons, nativeTitlebarButtons;
         WindowHitTestResult windowHit = WindowHitTestResult.None;
         ColorScheme colorScheme;
         #endregion
-        readonly List<ModernTitlebarButton> titlebarButtons, nativeTitlebarButtons;
 
         #region Constructor
         public MetroForm()
@@ -135,12 +135,6 @@ namespace NickAc.ModernUIDoneRight.Forms
             set {
                 colorScheme = value;
                 Refresh();
-            }
-        }
-        public override Color BackColor { get => base.BackColor; set {
-                base.BackColor = value;
-                //Update the foreground color accordingly
-                ForeColor = GraphicUtils.ForegroundColorForBackground(BackColor);
             }
         }
         void ResetColorScheme()
@@ -324,15 +318,22 @@ namespace NickAc.ModernUIDoneRight.Forms
         #endregion
 
         #region Overriden Methods
+        new void ResetBackColor()
+        {
+            BackColor = Color.White;
+        }
+        public override string Text { get => base.Text; set {
+                base.Text = value;
+                Invalidate();
+            }
+        }
         protected override void OnLoad(EventArgs e)
         {
             if (!DesignMode)
                 CenterToScreen();
             base.OnLoad(e);
-            if (MinimumSize.Equals(Size.Empty)) {
-                int v = GetTitleBarButtonsWidth();
-                base.MinimumSize = new Size(v + (int)Math.Round(v / 2D), TitlebarHeight + SIZING_BORDER);
-            }
+            int v = GetTitleBarButtonsWidth();
+           base.MinimumSize = new Size(v , TitlebarHeight + SIZING_BORDER);
         }
 
         public override Size MaximumSize {
