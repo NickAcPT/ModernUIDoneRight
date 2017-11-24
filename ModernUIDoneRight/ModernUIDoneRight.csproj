@@ -43,6 +43,12 @@
     <Compile Include="Controls\AppBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModernTileReborn.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\MetroForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -52,8 +58,10 @@
     <Compile Include="Objects\Interaction\ModernTitlebarButton.cs" />
     <Compile Include="Objects\Interaction\NativeTitlebarButton.cs" />
     <Compile Include="Objects\Interaction\WindowHitTestResult.cs" />
+    <Compile Include="Objects\TileText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ColorSchemeConverter.cs" />
+    <Compile Include="Utils\ControlPaintWrapper.cs" />
     <Compile Include="Utils\FormUtils.cs" />
     <Compile Include="Utils\GraphicUtils.cs" />
     <Compile Include="Utils\ShadowUtils.cs" />
