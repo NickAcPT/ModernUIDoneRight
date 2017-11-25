@@ -85,6 +85,7 @@
             this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(144, 39);
             this.Name = "Form1";
+            this.ShadowType = NickAc.ModernUIDoneRight.Objects.ShadowType.FlatShadow;
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

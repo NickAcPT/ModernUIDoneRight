@@ -22,7 +22,7 @@ namespace NickAc.ModernUIDoneRight.Objects.Interaction
         #region Properties
         public virtual Font Font { get; set; } = SystemFonts.CaptionFont;
         public virtual String Text { get; set; }
-        public virtual int Width { get; set; } = MetroForm.DEFAULT_TITLEBAR_HEIGHT;
+        public virtual int Width { get; set; } = ModernForm.DEFAULT_TITLEBAR_HEIGHT;
         public virtual Boolean Visible { get; set; } = true;
 
         #endregion

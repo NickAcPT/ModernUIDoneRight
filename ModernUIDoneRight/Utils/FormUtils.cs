@@ -173,9 +173,9 @@ namespace NickAc.ModernUIDoneRight.Utils
             {
                 if (f.WindowState == FormWindowState.Maximized)
                 {
-                    int beforeW = (f is MetroForm ? (((MetroForm)f).TextBarRectangle.Width) : f.Width);
+                    int beforeW = (f is ModernForm ? (((ModernForm)f).TextBarRectangle.Width) : f.Width);
                     f.WindowState = FormWindowState.Normal;
-                    int afterW = (f is MetroForm ? (((MetroForm)f).TextBarRectangle.Width) : f.Width);
+                    int afterW = (f is ModernForm ? (((ModernForm)f).TextBarRectangle.Width) : f.Width);
                     startCursorPosition = new Point(ConvertRange(0, beforeW, 0, afterW, startCursorPosition.X), startCursorPosition.Y);
                 }
                 f.Location += (new Size(e.Location) - new Size(startCursorPosition));

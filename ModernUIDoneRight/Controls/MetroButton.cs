@@ -22,7 +22,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public ColorScheme ColorScheme {
             get {
-                return Parent != null && Parent is MetroForm ? ((MetroForm)Parent).ColorScheme : colorScheme;
+                return Parent != null && Parent is ModernForm ? ((ModernForm)Parent).ColorScheme : colorScheme;
             }
 
             set {

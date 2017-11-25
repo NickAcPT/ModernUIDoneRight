@@ -13,7 +13,7 @@ namespace NickAc.ModernUIDoneRight.Controls
         #region Constructor
         public AppBar()
         {
-            Size = new Size(10, RoundUp((int)(MetroForm.DEFAULT_TITLEBAR_HEIGHT * 1.5d)));
+            Size = new Size(10, RoundUp((int)(ModernForm.DEFAULT_TITLEBAR_HEIGHT * 1.5d)));
             Dock = DockStyle.Top;
             Load += AppBar_Load;
         }
@@ -21,7 +21,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public ColorScheme ColorScheme {
             get {
-                return Parent != null && Parent is MetroForm ? ((MetroForm)Parent).ColorScheme : colorScheme;
+                return Parent != null && Parent is ModernForm ? ((ModernForm)Parent).ColorScheme : colorScheme;
             }
 
             set {

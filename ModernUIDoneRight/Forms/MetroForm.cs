@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace NickAc.ModernUIDoneRight.Forms
 {
-    public class MetroForm : Form
+    public class ModernForm : Form
     {
 
         #region Mouse-Resize Anywhere 
@@ -97,13 +97,13 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// </summary>
         private const int SIZING_BORDER = 7;
 
-        readonly List<ModernTitlebarButton> titlebarButtons, nativeTitlebarButtons;
+        private readonly List<ModernTitlebarButton> titlebarButtons, nativeTitlebarButtons;
         WindowHitTestResult windowHit = WindowHitTestResult.None;
         ColorScheme colorScheme;
         #endregion
 
         #region Constructor
-        public MetroForm()
+        public ModernForm()
         {
             ColorScheme = DefaultColorSchemes.Blue;
 
@@ -124,12 +124,13 @@ namespace NickAc.ModernUIDoneRight.Forms
         #endregion
 
         #region Properties
+        public ShadowType ShadowType { get; set; } = ShadowType.Default;
         public bool TitlebarVisible { get; set; } = true;
         public bool Sizable { get; set; } = true;
 
         public List<ModernTitlebarButton> TitlebarButtons => titlebarButtons;
 
-        List<ModernTitlebarButton> NativeTitlebarButtons => nativeTitlebarButtons;
+        private List<ModernTitlebarButton> NativeTitlebarButtons => nativeTitlebarButtons;
         /// <summary>
         /// The actual height of the titlebar
         /// </summary>
@@ -273,13 +274,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             return Rectangle.FromLTRB(TitlebarRectangle.Right - btn.Width - offset, 0, TitlebarRectangle.Right - offset, TitlebarRectangle.Bottom);
         }
         /// <summary>
-        /// Start titlebar button list.
         /// This method adds the default titlebar buttons.
-        /// 
-        /// In the future:
-        /// A different method will be used to only get the default buttons.
-        /// Then in the property, we would join the real list with the fake one.
-        /// Allowing then, to hide default buttons easily
         /// </summary>
         /// <param name="width">Button width</param>
         /// <param name="parent">Form containing the buttons</param>
@@ -335,6 +330,8 @@ namespace NickAc.ModernUIDoneRight.Forms
             return WindowHitTestResult.None;
         }
 
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public bool IsAppBarAvailable => Controls.OfType<AppBar>().Any();
 
         #endregion
@@ -350,13 +347,15 @@ namespace NickAc.ModernUIDoneRight.Forms
         {
             if (!DesignMode) {
                 CenterToScreen();
+
                 //Check if we can use the aero shadow
-                if (DwmNative.ExtendFrameIntoClientArea(this, 0, 0, 0, 1)) {
+                if ((ShadowType.Equals(ShadowType.AeroShadow) || ShadowType.Equals(ShadowType.Default)) && DwmNative.ExtendFrameIntoClientArea(this, 0, 0, 0, 1)) {
                     //We can! Tell windows to allow the rendering to happen on our borderless form
                     DwmNative.AllowRenderInBorderless(this);
-                } else {
+                }
+                else if (ShadowType.Equals(ShadowType.Default) || ShadowType.Equals(ShadowType.FlatShadow)) {
                     //No aero for us! We must create the typical flat shadow.
-                    //TODO: Flat Shadow
+                    new ShadowForm().Show(this);
                 }
             }
             base.OnLoad(e);

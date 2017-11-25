@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace ModernUITest
 {
-    public partial class Form1 : MetroForm
+    public partial class Form1 : ModernForm
     {
         public Form1()
         {
