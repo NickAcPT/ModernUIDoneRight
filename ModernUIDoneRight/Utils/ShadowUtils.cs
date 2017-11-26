@@ -17,8 +17,8 @@ namespace NickAc.ModernUIDoneRight.Utils
             Right
         }
 
-        static RenderSide[] VisibleTop = { RenderSide.Bottom };
-        static RenderSide[] VisibleBottom = { RenderSide.Top };
+        static RenderSide[] VisibleTop = { RenderSide.Bottom, RenderSide.Top };
+        static RenderSide[] VisibleBottom = { RenderSide.Top, RenderSide.Bottom };
         static RenderSide[] VisibleLeft = { RenderSide.Right };
         static RenderSide[] VisibleRight = { RenderSide.Left };
 
@@ -43,7 +43,7 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         public static void DrawShadow(Graphics G, Color c, Rectangle r, int d, Color BackColor, DockStyle st = DockStyle.None)
         {
-            Color[] colors = getColorVector(c, BackColor, d).ToArray();
+            Color[] colors = GetColorVector(c, BackColor, d).ToArray();
 
             if (IsVisible(RenderSide.Top, st))
                 for (int i = 1; i < d; i++)
@@ -78,7 +78,7 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         //Code taken and adapted from https://stackoverflow.com/a/25741405
         //All credits go to TaW (https://stackoverflow.com/users/3152130/taw)
-        static List<Color> getColorVector(Color fc, Color bc, int depth)
+        static List<Color> GetColorVector(Color fc, Color bc, int depth)
         {
             List<Color> cv = new List<Color>();
             int baseC = 100;
@@ -112,7 +112,7 @@ namespace NickAc.ModernUIDoneRight.Utils
                 ctrl.Parent.Paint += (s, e) =>
                 {
                     if (ctrl.Parent != null)
-                        DrawShadow(e.Graphics, Color.Black, ctrl.Bounds, 7, ctrl.Parent.BackColor);
+                        DrawShadow(e.Graphics, Color.Black, ctrl.Bounds, 7, ctrl.Parent.BackColor, ctrl.Dock);
                 };
             }
         }

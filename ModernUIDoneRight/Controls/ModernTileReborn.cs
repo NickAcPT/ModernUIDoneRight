@@ -2,9 +2,7 @@
 using NickAc.ModernUIDoneRight.Utils;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -16,49 +14,116 @@ namespace NickAc.ModernUIDoneRight.Controls
     /// </summary>
     public class TilePanelReborn : Control
     {
-        #region Constructor
+        #region Fields
+
+        private bool brandedTile;
+
+        private bool canBeHovered;
+
+        private bool checkable;
+
+        private bool hasDrawn;
+
+        private Image image;
+
+        private bool isHovered;
+
+        private Color lightBackColor;
+
+        private Color lightlightBackColor;
+
+        private List<TileText> texts = new List<TileText>();
+
+        #endregion
+
+        #region Constructors
+
         public TilePanelReborn()
         {
             DoubleBuffered = true;
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
-        #endregion
-        #region Events
 
-
-        protected void OnPaintOuterRectParent(object sender, PaintEventArgs pevent)
-        {
-            if (isHovered) {
-                using (var g = Parent.CreateGraphics()) {
-                    using (var br = new SolidBrush(lightBackColor)) {
-                        g.FillRectangle(br, GetOuterRectangle());
-                    }
-                }
-            }
-        }
-        bool isHovered;
-        protected override void OnMouseHover(EventArgs e)
-        {
-            base.OnMouseHover(e);
-            isHovered = true;
-            if (CanBeHovered) {
-                Parent.Refresh();
-            }
-        }
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            base.OnMouseLeave(e);
-            isHovered = false;
-            if (CanBeHovered) {
-                Parent.Refresh();
-            }
-        }
         #endregion
+
+        #region Properties
+        public override Color BackColor {
+            get {
+                return base.BackColor;
+            }
+            set {
+                base.BackColor = value;
+                lightBackColor = ControlPaint.Light(value);
+                lightlightBackColor = ControlPaint.LightLight(value);
+            }
+        }
+
+        public bool BrandedTile {
+            get {
+                return brandedTile;
+            }
+            set {
+                brandedTile = value;
+                Refresh();
+            }
+        }
+
+        public bool CanBeHovered {
+            get {
+                return canBeHovered;
+            }
+            set {
+                canBeHovered = value;
+                //UpdateParentHoverEvent(value);
+            }
+        }
+
+        public bool Checkable {
+            get { return checkable; }
+            set {
+                checkable = value;
+                UpdateSurface();
+                Refresh();
+            }
+        }
+
+        public bool Flat { get; set; }
+        public Image Image {
+            get {
+                return image;
+            }
+            set {
+                image = value;
+                UpdateSurface();
+                Refresh();
+            }
+        }
+
+        [Browsable(true)]
+        public override string Text {
+            get {
+                return base.Text;
+            }
+            set {
+                base.Text = value;
+                Refresh();
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public List<TileText> Texts {
+            get {
+                return texts;
+            }
+            set {
+                texts = value;
+            }
+        }
+
+        #endregion
+
         #region Methods
-        public int GetPercentage(int size, int percent)
-        {
-            return size * percent / 100;
-        }
+
         public Rectangle GetImageRect()
         {
             if (brandedTile)
@@ -66,10 +131,50 @@ namespace NickAc.ModernUIDoneRight.Controls
 
             return new Rectangle(0, 0, GetPercentage(Width, 50), GetPercentage(Height, 50));
         }
-        #endregion
-        #region Paint
+
+        public Rectangle GetOuterRectangle()
+        {
+            var rectangle = Bounds;
+            rectangle.Inflate(3, 3);
+            return rectangle;
+        }
+
+        public int GetPercentage(int size, int percent)
+        {
+            return size * percent / 100;
+        }
+
+        public Rectangle GetTextRectangle()
+        {
+            var rectangle = new Rectangle(0, Height - 32, Width, 32);
+            rectangle.Inflate(-8, -8);
+            return rectangle;
+        }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            isHovered = true;
+            if (CanBeHovered) {
+                Parent.Invalidate(GetOuterRectangle());
+            }
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            isHovered = false;
+            if (CanBeHovered) {
+                Parent.Invalidate(GetOuterRectangle());
+            }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
+            if (!hasDrawn) {
+                hasDrawn = true;
+                OnLoad();
+            }
             //Draw the outer Rectangle
             using (var solidBrush = new SolidBrush(lightlightBackColor)) {
                 e.Graphics.FillRectangle(solidBrush, DisplayRectangle);
@@ -81,9 +186,16 @@ namespace NickAc.ModernUIDoneRight.Controls
             using (var solidBrush = new SolidBrush(BackColor)) {
                 e.Graphics.FillRectangle(solidBrush, DisplayRectangle);
             }
-            //Draw gradient
-            using (LinearGradientBrush brush = new LinearGradientBrush(displayRectangle, Color.FromArgb(75, 0, 0, 0), Color.FromArgb(7, 0, 0, 0), LinearGradientMode.Horizontal)) {
-                e.Graphics.FillRectangle(brush, displayRectangle);
+            if (!Flat) {
+                //Draw gradient
+                using (LinearGradientBrush brush = new LinearGradientBrush(displayRectangle, Color.FromArgb(75, 0, 0, 0), Color.FromArgb(7, 0, 0, 0), LinearGradientMode.Horizontal)) {
+                    e.Graphics.FillRectangle(brush, displayRectangle);
+                }
+            }
+            else {
+                using (SolidBrush sb = new SolidBrush(Color.FromArgb(35, Color.Black))) {
+                    e.Graphics.FillRectangle(sb, displayRectangle);
+                }
             }
 
             if (Image != null) {
@@ -109,76 +221,14 @@ namespace NickAc.ModernUIDoneRight.Controls
                 }
             }
         }
-        #endregion
-        #region Properties and Internal Stuff
-        List<TileText> texts = new List<TileText>();
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public List<TileText> Texts {
-            get {
-                return texts;
-            }
-            set {
-                texts = value;
-            }
-        }
 
-        bool brandedTile = false;
-        public bool BrandedTile {
-            get {
-                return brandedTile;
-            }
-            set {
-                brandedTile = value;
-                Refresh();
-            }
-        }
-
-        void UpdateParentHoverEvent(bool isH)
+        protected void OnPaintOuterRectParent(object sender, PaintEventArgs pevent)
         {
-            if (Parent != null) {
-                if (isH) {
-                    Parent.Paint += OnPaintOuterRectParent;
-                }
-                else {
-                    Parent.Paint -= OnPaintOuterRectParent;
+            if (isHovered) {
+                using (var br = new SolidBrush(lightBackColor)) {
+                    pevent.Graphics.FillRectangle(br, GetOuterRectangle());
                 }
             }
-        }
-
-        bool canBeHovered;
-        public bool CanBeHovered {
-            get {
-                return canBeHovered;
-            }
-            set {
-                canBeHovered = value;
-                UpdateParentHoverEvent(value);
-            }
-        }
-        public override Color BackColor {
-            get {
-                return base.BackColor;
-            }
-            set {
-                base.BackColor = value;
-                lightBackColor = ControlPaint.Light(value);
-                lightlightBackColor = ControlPaint.LightLight(value);
-            }
-        }
-        Color lightlightBackColor;
-        Color lightBackColor;
-
-        public Rectangle GetTextRectangle()
-        {
-            var rectangle = new Rectangle(0, Height - 32, Width, 32);
-            rectangle.Inflate(-8, -8);
-            return rectangle;
-        }
-        public Rectangle GetOuterRectangle()
-        {
-            var rectangle = Bounds;
-            rectangle.Inflate(4, 4);
-            return rectangle;
         }
 
         protected void UpdateSurface()
@@ -186,38 +236,13 @@ namespace NickAc.ModernUIDoneRight.Controls
             Refresh();
         }
 
+        private void OnLoad()
+        {
+            if (Parent != null) {
+                Parent.Paint += OnPaintOuterRectParent;
+            }
+        }
 
-        Image image;
-        public Image Image {
-            get {
-                return image;
-            }
-            set {
-                image = value;
-                UpdateSurface();
-                Refresh();
-            }
-        }
-        bool checkable;
-
-        public bool Checkable {
-            get { return checkable; }
-            set {
-                checkable = value;
-                UpdateSurface();
-                Refresh();
-            }
-        }
-        [Browsable(true)]
-        public override string Text {
-            get {
-                return base.Text;
-            }
-            set {
-                base.Text = value;
-                Refresh();
-            }
-        }
         #endregion
     }
 }
