@@ -405,6 +405,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
+            if (!Sizable) return;
             var hitResult = HitTest(e.Location);
 
             windowHit = hitResult;

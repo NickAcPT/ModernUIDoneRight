@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.SuspendLayout();
             // 
             // appBar1
             // 
+            this.appBar1.Actions = ((System.Collections.Generic.List<NickAc.ModernUIDoneRight.Objects.AppAction>)(resources.GetObject("appBar1.Actions")));
             this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.appBar1.IconVisible = true;
             this.appBar1.Location = new System.Drawing.Point(1, 33);

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-16"?>
+<DevTrackerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SolutionTotalEditTime="PT3M48.956936S" SolutionTotalViewTime="PT5M11.327713S" SolutionTotalDebugTime="PT0S">
+  <FileVersion>
+    <Major>1</Major>
+    <Minor>0</Minor>
+  </FileVersion>
+  <SessionTimeList />
+  <LastSessionTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT6.9224375S" EditActiveTime="PT1M0.8061514S">
+      <ModifiedDate>2017-11-28T15:59:47.3380817+00:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Objects\Action.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:58:35.7037935+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17.8808385S" EditActiveTime="PT2M37.0584519S">
+      <ModifiedDate>2017-11-28T15:59:47.3693333+00:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Controls\AppBar.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:55:23.1067253+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.3577827S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\users\user\documents\visual studio 2017\projects\modernuidoneright\modernuitest\Form1.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUITest\ModernUITest.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:53:51.4161347+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M13.1226497S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\users\user\documents\visual studio 2017\projects\modernuidoneright\modernuidoneright\utils\FormUtils.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:53:57.967283+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M19.1659998S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Forms\ModernForm.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:23:45.906863+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9.8103152S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\users\user\documents\visual studio 2017\projects\modernuidoneright\modernuidoneright\controls\ModernTileReborn.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:54:13.6947584+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+  </LastSessionTimeList>
+  <TotalTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT6.9224375S" EditActiveTime="PT1M0.8061514S">
+      <ModifiedDate>2017-11-28T15:59:47.3380817+00:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Objects\Action.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:58:35.7037935+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17.8652122S" EditActiveTime="PT2M37.0584519S">
+      <ModifiedDate>2017-11-28T15:59:47.3693333+00:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Controls\AppBar.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:55:23.1067253+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10.3305765S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>c:\users\user\documents\visual studio 2017\projects\modernuidoneright\modernuitest\Form1.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUITest\ModernUITest.csproj</ProjectName>
+      <CreatedDate>2017-11-26T17:41:09.6964141+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M19.1004485S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Utils\FormUtils.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-26T17:41:50.7628806+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M46.0334117S" EditActiveTime="PT11.0923327S">
+      <ModifiedDate>2017-11-26T17:42:32.0566817+00:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>3</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Forms\ModernForm.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-26T17:41:15.684231+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT31.0756266S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Controls\ModernTileReborn.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-26T17:40:48.4240929+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+  </TotalTimeList>
+  <HistoryTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT6.9224375S" EditActiveTime="PT1M0.8061514S">
+      <ModifiedDate>2017-11-28T15:59:47.3380817+00:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Objects\Action.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:58:35.7037935+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17.8652122S" EditActiveTime="PT2M37.0584519S">
+      <ModifiedDate>2017-11-28T15:59:47.3693333+00:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Controls\AppBar.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:55:23.1067253+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9.8103152S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\users\user\documents\visual studio 2017\projects\modernuidoneright\modernuidoneright\controls\ModernTileReborn.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:54:13.6947584+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M13.1226497S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\users\user\documents\visual studio 2017\projects\modernuidoneright\modernuidoneright\utils\FormUtils.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:53:57.967283+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.3577827S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\users\user\documents\visual studio 2017\projects\modernuidoneright\modernuitest\Form1.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUITest\ModernUITest.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:53:51.4161347+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M19.1659998S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Forms\ModernForm.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T15:23:45.906863+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10.9536327S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Forms\ModernForm.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-28T13:31:33.8358533+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5.9777988S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Utils\FormUtils.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-26T17:41:50.7628806+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M15.9147802S" EditActiveTime="PT11.0923327S">
+      <ModifiedDate>2017-11-26T17:42:32.0566817+00:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Forms\ModernForm.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-26T17:41:15.684231+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5.9727938S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\users\user\documents\visual studio 2017\projects\modernuidoneright\modernuitest\Form1.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUITest\ModernUITest.csproj</ProjectName>
+      <CreatedDate>2017-11-26T17:41:09.6964141+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT21.2653114S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Controls\ModernTileReborn.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2017-11-26T17:40:48.4240929+00:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
+  </HistoryTimeList>
+</DevTrackerData>
