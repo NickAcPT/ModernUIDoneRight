@@ -146,8 +146,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public Rectangle GetTextRectangle()
         {
-            var rectangle = new Rectangle(0, Height - 32, Width, 32);
-            rectangle.Inflate(-8, -8);
+            var rectangle = Rectangle.FromLTRB(8, Height - 32, Width - 8, Height - 8);
             return rectangle;
         }
 
@@ -211,6 +210,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             if (!brandedTile) {
                 using (var sb = new SolidBrush(ForeColor)) {
                     using (var tF = ControlPaintWrapper.CreateStringFormat(this, ContentAlignment.BottomLeft, false)) {
+                        tF.FormatFlags = tF.FormatFlags | StringFormatFlags.NoWrap;
                         e.Graphics.DrawString(Text, Font, sb, GetTextRectangle(), tF);
                         foreach (var t in texts) {
                             if (t != null) {

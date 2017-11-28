@@ -1,4 +1,5 @@
 ﻿using NickAc.ModernUIDoneRight.Forms;
+using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Objects.Interaction;
 using System.Windows.Forms;
 
@@ -22,6 +23,13 @@ namespace ModernUITest
             };
             btn1.Click += (s, e) => MessageBox.Show("1");
             TitlebarButtons.Add(btn1);
+
+            AppAction item = new AppAction
+            {
+                Image = Icon.ToBitmap()
+            };
+            item.Click += (sender, e) => MessageBox.Show(sender.ToString());
+            appBar1.Actions.Add(item);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace NickAc.ModernUIDoneRight.Objects
         /// Called to signal to subscribers that it was clicked.
         /// </summary>
         public event EventHandler Click;
-        protected virtual void OnClick(EventArgs e)
+        public virtual void OnClick(EventArgs e)
         {
             EventHandler eh = Click;
 
@@ -28,11 +28,12 @@ namespace NickAc.ModernUIDoneRight.Objects
         {
             if (bar != null && containerList != null && containerList.Contains(this)) {
                 int index = containerList.IndexOf(this);
-                int size = bar.Height - (bar.XTextOffset * 2);
-                int right = bar.Width - bar.XTextOffset - (index * size);
-                return Rectangle.FromLTRB(right - size, bar.XTextOffset, right, bar.Height - bar.XTextOffset);
+                int xTextOffset = bar.XTextOffset;
+                int size = bar.Height - xTextOffset;
+                int xTextOffsetHalf = bar.XTextOffset / 2;
+                int right = bar.Width - xTextOffsetHalf - (index * size + xTextOffsetHalf * index);
+                return Rectangle.FromLTRB(right - size, xTextOffsetHalf, right, bar.Height - xTextOffsetHalf);
             }
-
             return Rectangle.Empty;
         }
     }

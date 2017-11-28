@@ -386,7 +386,7 @@ namespace NickAc.ModernUIDoneRight.Forms
                 if (mouseChanged) {
                     base.Cursor = cursor;
                 }
-                mouseChanged = !cursor.Equals(Cursors.Default);
+                mouseChanged = true /*!cursor.Equals(Cursors.Default)*/;
             }
             Invalidate(TitlebarButtonsRectangle);
         }
@@ -394,12 +394,20 @@ namespace NickAc.ModernUIDoneRight.Forms
         {
             base.OnMouseEnter(e);
             if (DesignMode) return;
+            if (mouseChanged) {
+                Cursor = Cursors.Default;
+                mouseChanged = false;
+            }
             Invalidate(TitlebarButtonsRectangle);
         }
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
             if (DesignMode) return;
+            if (mouseChanged) {
+                Cursor = Cursors.Default;
+                mouseChanged = false;
+            }
             Invalidate(TitlebarButtonsRectangle);
         }
         protected override void OnMouseDown(MouseEventArgs e)

@@ -3,6 +3,7 @@ using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -10,6 +11,24 @@ namespace NickAc.ModernUIDoneRight.Controls
 {
     public class AppBar : Control
     {
+
+        #region Methods
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            base.OnMouseClick(e);
+            if (Actions != null) {
+                Actions.ForEach(a => {
+                    Rectangle rect = a.GetRectangle(this, Actions);
+                    if (rect != Rectangle.Empty && rect.Contains(e.Location)) {
+                        a.OnClick(EventArgs.Empty);
+                    }
+
+                });
+            }
+        }
+
+        #endregion
 
         #region Fields
 
@@ -23,6 +42,10 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public AppBar()
         {
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.ResizeRedraw, true);
             Size = new Size(10, RoundUp((int)(ModernForm.DEFAULT_TITLEBAR_HEIGHT * 1.5d)));
             Dock = DockStyle.Top;
             Load += AppBar_Load;
@@ -40,6 +63,7 @@ namespace NickAc.ModernUIDoneRight.Controls
         #endregion
 
         #region Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public List<AppAction> Actions { get; set; } = new List<AppAction>();
 
         public ColorScheme ColorScheme {
@@ -78,8 +102,8 @@ namespace NickAc.ModernUIDoneRight.Controls
             if (Actions != null) {
                 Actions.ForEach(a => {
                     Rectangle rect = a.GetRectangle(this, Actions);
-                    if (rect != Rectangle.Empty) {
-                        e.Graphics.FillRectangle(Brushes.Red, rect);
+                    if (rect != Rectangle.Empty && a.Image != null) {
+                        ControlPaintWrapper.ZoomDrawImage(e.Graphics, a.Image, rect);
                     }
 
                 });
