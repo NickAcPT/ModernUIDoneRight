@@ -1,5 +1,6 @@
 ﻿using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
+using NickAc.ModernUIDoneRight.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,13 +13,14 @@ namespace NickAc.ModernUIDoneRight.Controls
 {
     public class MetroButton : Button
     {
-        #region Properties
 
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle ControlBounds => new Rectangle(Point.Empty, Size);
+        #region Fields
 
         ColorScheme colorScheme = DefaultColorSchemes.Blue;
+
+        #endregion
+
+        #region Properties
 
         public ColorScheme ColorScheme {
             get {
@@ -29,17 +31,32 @@ namespace NickAc.ModernUIDoneRight.Controls
                 colorScheme = value;
             }
         }
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Rectangle ControlBounds => new Rectangle(Point.Empty, Size);
+
         #endregion
-        #region Overriden Methods
+
+        #region Methods
+
         protected override void OnPaint(PaintEventArgs pevent)
         {
+            Point cursorLoc = PointToClient(Cursor.Position);
             base.OnPaint(pevent);
             using (var primary = new SolidBrush(ColorScheme.PrimaryColor)) {
-                using (var seconday = new SolidBrush(ColorScheme.SecondaryColor)) {
-                    pevent.Graphics.FillRectangle(primary, ControlBounds);
+                using (var secondary = new SolidBrush(ColorScheme.SecondaryColor)) {
+                    pevent.Graphics.FillRectangle(DisplayRectangle.Contains(cursorLoc) && MouseButtons == MouseButtons.Left ? secondary : primary, ControlBounds);
+                    using (var sF = ControlPaintWrapper.StringFormatForAlignment(TextAlign)) {
+                        using (var brush = new SolidBrush(ColorScheme.ForegroundColor)) {
+                            pevent.Graphics.DrawString(Text, Font, brush, DisplayRectangle, sF);
+                        }
+                    }
+                    
                 }
             }
         }
+
         #endregion
 
     }

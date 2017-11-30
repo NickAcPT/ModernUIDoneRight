@@ -33,6 +33,7 @@
             this.tilePanelReborn3 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn4 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
+            this.metroButton1 = new NickAc.ModernUIDoneRight.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // tilePanelReborn1
@@ -106,6 +107,15 @@
             this.appBar1.Text = "appBar1";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(522, 135);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(253, 60);
+            this.metroButton1.TabIndex = 4;
+            this.metroButton1.Text = "metroButton1";
+            this.metroButton1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,6 +124,7 @@
             this.ClientSize = new System.Drawing.Size(885, 374);
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.appBar1);
             this.Controls.Add(this.tilePanelReborn4);
             this.Controls.Add(this.tilePanelReborn3);
@@ -133,6 +144,7 @@
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn3;
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn4;
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
+        private NickAc.ModernUIDoneRight.Controls.MetroButton metroButton1;
     }
 }
 
