@@ -95,7 +95,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// <summary>
         /// The size of the border
         /// </summary>
-        private const int SIZING_BORDER = 7;
+        public const int SIZING_BORDER = 7;
 
         private readonly List<ModernTitlebarButton> titlebarButtons, nativeTitlebarButtons;
         WindowHitTestResult windowHit = WindowHitTestResult.None;

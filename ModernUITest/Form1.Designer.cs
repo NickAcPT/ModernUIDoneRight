@@ -45,7 +45,7 @@
             this.tilePanelReborn1.Flat = true;
             this.tilePanelReborn1.ForeColor = System.Drawing.Color.White;
             this.tilePanelReborn1.Image = null;
-            this.tilePanelReborn1.Location = new System.Drawing.Point(70, 115);
+            this.tilePanelReborn1.Location = new System.Drawing.Point(37, 117);
             this.tilePanelReborn1.Name = "tilePanelReborn1";
             this.tilePanelReborn1.Size = new System.Drawing.Size(205, 101);
             this.tilePanelReborn1.TabIndex = 2;
@@ -60,7 +60,7 @@
             this.tilePanelReborn2.Flat = true;
             this.tilePanelReborn2.ForeColor = System.Drawing.Color.White;
             this.tilePanelReborn2.Image = null;
-            this.tilePanelReborn2.Location = new System.Drawing.Point(281, 115);
+            this.tilePanelReborn2.Location = new System.Drawing.Point(248, 117);
             this.tilePanelReborn2.Name = "tilePanelReborn2";
             this.tilePanelReborn2.Size = new System.Drawing.Size(205, 101);
             this.tilePanelReborn2.TabIndex = 2;
@@ -75,7 +75,7 @@
             this.tilePanelReborn3.Flat = true;
             this.tilePanelReborn3.ForeColor = System.Drawing.Color.White;
             this.tilePanelReborn3.Image = null;
-            this.tilePanelReborn3.Location = new System.Drawing.Point(70, 222);
+            this.tilePanelReborn3.Location = new System.Drawing.Point(37, 224);
             this.tilePanelReborn3.Name = "tilePanelReborn3";
             this.tilePanelReborn3.Size = new System.Drawing.Size(103, 101);
             this.tilePanelReborn3.TabIndex = 2;
@@ -90,7 +90,7 @@
             this.tilePanelReborn4.Flat = true;
             this.tilePanelReborn4.ForeColor = System.Drawing.Color.White;
             this.tilePanelReborn4.Image = null;
-            this.tilePanelReborn4.Location = new System.Drawing.Point(179, 222);
+            this.tilePanelReborn4.Location = new System.Drawing.Point(146, 224);
             this.tilePanelReborn4.Name = "tilePanelReborn4";
             this.tilePanelReborn4.Size = new System.Drawing.Size(103, 101);
             this.tilePanelReborn4.TabIndex = 2;
@@ -102,14 +102,14 @@
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
-            this.appBar1.Size = new System.Drawing.Size(883, 50);
+            this.appBar1.Size = new System.Drawing.Size(777, 50);
             this.appBar1.TabIndex = 3;
             this.appBar1.Text = "appBar1";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(522, 135);
+            this.metroButton1.Location = new System.Drawing.Point(489, 137);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(253, 60);
             this.metroButton1.TabIndex = 4;
@@ -121,7 +121,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(885, 374);
+            this.ClientSize = new System.Drawing.Size(779, 374);
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.metroButton1);
@@ -131,7 +131,7 @@
             this.Controls.Add(this.tilePanelReborn2);
             this.Controls.Add(this.tilePanelReborn1);
             this.Location = new System.Drawing.Point(0, 0);
-            this.MinimumSize = new System.Drawing.Size(144, 39);
+            this.MinimumSize = new System.Drawing.Size(779, 374);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
