@@ -33,7 +33,7 @@
             this.tilePanelReborn3 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn4 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
-            this.metroButton1 = new NickAc.ModernUIDoneRight.Controls.MetroButton();
+            this.metroButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.SuspendLayout();
             // 
             // tilePanelReborn1
@@ -144,7 +144,7 @@
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn3;
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn4;
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
-        private NickAc.ModernUIDoneRight.Controls.MetroButton metroButton1;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton metroButton1;
     }
 }
 
