@@ -43,7 +43,7 @@
     <Compile Include="Controls\AppBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\MetroButton.cs">
+    <Compile Include="Controls\ModernButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ModernTileReborn.cs">

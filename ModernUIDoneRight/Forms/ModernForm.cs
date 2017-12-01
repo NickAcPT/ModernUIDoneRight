@@ -359,8 +359,6 @@ namespace NickAc.ModernUIDoneRight.Forms
                 }
             }
             base.OnLoad(e);
-            int v = GetTitleBarButtonsWidth();
-            base.MinimumSize = new Size(v, TitlebarHeight + SIZING_BORDER);
         }
 
         public override Size MaximumSize {
@@ -370,6 +368,20 @@ namespace NickAc.ModernUIDoneRight.Forms
             set {
                 value = Screen.GetWorkingArea(this).Size;
                 base.MaximumSize = value;
+            }
+        }
+
+        Size minimumSize = Size.Empty;
+        public override Size MinimumSize {
+            get {
+                if (minimumSize.IsEmpty) {
+                    int v = GetTitleBarButtonsWidth();
+                    return new Size(v, TitlebarHeight + SIZING_BORDER);
+                }
+                return minimumSize;
+            }
+            set {
+                minimumSize = value;
             }
         }
 
