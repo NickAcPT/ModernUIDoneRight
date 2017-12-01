@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace NickAc.ModernUIDoneRight.Controls
 {
-    public class MetroButton : Button
+    public class ModernButton : Button
     {
 
         #region Fields
