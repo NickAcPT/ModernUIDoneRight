@@ -346,7 +346,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnLoad(EventArgs e)
         {
             if (!DesignMode) {
-                CenterToScreen();
+                if (Location.IsEmpty) CenterToScreen();
 
                 //Check if we can use the aero shadow
                 if ((ShadowType.Equals(ShadowType.AeroShadow) || ShadowType.Equals(ShadowType.Default)) && DwmNative.ExtendFrameIntoClientArea(this, 0, 0, 0, 1)) {
