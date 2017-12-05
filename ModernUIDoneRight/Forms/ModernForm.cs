@@ -180,7 +180,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle TitlebarRectangle => Rectangle.FromLTRB(1, 1, FormBounds.Right - 1, TitlebarVisible ? TitlebarHeight + 1 : 0);
+        public Rectangle TitlebarRectangle => Rectangle.FromLTRB(1, 1, FormBounds.Right - 1, TitlebarVisible ? TitlebarHeight + 1 : 1);
         /// <summary>
         /// Rectangle that represents all caption/titlebar buttons
         /// </summary>

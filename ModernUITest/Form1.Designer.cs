@@ -100,9 +100,9 @@
             // 
             this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.appBar1.IconVisible = false;
-            this.appBar1.Location = new System.Drawing.Point(1, 33);
+            this.appBar1.Location = new System.Drawing.Point(1, 1);
             this.appBar1.Name = "appBar1";
-            this.appBar1.Size = new System.Drawing.Size(777, 50);
+            this.appBar1.Size = new System.Drawing.Size(778, 50);
             this.appBar1.TabIndex = 3;
             this.appBar1.Text = "appBar1";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
@@ -121,7 +121,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(779, 374);
+            this.ClientSize = new System.Drawing.Size(780, 377);
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.metroButton1);
@@ -134,6 +134,7 @@
             this.MinimumSize = new System.Drawing.Size(779, 374);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.TitlebarVisible = false;
             this.ResumeLayout(false);
 
         }
