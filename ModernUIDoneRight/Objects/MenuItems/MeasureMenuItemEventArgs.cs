@@ -8,6 +8,15 @@ namespace NickAc.ModernUIDoneRight.Objects.MenuItems
 {
     public class MeasureMenuItemEventArgs : EventArgs
     {
-        public Rectangle ItemRectangle { get; set; } = Rectangle.Empty;
+        public MeasureMenuItemEventArgs(Font font, Graphics graphics, Size itemSize)
+        {
+            Font = font;
+            Graphics = graphics;
+            ItemSize = itemSize;
+        }
+
+        public Font Font { get; set; }
+        public Graphics Graphics { get; set; }
+        public Size ItemSize { get; set; } = Size.Empty;
     }
 }

@@ -8,12 +8,14 @@ namespace NickAc.ModernUIDoneRight.Objects.MenuItems
 {
     public class RenderMenuItemEventArgs : EventArgs
     {
-        public RenderMenuItemEventArgs(Graphics graphics, Rectangle rectangle)
+        public RenderMenuItemEventArgs(Graphics graphics, Rectangle rectangle, Font font)
         {
             Graphics = graphics;
             Rectangle = rectangle;
+            Font = font;
         }
 
+        public Font Font { get; set; }
         public Graphics Graphics { get; set; }
         public Rectangle Rectangle { get; set; }
     }

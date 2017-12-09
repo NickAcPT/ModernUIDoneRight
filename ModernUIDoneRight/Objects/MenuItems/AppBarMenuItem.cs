@@ -6,6 +6,7 @@ using System.Text;
 
 namespace NickAc.ModernUIDoneRight.Objects.MenuItems
 {
+    [Serializable]
     public abstract class AppBarMenuItem
     {
         /// <summary>
@@ -19,7 +20,48 @@ namespace NickAc.ModernUIDoneRight.Objects.MenuItems
             eh?.Invoke(this, e);
         }
 
-        public abstract void RenderItem(RenderMenuItemEventArgs e);
-        public abstract void MeasureItem(MeasureMenuItemEventArgs e);
+        /// <summary>
+        /// Called to signal to subscribers that the item needs to be measured
+        /// </summary>
+        public event EventHandler<MeasureMenuItemEventArgs> MeasureItem;
+        protected virtual void OnMeasureItem(MeasureMenuItemEventArgs e)
+        {
+            EventHandler<MeasureMenuItemEventArgs> eh = MeasureItem;
+
+            eh?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Called to signal to subscribers that the item needs to be rendered
+        /// </summary>
+        public event EventHandler<RenderMenuItemEventArgs> RenderItem;
+        protected virtual void OnRenderItem(RenderMenuItemEventArgs e)
+        {
+            EventHandler<RenderMenuItemEventArgs> eh = RenderItem;
+
+            eh?.Invoke(this, e);
+        }
+
+        public Size GetSize(Font font, Graphics g)
+        {
+            MeasureMenuItemEventArgs args = new MeasureMenuItemEventArgs(font, g, Size.Empty);
+            OnMeasureItem(args);
+            return args.ItemSize;
+        }
+
+
+        public void DrawItem(Graphics g, Rectangle rect, Font font)
+        {
+            var args = new RenderMenuItemEventArgs(g, rect, font);
+            OnRenderItem(args);
+        }
+
+
+
+        public void PerformClick()
+        {
+            OnClick(EventArgs.Empty);
+        }
+
     }
 }

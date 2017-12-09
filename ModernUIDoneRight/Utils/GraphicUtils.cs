@@ -55,13 +55,8 @@ namespace NickAc.ModernUIDoneRight.Utils
                 g.DrawLine(p, rect.Right - 1, rect.Top, rect.Right - 1, rect.Bottom);
             }
         }
-
-        public static void DrawCenteredText(Graphics g, string text, Font f, Rectangle rect, Color textColor)
-        {
-            DrawCenteredText(g, text, f, rect, textColor, true, true);
-        }
-
-        public static void DrawCenteredText(Graphics g, string text, Font f, Rectangle rect, Color textColor, bool horizontal, bool vertical)
+        
+        public static void DrawCenteredText(Graphics g, string text, Font f, Rectangle rect, Color textColor, bool horizontal = true, bool vertical = true)
         {
             var sb = new SolidBrush(textColor);
             var stringFormat = new StringFormat();

@@ -1,6 +1,7 @@
 ﻿using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Objects.Interaction;
+using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using System.Windows.Forms;
 
 namespace ModernUITest
@@ -30,6 +31,24 @@ namespace ModernUITest
             };
             item.Click += (sender, e) => MessageBox.Show(sender.ToString());
             appBar1.Actions.Add(item);
+
+            AppBarMenuTextItem item1 = new AppBarMenuTextItem("1");
+            item1.Click += (s, e) => {
+                MessageBox.Show("1");
+            };
+            appBar1.MenuItems.Add(item1);
+            /*
+            AppBarMenuTextItem item2 = new AppBarMenuTextItem("2");
+            item2.Click += (s, e) => {
+                MessageBox.Show("2");
+            };
+            appBar1.MenuItems.Add(item2);
+
+            AppBarMenuTextItem item3 = new AppBarMenuTextItem("3");
+            item3.Click += (s, e) => {
+                MessageBox.Show("3");
+            };
+            appBar1.MenuItems.Add(item3);*/
         }
     }
 }

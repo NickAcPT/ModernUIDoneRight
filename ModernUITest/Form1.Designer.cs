@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn2 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn3 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
@@ -47,7 +48,7 @@
             this.tilePanelReborn1.Image = null;
             this.tilePanelReborn1.Location = new System.Drawing.Point(37, 117);
             this.tilePanelReborn1.Name = "tilePanelReborn1";
-            this.tilePanelReborn1.Size = new System.Drawing.Size(205, 101);
+            this.tilePanelReborn1.Size = new System.Drawing.Size(210, 100);
             this.tilePanelReborn1.TabIndex = 2;
             this.tilePanelReborn1.Text = "tilePanelReborn1";
             // 
@@ -60,9 +61,9 @@
             this.tilePanelReborn2.Flat = true;
             this.tilePanelReborn2.ForeColor = System.Drawing.Color.White;
             this.tilePanelReborn2.Image = null;
-            this.tilePanelReborn2.Location = new System.Drawing.Point(248, 117);
+            this.tilePanelReborn2.Location = new System.Drawing.Point(253, 117);
             this.tilePanelReborn2.Name = "tilePanelReborn2";
-            this.tilePanelReborn2.Size = new System.Drawing.Size(205, 101);
+            this.tilePanelReborn2.Size = new System.Drawing.Size(210, 100);
             this.tilePanelReborn2.TabIndex = 2;
             this.tilePanelReborn2.Text = "tilePanelReborn1";
             // 
@@ -77,7 +78,7 @@
             this.tilePanelReborn3.Image = null;
             this.tilePanelReborn3.Location = new System.Drawing.Point(37, 224);
             this.tilePanelReborn3.Name = "tilePanelReborn3";
-            this.tilePanelReborn3.Size = new System.Drawing.Size(103, 101);
+            this.tilePanelReborn3.Size = new System.Drawing.Size(101, 100);
             this.tilePanelReborn3.TabIndex = 2;
             this.tilePanelReborn3.Text = "tilePanelReborn1";
             // 
@@ -92,7 +93,7 @@
             this.tilePanelReborn4.Image = null;
             this.tilePanelReborn4.Location = new System.Drawing.Point(146, 224);
             this.tilePanelReborn4.Name = "tilePanelReborn4";
-            this.tilePanelReborn4.Size = new System.Drawing.Size(103, 101);
+            this.tilePanelReborn4.Size = new System.Drawing.Size(101, 100);
             this.tilePanelReborn4.TabIndex = 2;
             this.tilePanelReborn4.Text = "tilePanelReborn1";
             // 
