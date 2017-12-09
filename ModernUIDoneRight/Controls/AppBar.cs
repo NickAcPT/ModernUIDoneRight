@@ -1,5 +1,6 @@
 ﻿using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
+using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
 using System.Collections.Generic;
@@ -81,6 +82,8 @@ namespace NickAc.ModernUIDoneRight.Controls
         public Font TextFont { get; set; } = new Font(SystemFonts.CaptionFont.FontFamily, 14f);
         public Rectangle TextRectangle => Rectangle.FromLTRB(XTextOffset * (IconVisible ? 2 : 1), 0, ControlBounds.Right - XTextOffset, ControlBounds.Bottom);
         public int XTextOffset => /*Height*/20;
+        public List<AppBarMenuItem> MenuItems { get; set; } = new List<AppBarMenuItem>();
+
 
         #endregion
 

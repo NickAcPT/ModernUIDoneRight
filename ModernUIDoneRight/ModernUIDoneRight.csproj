@@ -57,12 +57,16 @@
     </Compile>
     <Compile Include="Native\DwmNative.cs" />
     <Compile Include="Objects\Action.cs" />
+    <Compile Include="Objects\MenuItems\AppBarMenuItem.cs" />
     <Compile Include="Objects\Colors\ColorScheme.cs" />
     <Compile Include="Objects\Colors\DefaultColors.cs" />
     <Compile Include="Objects\Colors\DefaultColorSchemes.cs" />
     <Compile Include="Objects\Interaction\ModernTitlebarButton.cs" />
     <Compile Include="Objects\Interaction\NativeTitlebarButton.cs" />
     <Compile Include="Objects\Interaction\WindowHitTestResult.cs" />
+    <Compile Include="Objects\MenuItems\AppBarMenuTextItem.cs" />
+    <Compile Include="Objects\MenuItems\MeasureMenuItemEventArgs.cs" />
+    <Compile Include="Objects\MenuItems\RenderMenuItemEventArgs.cs" />
     <Compile Include="Objects\ShadowType.cs" />
     <Compile Include="Objects\TileText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

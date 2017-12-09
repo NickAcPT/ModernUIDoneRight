@@ -27,7 +27,7 @@ namespace NickAc.ModernUIDoneRight.Objects
         public Rectangle GetRectangle(AppBar bar, List<AppAction> containerList)
         {
             if (bar != null && containerList != null && containerList.Contains(this)) {
-                int index = containerList.IndexOf(this);
+                int index = containerList.IndexOf(this) + (bar.MenuItems != null && bar.MenuItems.Count > 0 ? 1 : 0);
                 int xTextOffset = bar.XTextOffset;
                 int size = bar.Height - xTextOffset;
                 int xTextOffsetHalf = bar.XTextOffset / 2;
