@@ -34,21 +34,21 @@ namespace ModernUITest
 
             AppBarMenuTextItem item1 = new AppBarMenuTextItem("1");
             item1.Click += (s, e) => {
-                MessageBox.Show("1");
+                MessageBox.Show(this, "1");
             };
             appBar1.MenuItems.Add(item1);
-            /*
+            
             AppBarMenuTextItem item2 = new AppBarMenuTextItem("2");
             item2.Click += (s, e) => {
-                MessageBox.Show("2");
+                MessageBox.Show(this, "2");
             };
             appBar1.MenuItems.Add(item2);
 
             AppBarMenuTextItem item3 = new AppBarMenuTextItem("3");
             item3.Click += (s, e) => {
-                MessageBox.Show("3");
+                MessageBox.Show(this, "3");
             };
-            appBar1.MenuItems.Add(item3);*/
+            appBar1.MenuItems.Add(item3);
         }
     }
 }

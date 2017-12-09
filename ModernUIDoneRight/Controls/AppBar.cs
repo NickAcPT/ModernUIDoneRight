@@ -99,6 +99,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             base.OnMouseClick(e);
             Rectangle rectangle = GetMenuRectangle();
             if (MenuItems != null && MenuItems.Count > 0 && rectangle.Contains(e.Location)) {
+                //Open new "window" to act as menu
                 Color splitterColor = Color.Gray;
                 const float splitterPercentage = 0.75f;
                 var form = new ModernForm
@@ -113,7 +114,6 @@ namespace NickAc.ModernUIDoneRight.Controls
                 };
 
                 bool mouseDown = false;
-
                 form.MouseDown += (s, ee) => {
                     mouseDown = true;
                     form.Invalidate();
@@ -122,8 +122,12 @@ namespace NickAc.ModernUIDoneRight.Controls
                     mouseDown = false;
                     form.Invalidate();
                 };
+                form.MouseMove += (s, ee) => {
+                    form.Refresh();
+                };
 
                 form.Click += (s, ee) => {
+                    //Check the click
                     if (form.Tag != null) {
                         if (form.Tag is List<AppBarMenuItem> items) {
                             using (var g = form.CreateGraphics()) {
@@ -145,6 +149,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
                 form.Deactivate += (s, ee) => form.Close();
                 form.Paint += (s, ee) => {
+                    //Draw the menu
                     int yOffset = 0;
                     using (var splitterPen = new Pen(splitterColor)) {
                         for (int i = 0, MenuItemsCount = MenuItems.Count; i < MenuItemsCount; i++) {
@@ -223,8 +228,9 @@ namespace NickAc.ModernUIDoneRight.Controls
                         GraphicUtils.DrawCenteredText(pevent.Graphics, Parent.Text, TextFont, TextRectangle, ColorScheme.ForegroundColor, false, true);
 
                         if (MenuItems != null && MenuItems.Count > 0) {
+                            //Draw menu icon
                             Rectangle rect = GetMenuRectangle();
-                            const int circleRadius = 3;
+                            const int circleRadius = 2;
                             const int interval = 3;
                             int centerX = rect.Right - (rect.Width / 2);
                             int centerY = rect.Bottom - (rect.Height / 2);
