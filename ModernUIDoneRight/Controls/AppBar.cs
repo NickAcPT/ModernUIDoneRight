@@ -102,7 +102,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                 //Open new "window" to act as menu
                 Color splitterColor = Color.Gray;
                 const float splitterPercentage = 0.75f;
-                var form = new ModernForm
+                var form = new AppBarMenuForm
                 {
                     Capture = true,
                     TitlebarVisible = false,
@@ -110,7 +110,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                     Text = "ModernMenu",
                     ShowInTaskbar = false,
                     TopMost = true,
-                    Sizable = false
+                    Sizable = false,
                 };
 
                 bool mouseDown = false;
