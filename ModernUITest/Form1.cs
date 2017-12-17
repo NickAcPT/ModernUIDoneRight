@@ -50,5 +50,10 @@ namespace ModernUITest
             };
             appBar1.MenuItems.Add(item3);
         }
+
+        private void metroButton1_Click(object sender, System.EventArgs e)
+        {
+            modernShadowPanel1.Refresh();
+        }
     }
 }

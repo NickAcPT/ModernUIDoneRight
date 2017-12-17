@@ -46,6 +46,9 @@
     <Compile Include="Controls\ModernButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ModernShadowPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ModernTileReborn.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn2 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn3 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn4 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.metroButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
+            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernButton3 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernShadowPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tilePanelReborn1
@@ -103,7 +107,7 @@
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
-            this.appBar1.Size = new System.Drawing.Size(784, 50);
+            this.appBar1.Size = new System.Drawing.Size(819, 50);
             this.appBar1.TabIndex = 3;
             this.appBar1.Text = "appBar1";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
@@ -116,15 +120,54 @@
             this.metroButton1.TabIndex = 4;
             this.metroButton1.Text = "metroButton1";
             this.metroButton1.UseVisualStyleBackColor = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
+            // modernShadowPanel1
+            // 
+            this.modernShadowPanel1.Controls.Add(this.modernButton3);
+            this.modernShadowPanel1.Controls.Add(this.modernButton2);
+            this.modernShadowPanel1.Controls.Add(this.modernButton1);
+            this.modernShadowPanel1.Location = new System.Drawing.Point(253, 223);
+            this.modernShadowPanel1.Name = "modernShadowPanel1";
+            this.modernShadowPanel1.Size = new System.Drawing.Size(347, 160);
+            this.modernShadowPanel1.TabIndex = 5;
+            // 
+            // modernButton1
+            // 
+            this.modernButton1.Location = new System.Drawing.Point(35, 22);
+            this.modernButton1.Name = "modernButton1";
+            this.modernButton1.Size = new System.Drawing.Size(100, 60);
+            this.modernButton1.TabIndex = 4;
+            this.modernButton1.Text = "metroButton1";
+            this.modernButton1.UseVisualStyleBackColor = true;
+            // 
+            // modernButton2
+            // 
+            this.modernButton2.Location = new System.Drawing.Point(151, 22);
+            this.modernButton2.Name = "modernButton2";
+            this.modernButton2.Size = new System.Drawing.Size(100, 60);
+            this.modernButton2.TabIndex = 4;
+            this.modernButton2.Text = "metroButton1";
+            this.modernButton2.UseVisualStyleBackColor = true;
+            // 
+            // modernButton3
+            // 
+            this.modernButton3.Location = new System.Drawing.Point(122, 88);
+            this.modernButton3.Name = "modernButton3";
+            this.modernButton3.Size = new System.Drawing.Size(100, 60);
+            this.modernButton3.TabIndex = 4;
+            this.modernButton3.Text = "metroButton1";
+            this.modernButton3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(786, 380);
+            this.ClientSize = new System.Drawing.Size(821, 380);
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.modernShadowPanel1);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.appBar1);
             this.Controls.Add(this.tilePanelReborn4);
@@ -135,6 +178,7 @@
             this.MinimumSize = new System.Drawing.Size(779, 374);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.modernShadowPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -146,6 +190,10 @@
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn4;
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
         private NickAc.ModernUIDoneRight.Controls.ModernButton metroButton1;
+        private NickAc.ModernUIDoneRight.Controls.ModernShadowPanel modernShadowPanel1;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton3;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
     }
 }
 
