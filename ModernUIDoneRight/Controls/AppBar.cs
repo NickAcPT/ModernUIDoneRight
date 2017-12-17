@@ -104,7 +104,6 @@ namespace NickAc.ModernUIDoneRight.Controls
                 const float splitterPercentage = 0.75f;
                 var form = new AppBarMenuForm
                 {
-                    Capture = true,
                     TitlebarVisible = false,
                     Tag = MenuItems,
                     Text = "ModernMenu",
@@ -147,7 +146,12 @@ namespace NickAc.ModernUIDoneRight.Controls
                     }
                 };
 
-                form.Deactivate += (s, ee) => form.Close();
+                form.Deactivate += (s, ee) => {
+                    if (Parent is Form frm) {
+                        frm.Activate();
+                    }
+                    form.Dispose();
+                };
                 form.Paint += (s, ee) => {
                     //Draw the menu
                     int yOffset = 0;

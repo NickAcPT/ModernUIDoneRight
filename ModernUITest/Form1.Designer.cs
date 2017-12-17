@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
-            this.tilePanelReborn2 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn3 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn4 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
-            this.metroButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
-            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton3 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernTabControl1 = new NickAc.ModernUIDoneRight.Controls.ModernTabControl();
             this.modernShadowPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,21 +54,6 @@
             this.tilePanelReborn1.Size = new System.Drawing.Size(210, 100);
             this.tilePanelReborn1.TabIndex = 2;
             this.tilePanelReborn1.Text = "tilePanelReborn1";
-            // 
-            // tilePanelReborn2
-            // 
-            this.tilePanelReborn2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
-            this.tilePanelReborn2.BrandedTile = false;
-            this.tilePanelReborn2.CanBeHovered = true;
-            this.tilePanelReborn2.Checkable = true;
-            this.tilePanelReborn2.Flat = true;
-            this.tilePanelReborn2.ForeColor = System.Drawing.Color.White;
-            this.tilePanelReborn2.Image = null;
-            this.tilePanelReborn2.Location = new System.Drawing.Point(253, 117);
-            this.tilePanelReborn2.Name = "tilePanelReborn2";
-            this.tilePanelReborn2.Size = new System.Drawing.Size(210, 100);
-            this.tilePanelReborn2.TabIndex = 2;
-            this.tilePanelReborn2.Text = "tilePanelReborn1";
             // 
             // tilePanelReborn3
             // 
@@ -112,52 +96,53 @@
             this.appBar1.Text = "appBar1";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
-            // metroButton1
-            // 
-            this.metroButton1.Location = new System.Drawing.Point(489, 137);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(253, 60);
-            this.metroButton1.TabIndex = 4;
-            this.metroButton1.Text = "metroButton1";
-            this.metroButton1.UseVisualStyleBackColor = true;
-            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
-            // 
             // modernShadowPanel1
             // 
             this.modernShadowPanel1.Controls.Add(this.modernButton3);
             this.modernShadowPanel1.Controls.Add(this.modernButton2);
             this.modernShadowPanel1.Controls.Add(this.modernButton1);
-            this.modernShadowPanel1.Location = new System.Drawing.Point(253, 223);
+            this.modernShadowPanel1.Location = new System.Drawing.Point(253, 117);
             this.modernShadowPanel1.Name = "modernShadowPanel1";
-            this.modernShadowPanel1.Size = new System.Drawing.Size(347, 160);
+            this.modernShadowPanel1.Size = new System.Drawing.Size(251, 152);
             this.modernShadowPanel1.TabIndex = 5;
             // 
-            // modernButton1
+            // modernButton3
             // 
-            this.modernButton1.Location = new System.Drawing.Point(35, 22);
-            this.modernButton1.Name = "modernButton1";
-            this.modernButton1.Size = new System.Drawing.Size(100, 60);
-            this.modernButton1.TabIndex = 4;
-            this.modernButton1.Text = "metroButton1";
-            this.modernButton1.UseVisualStyleBackColor = true;
+            this.modernButton3.Location = new System.Drawing.Point(100, 79);
+            this.modernButton3.Name = "modernButton3";
+            this.modernButton3.Size = new System.Drawing.Size(100, 60);
+            this.modernButton3.TabIndex = 4;
+            this.modernButton3.Text = "metroButton1";
+            this.modernButton3.UseVisualStyleBackColor = true;
             // 
             // modernButton2
             // 
-            this.modernButton2.Location = new System.Drawing.Point(151, 22);
+            this.modernButton2.Location = new System.Drawing.Point(129, 13);
             this.modernButton2.Name = "modernButton2";
             this.modernButton2.Size = new System.Drawing.Size(100, 60);
             this.modernButton2.TabIndex = 4;
             this.modernButton2.Text = "metroButton1";
             this.modernButton2.UseVisualStyleBackColor = true;
             // 
-            // modernButton3
+            // modernButton1
             // 
-            this.modernButton3.Location = new System.Drawing.Point(122, 88);
-            this.modernButton3.Name = "modernButton3";
-            this.modernButton3.Size = new System.Drawing.Size(100, 60);
-            this.modernButton3.TabIndex = 4;
-            this.modernButton3.Text = "metroButton1";
-            this.modernButton3.UseVisualStyleBackColor = true;
+            this.modernButton1.Location = new System.Drawing.Point(13, 13);
+            this.modernButton1.Name = "modernButton1";
+            this.modernButton1.Size = new System.Drawing.Size(100, 60);
+            this.modernButton1.TabIndex = 4;
+            this.modernButton1.Text = "metroButton1";
+            this.modernButton1.UseVisualStyleBackColor = true;
+            // 
+            // modernTabControl1
+            // 
+            this.modernTabControl1.CurrentIndex = 0;
+            this.modernTabControl1.CurrentTabPage = null;
+            this.modernTabControl1.Location = new System.Drawing.Point(528, 117);
+            this.modernTabControl1.Name = "modernTabControl1";
+            this.modernTabControl1.Padding = new System.Windows.Forms.Padding(5);
+            this.modernTabControl1.Size = new System.Drawing.Size(280, 250);
+            this.modernTabControl1.TabHeight = 20;
+            this.modernTabControl1.TabIndex = 6;
             // 
             // Form1
             // 
@@ -167,12 +152,11 @@
             this.ClientSize = new System.Drawing.Size(821, 380);
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.modernTabControl1);
             this.Controls.Add(this.modernShadowPanel1);
-            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.appBar1);
             this.Controls.Add(this.tilePanelReborn4);
             this.Controls.Add(this.tilePanelReborn3);
-            this.Controls.Add(this.tilePanelReborn2);
             this.Controls.Add(this.tilePanelReborn1);
             this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(779, 374);
@@ -185,15 +169,14 @@
 
         #endregion
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn1;
-        private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn2;
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn3;
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn4;
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
-        private NickAc.ModernUIDoneRight.Controls.ModernButton metroButton1;
         private NickAc.ModernUIDoneRight.Controls.ModernShadowPanel modernShadowPanel1;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton3;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
+        private NickAc.ModernUIDoneRight.Controls.ModernTabControl modernTabControl1;
     }
 }
 

@@ -8,6 +8,6 @@ namespace NickAc.ModernUIDoneRight.Objects.MenuItems
 {
     class AppBarMenuForm : ModernForm
     {
-        protected override bool ShowWithoutActivation => false;
+        protected override bool ShowWithoutActivation => true;
     }
 }

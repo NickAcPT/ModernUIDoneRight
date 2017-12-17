@@ -10,7 +10,8 @@
     <AssemblyName>ModernUIDoneRight</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -49,6 +51,10 @@
     <Compile Include="Controls\ModernShadowPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ModernTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModernTabControlDesigner.cs" />
     <Compile Include="Controls\ModernTileReborn.cs">
       <SubType>Component</SubType>
     </Compile>
