@@ -51,10 +51,6 @@
     <Compile Include="Controls\ModernShadowPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ModernTabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ModernTabControlDesigner.cs" />
     <Compile Include="Controls\ModernTileReborn.cs">
       <SubType>Component</SubType>
     </Compile>

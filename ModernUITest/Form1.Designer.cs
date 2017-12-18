@@ -36,7 +36,6 @@
             this.modernButton3 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernTabControl1 = new NickAc.ModernUIDoneRight.Controls.ModernTabControl();
             this.modernShadowPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,17 +132,6 @@
             this.modernButton1.Text = "metroButton1";
             this.modernButton1.UseVisualStyleBackColor = true;
             // 
-            // modernTabControl1
-            // 
-            this.modernTabControl1.CurrentIndex = 0;
-            this.modernTabControl1.CurrentTabPage = null;
-            this.modernTabControl1.Location = new System.Drawing.Point(528, 117);
-            this.modernTabControl1.Name = "modernTabControl1";
-            this.modernTabControl1.Padding = new System.Windows.Forms.Padding(5);
-            this.modernTabControl1.Size = new System.Drawing.Size(280, 250);
-            this.modernTabControl1.TabHeight = 20;
-            this.modernTabControl1.TabIndex = 6;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -152,7 +140,6 @@
             this.ClientSize = new System.Drawing.Size(821, 380);
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
-            this.Controls.Add(this.modernTabControl1);
             this.Controls.Add(this.modernShadowPanel1);
             this.Controls.Add(this.appBar1);
             this.Controls.Add(this.tilePanelReborn4);
@@ -176,7 +163,6 @@
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton3;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
-        private NickAc.ModernUIDoneRight.Controls.ModernTabControl modernTabControl1;
     }
 }
 
