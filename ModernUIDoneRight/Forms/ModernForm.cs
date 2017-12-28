@@ -298,7 +298,6 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            if (!Sizable) return;
             var hitResult = HitTest(e.Location);
 
             windowHit = hitResult;
@@ -307,6 +306,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             if (hitResult == WindowHitTestResult.TitleBar) {
                 FormUtils.StartFormDragFromTitlebar(this);
             } else if (hitResult != WindowHitTestResult.TitleBarButtons && hitResult != WindowHitTestResult.None && Sizable) {
+                if (!Sizable) return;
                 FormUtils.StartFormResizeFromEdge(this, FormUtils.ConvertToResizeResult(hitResult));
             }
         }
