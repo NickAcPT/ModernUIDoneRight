@@ -171,7 +171,7 @@ namespace NickAc.ModernUIDoneRight.Utils
         {
             if (ctrl.Parent != null) {
                 ctrl.Parent.Paint += (s, e) => {
-                    if (ctrl.Parent != null)
+                    if (ctrl.Parent != null && ctrl.Visible)
                         DrawShadow(e.Graphics, Color.Black, ctrl.Bounds, 7, ctrl.Dock);
                 };
             }
