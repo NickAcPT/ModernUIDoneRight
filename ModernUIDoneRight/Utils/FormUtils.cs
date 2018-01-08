@@ -69,7 +69,7 @@ namespace NickAc.ModernUIDoneRight.Utils
         {
             Size minimum = f is ModernForm ? ((ModernForm)f).MinimumSize : f.MinimumSize;
             Size maximum = f is ModernForm ? ((ModernForm)f).MaximumSize : f.MaximumSize;
-            Cursor.Clip = Screen.GetWorkingArea(f);
+            //Cursor.Clip = Screen.GetWorkingArea(f);
             Point curLoc = f.PointToClient(Cursor.Position);
             Point fLoc = new Point(f.Left, f.Top);
             int w = f.Width;
@@ -162,7 +162,7 @@ namespace NickAc.ModernUIDoneRight.Utils
                 f.MouseUp -= invoke2;
                 f.MouseMove -= invoke;
                 f.Update();
-                Cursor.Clip = new Rectangle();
+                //Cursor.Clip = new Rectangle();
             };
 
             f.MouseUp += invoke2;
@@ -173,7 +173,7 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         public static void StartFormDragFromTitlebar(Form f, Control c = null)
         {
-            Cursor.Clip = Screen.GetWorkingArea(f);
+            //Cursor.Clip = Screen.GetWorkingArea(f);
             Point startCursorPosition = (c ?? f).PointToClient(Cursor.Position);
             Action<Object, MouseEventArgs> mouseMove = (Object s, MouseEventArgs e) => {
                 if (f.WindowState == FormWindowState.Maximized) {
@@ -189,7 +189,7 @@ namespace NickAc.ModernUIDoneRight.Utils
             (c ?? f).MouseUp += (s, e) => {
                 (c ?? f).MouseMove -= invoke;
 
-                Cursor.Clip = new Rectangle();
+                //Cursor.Clip = new Rectangle();
             };
         }
     }
