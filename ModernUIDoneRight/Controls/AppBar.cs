@@ -48,6 +48,8 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         #region Properties
 
+        public bool CastShadow { get; set; } = true;
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public List<AppAction> Actions { get; set; } = new List<AppAction>();
 
@@ -262,6 +264,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         private void AppBar_Load(object sender, EventArgs e)
         {
+            if (!CastShadow) return;
             //The control was drawn.
             //This means we can add the drop shadow
             ShadowUtils.CreateDropShadow(this);
