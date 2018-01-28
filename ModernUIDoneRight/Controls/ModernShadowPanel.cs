@@ -9,6 +9,12 @@ namespace NickAc.ModernUIDoneRight.Controls
     {
         private Bitmap FrozenImage { get; set; }
 
+        public ModernShadowPanel()
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+        }
+
         public void Freeze()
         {
             FrozenImage = new Bitmap(Size.Width, Size.Height);
