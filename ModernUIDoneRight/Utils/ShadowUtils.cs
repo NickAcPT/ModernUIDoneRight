@@ -18,8 +18,8 @@ namespace NickAc.ModernUIDoneRight.Utils
             Right
         }
 
-        static RenderSide[] VisibleTop = { RenderSide.Bottom, RenderSide.Top };
-        static RenderSide[] VisibleBottom = { RenderSide.Top, RenderSide.Bottom };
+        static RenderSide[] VisibleTop = { RenderSide.Bottom/*, RenderSide.Top*/ };
+        static RenderSide[] VisibleBottom = { RenderSide.Top/*, RenderSide.Bottom*/ };
         static RenderSide[] VisibleLeft = { RenderSide.Right };
         static RenderSide[] VisibleRight = { RenderSide.Left };
 
@@ -121,7 +121,7 @@ namespace NickAc.ModernUIDoneRight.Utils
 
             do {
                 var transparency = (rOuter.Height - rInner.Height) / (double)(blur * 2 + spread * 2);
-                var color = Color.FromArgb(((int)(255 * (transparency * transparency))), shadowColor);
+                var color = Color.FromArgb(((int)(200 * (transparency * transparency))), shadowColor);
                 var rOutput = rInner;
                 rOutput.Offset(-originalOuter.Left, -originalOuter.Top);
                 g2.DrawRoundedRectangle(rOutput, 5, Pens.Transparent, color);
@@ -142,7 +142,7 @@ namespace NickAc.ModernUIDoneRight.Utils
         static List<Color> GetColorVector(Color fc, int depth)
         {
             List<Color> cv = new List<Color>();
-            int baseC = 100;
+            int baseC = 65;
             float div = baseC / depth;
             for (int d = 1; d <= depth; d++) {
                 cv.Add(Color.FromArgb(Max(0, baseC), fc));

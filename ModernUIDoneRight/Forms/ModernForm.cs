@@ -295,13 +295,14 @@ namespace NickAc.ModernUIDoneRight.Forms
             }
         }
 
+        bool isMouseDown;
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
+            isMouseDown = true;
             var hitResult = HitTest(e.Location);
 
             windowHit = hitResult;
-            Invalidate(TitlebarButtonsRectangle);
 
             if (hitResult == WindowHitTestResult.TitleBar) {
                 FormUtils.StartFormDragFromTitlebar(this);
@@ -309,6 +310,7 @@ namespace NickAc.ModernUIDoneRight.Forms
                 if (!Sizable) return;
                 FormUtils.StartFormResizeFromEdge(this, FormUtils.ConvertToResizeResult(hitResult));
             }
+            Invalidate(TitlebarButtonsRectangle);
         }
 
         protected override void OnMouseEnter(EventArgs e)
@@ -352,6 +354,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
+            isMouseDown = false;
             if (mouseChanged) {
                 Cursor = Cursors.Default;
                 mouseChanged = false;
@@ -366,26 +369,37 @@ namespace NickAc.ModernUIDoneRight.Forms
 
             using (SolidBrush primary = new SolidBrush(ColorScheme.PrimaryColor)) {
                 using (SolidBrush secondary = new SolidBrush(ColorScheme.SecondaryColor)) {
-                    //Draw titlebar
-                    if (TitlebarVisible)
-                        e.Graphics.FillRectangle(primary, TitlebarRectangle);
-                    //Draw form border
-                    GraphicUtils.DrawRectangleBorder(FormBounds, e.Graphics, ColorScheme.SecondaryColor);
+                    using (SolidBrush secondary2 = new SolidBrush(IsAppBarAvailable ? ColorScheme.DarkenColor(ColorScheme.SecondaryColor) : ColorScheme.SecondaryColor)) {
+                        //Draw titlebar
+                        if (TitlebarVisible)
+                            e.Graphics.FillRectangle(IsAppBarAvailable ? secondary : primary, TitlebarRectangle);
+                        //Draw form border
+                        GraphicUtils.DrawRectangleBorder(FormBounds, e.Graphics, ColorScheme.SecondaryColor);
 
-                    if (!TitlebarVisible)
-                        return;
-                    //Start rendering the titlebar buttons
-                    int titlebarButtonOffset = 0;
-                    titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary, NativeTitlebarButtons, ref titlebarButtonOffset);
-                    titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary, TitlebarButtons, ref titlebarButtonOffset);
-                    //Dectect if an app bar is available.
-                    //If it is, draw the window title.
-                    if (!IsAppBarAvailable) {
-                        GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SIZING_BORDER, TextBarRectangle.Top, TextBarRectangle.Right - SIZING_BORDER, TextBarRectangle.Bottom), ColorScheme.ForegroundColor, false, true);
+                        if (!TitlebarVisible)
+                            return;
+                        //Start rendering the titlebar buttons
+                        int titlebarButtonOffset = 0;
+                        titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary2, NativeTitlebarButtons, ref titlebarButtonOffset);
+                        titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary2, TitlebarButtons, ref titlebarButtonOffset);
+                        //Dectect if an app bar is available.
+                        //If it is, draw the window title.
+                        if (!IsAppBarAvailable) {
+                            GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SIZING_BORDER, TextBarRectangle.Top, TextBarRectangle.Right - SIZING_BORDER, TextBarRectangle.Bottom), ColorScheme.ForegroundColor, false, true);
+                        }
                     }
-                }
 
+                }
             }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            var oldClip = e.Graphics.Clip;
+            e.Graphics.SetClip(DisplayRectangle);
+            base.OnPaint(e);
+            e.Graphics.SetClip(oldClip.GetBounds(e.Graphics));
+            oldClip.Dispose();
         }
 
         /// <summary>
@@ -491,7 +505,7 @@ namespace NickAc.ModernUIDoneRight.Forms
                 var btn = buttons[i];
                 if (!btn.Visible) continue;
                 Rectangle rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
-                if (rect.Contains(curLoc))
+                if (rect.Contains(curLoc) && isMouseDown)
                     e.Graphics.FillRectangle(secondary, rect);
                 GraphicUtils.DrawCenteredText(e.Graphics, btn.Text, btn.Font, rect, ColorScheme.ForegroundColor);
                 titlebarButtonOffset += btn.Width;
