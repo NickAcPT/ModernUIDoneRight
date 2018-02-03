@@ -11,6 +11,7 @@ namespace ModernUITest
         public Form1()
         {
             InitializeComponent();
+            modernShadowPanel1.Freeze();
             ModernTitlebarButton btn2 = new ModernTitlebarButton
             {
                 Text = "2"

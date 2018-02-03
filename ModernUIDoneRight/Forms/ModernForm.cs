@@ -31,7 +31,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         private readonly List<ModernTitlebarButton> titlebarButtons, nativeTitlebarButtons;
         ColorScheme colorScheme;
         Size minimumSize = Size.Empty;
-        bool mouseChanged = false;
+        bool mouseChanged;
         WindowHitTestResult windowHit = WindowHitTestResult.None;
 
         #endregion

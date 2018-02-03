@@ -19,9 +19,7 @@ namespace NickAc.ModernUIDoneRight.Controls
         {
             FrozenImage = new Bitmap(Size.Width, Size.Height);
             using (var g = Graphics.FromImage(FrozenImage)) {
-                foreach (Control c in Controls) {
-                    DrawControlShadow(c, g);
-                }
+                DrawControlShadow(g);
             }
             Refresh();
         }
@@ -60,14 +58,28 @@ namespace NickAc.ModernUIDoneRight.Controls
                 e.Graphics.DrawImage(FrozenImage, Point.Empty);
                 return;
             }
-            foreach (Control c in Controls) {
-                DrawControlShadow(c, e.Graphics);
-            }
+            DrawControlShadow(e.Graphics);
         }
 
-        private void DrawControlShadow(Control c, Graphics g)
+        private const int SHADOW_OFFSET = 4;
+        private const int HALF_SHADOW_OFFSET = SHADOW_OFFSET / 2;
+        private const int HALF_HALF_SHADOW_OFFSET = HALF_SHADOW_OFFSET / 2;
+        private void DrawControlShadow(Graphics g)
         {
-            ShadowUtils.DrawOutsetShadow(g, Color.Black, 1, 0, 20, 0, c);
+            using (var brush = new SolidBrush(Color.FromArgb(150, Color.Black))) {
+                using (var img = new Bitmap(Width, Height)) {
+                    using (var gp = Graphics.FromImage(img)) {
+                        foreach (Control c in Controls) {
+                            //gp.DrawRoundedRectangle(rInner, 5, Pens.Transparent, Color.Black);
+                            gp.FillRectangle(brush, Rectangle.Inflate(c.Bounds, HALF_SHADOW_OFFSET, HALF_HALF_SHADOW_OFFSET));
+                        }
+                    }
+                    var gaussian = new GaussianBlur(img);
+                    using (var result = gaussian.Process(SHADOW_OFFSET)) {
+                        g.DrawImageUnscaled(result, Point.Empty);
+                    }
+                }
+            }
         }
     }
 }

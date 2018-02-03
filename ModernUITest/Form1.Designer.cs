@@ -91,12 +91,12 @@
             this.modernShadowPanel1.Controls.Add(this.modernButton1);
             this.modernShadowPanel1.Location = new System.Drawing.Point(253, 117);
             this.modernShadowPanel1.Name = "modernShadowPanel1";
-            this.modernShadowPanel1.Size = new System.Drawing.Size(251, 152);
+            this.modernShadowPanel1.Size = new System.Drawing.Size(342, 238);
             this.modernShadowPanel1.TabIndex = 5;
             // 
             // modernButton3
             // 
-            this.modernButton3.Location = new System.Drawing.Point(100, 79);
+            this.modernButton3.Location = new System.Drawing.Point(73, 158);
             this.modernButton3.Name = "modernButton3";
             this.modernButton3.Size = new System.Drawing.Size(100, 60);
             this.modernButton3.TabIndex = 4;
@@ -105,7 +105,7 @@
             // 
             // modernButton2
             // 
-            this.modernButton2.Location = new System.Drawing.Point(129, 13);
+            this.modernButton2.Location = new System.Drawing.Point(147, 27);
             this.modernButton2.Name = "modernButton2";
             this.modernButton2.Size = new System.Drawing.Size(100, 60);
             this.modernButton2.TabIndex = 4;
@@ -114,7 +114,7 @@
             // 
             // modernButton1
             // 
-            this.modernButton1.Location = new System.Drawing.Point(13, 13);
+            this.modernButton1.Location = new System.Drawing.Point(28, 27);
             this.modernButton1.Name = "modernButton1";
             this.modernButton1.Size = new System.Drawing.Size(100, 60);
             this.modernButton1.TabIndex = 4;
