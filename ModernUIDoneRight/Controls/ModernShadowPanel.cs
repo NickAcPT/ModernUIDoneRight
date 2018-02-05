@@ -61,7 +61,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             DrawControlShadow(e.Graphics);
         }
 
-        private const int SHADOW_OFFSET = 4;
+        private const int SHADOW_OFFSET = 3;
         private const int HALF_SHADOW_OFFSET = SHADOW_OFFSET / 2;
         private const int HALF_HALF_SHADOW_OFFSET = HALF_SHADOW_OFFSET / 2;
         private void DrawControlShadow(Graphics g)
@@ -71,7 +71,8 @@ namespace NickAc.ModernUIDoneRight.Controls
                     using (var gp = Graphics.FromImage(img)) {
                         foreach (Control c in Controls) {
                             //gp.DrawRoundedRectangle(rInner, 5, Pens.Transparent, Color.Black);
-                            gp.FillRectangle(brush, Rectangle.Inflate(c.Bounds, HALF_SHADOW_OFFSET, HALF_HALF_SHADOW_OFFSET));
+                            gp.FillRectangle(brush, Rectangle.Inflate(c.Bounds, HALF_SHADOW_OFFSET, HALF_SHADOW_OFFSET));
+                            //ShadowUtils.DrawOutsetShadow(gp, Color.Black, 0, 0, 20, 1, c);
                         }
                     }
                     var gaussian = new GaussianBlur(img);
