@@ -10,6 +10,10 @@ namespace NickAc.ModernUIDoneRight.Utils
 {
     public static class ShadowUtils
     {
+        public interface IShadowController
+        {
+            bool ShouldShowShadow();
+        }
         enum RenderSide
         {
             Top,
@@ -171,7 +175,7 @@ namespace NickAc.ModernUIDoneRight.Utils
         {
             if (ctrl.Parent != null) {
                 ctrl.Parent.Paint += (s, e) => {
-                    if (ctrl.Parent != null && ctrl.Visible)
+                    if (ctrl.Parent != null && ctrl.Visible && (!(ctrl is IShadowController) || ((IShadowController)ctrl).ShouldShowShadow()))
                         DrawShadow(e.Graphics, Color.Black, ctrl.Bounds, 7, ctrl.Dock);
                 };
             }

@@ -1,4 +1,5 @@
-﻿using NickAc.ModernUIDoneRight.Forms;
+﻿using NickAc.ModernUIDoneRight;
+using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Objects.Interaction;
 using NickAc.ModernUIDoneRight.Objects.MenuItems;
@@ -11,7 +12,6 @@ namespace ModernUITest
         public Form1()
         {
             InitializeComponent();
-            modernShadowPanel1.Freeze();
             ModernTitlebarButton btn2 = new ModernTitlebarButton
             {
                 Text = "2"
@@ -50,11 +50,27 @@ namespace ModernUITest
                 MessageBox.Show(this, "3");
             };
             appBar1.MenuItems.Add(item3);
+
+            var item11 = new SidebarTextItem("Text 1");
+            item11.Click += (s, e) => {
+                MessageBox.Show(this, "3");
+            };
+            sidebarControl1.Items.Add(item11);
         }
 
-        private void metroButton1_Click(object sender, System.EventArgs e)
+        private void tilePanelReborn3_Click(object sender, System.EventArgs e)
         {
-            modernShadowPanel1.Refresh();
+            sidebarControl1.ShowSidebar();
+        }
+
+        private void tilePanelReborn4_Click(object sender, System.EventArgs e)
+        {
+            sidebarControl1.HideSidebar();
+        }
+
+        private void Form1_Load(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

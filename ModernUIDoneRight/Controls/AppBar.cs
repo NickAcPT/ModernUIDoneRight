@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NickAc.ModernUIDoneRight.Controls
@@ -48,6 +49,10 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         #region Properties
 
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsSideBarAvailable => Parent != null && Parent.Controls.OfType<SidebarControl>().Any();
+
         public bool CastShadow { get; set; } = true;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -62,6 +67,8 @@ namespace NickAc.ModernUIDoneRight.Controls
             }
         }
 
+        public int HamburgerButtonSize { get; set; } = 32;
+
         public Rectangle ControlBounds => new Rectangle(Point.Empty, Size);
 
         public bool IconVisible { get { return iconVisible; } set { iconVisible = value; Invalidate(); } }
@@ -71,7 +78,10 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public Font TextFont { get; set; } = new Font(SystemFonts.CaptionFont.FontFamily, 14f);
 
-        public Rectangle TextRectangle => Rectangle.FromLTRB(XTextOffset * (IconVisible ? 2 : 1), 0, ControlBounds.Right - XTextOffset, ControlBounds.Bottom);
+        public Rectangle TextRectangle => Rectangle.FromLTRB((IsSideBarAvailable ? HamburgerButtonSize : 0) + XTextOffset * (IconVisible ? 2 : 1), 0, ControlBounds.Right - XTextOffset, ControlBounds.Bottom);
+
+        public Rectangle HamburgerRectangle => IsSideBarAvailable ? Rectangle.FromLTRB(TextRectangle.Left - 8 - HamburgerButtonSize, TextRectangle.Top + 8, TextRectangle.Left - 8, TextRectangle.Bottom - 8)
+            : Rectangle.Empty;
 
         public int XTextOffset => 20;
 
@@ -96,11 +106,31 @@ namespace NickAc.ModernUIDoneRight.Controls
             eh?.Invoke(this, e);
         }
 
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (IsSideBarAvailable) Invalidate(HamburgerRectangle);
+        }
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (IsSideBarAvailable) Invalidate(HamburgerRectangle);
+        }
+
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
-            Rectangle rectangle = GetMenuRectangle();
-            if (MenuItems != null && MenuItems.Count > 0 && rectangle.Contains(e.Location)) {
+            if (IsSideBarAvailable && HamburgerRectangle.Contains(e.Location)) {
+                Parent.Controls.OfType<SidebarControl>().All(c => {
+                    if (c.IsClosed) {
+                        c.ShowSidebar();
+                    } else
+                        c.HideSidebar();
+                    return true;
+                });
+            }
+            Rectangle menuRect = GetMenuRectangle();
+            if (MenuItems != null && MenuItems.Count > 0 && menuRect.Contains(e.Location)) {
                 //Open new "window" to act as menu
                 Color splitterColor = Color.Gray;
                 const float splitterPercentage = 0.75f;
@@ -188,7 +218,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                     }
                 }
                 form.Size = new Size(maxWidth + 2, maxHeight + 2);
-                Point screenLoc = PointToScreen(new Point(rectangle.Right, rectangle.Top));
+                Point screenLoc = PointToScreen(new Point(menuRect.Right, menuRect.Top));
                 form.Location = new Point(screenLoc.X - maxWidth, screenLoc.Y);
                 form.Show(this.Parent);
             }
@@ -256,6 +286,37 @@ namespace NickAc.ModernUIDoneRight.Controls
                             pevent.Graphics.FillEllipse(foreColor, centerX - circleRadius, bottomCircle - circleRadius, circleRadius * 2, circleRadius * 2);
 
                             pevent.Graphics.SmoothingMode = oldMode;
+                        }
+                        if (IsSideBarAvailable) {
+                            if (MouseButtons != MouseButtons.None && HamburgerRectangle.Contains(PointToClient(Cursor.Position))) {
+                                pevent.Graphics.FillRectangle(secondary, HamburgerRectangle);
+                            }
+
+                            using (var forePen = new Pen(ColorScheme.ForegroundColor, 3)) {
+                                //Draw hamburger icon
+                                Rectangle rect = HamburgerRectangle;
+                                const int circleRadius = 2;
+                                const int spacingSides = 4;
+                                const int interval = 3;
+                                int centerX = rect.Right - (rect.Width / 2);
+                                int centerY = rect.Bottom - (rect.Height / 2);
+                                int topCircle = centerY - (circleRadius * 2) - interval;
+                                int bottomCircle = centerY + (circleRadius * 2) + interval;
+
+                                var oldMode = pevent.Graphics.SmoothingMode;
+                                pevent.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+                                //Top
+                                pevent.Graphics.DrawLine(forePen, rect.Left + spacingSides, topCircle, rect.Right - spacingSides, topCircle);
+
+                                //Middle
+                                pevent.Graphics.DrawLine(forePen, rect.Left + spacingSides, centerY, rect.Right - spacingSides, centerY);
+
+                                //Bottom
+                                pevent.Graphics.DrawLine(forePen, rect.Left + spacingSides, bottomCircle, rect.Right - spacingSides, bottomCircle);
+
+                                pevent.Graphics.SmoothingMode = oldMode;
+                            }
                         }
                     }
                 }
