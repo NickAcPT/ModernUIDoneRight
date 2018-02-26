@@ -82,24 +82,22 @@ namespace NickAc.ModernUIDoneRight.Controls
 
             int yPos = TopBarSize + TopBarSpacing;
             using (var altColor = new SolidBrush(ColorScheme.SecondaryColor)) {
-                foreach (var item in Items) {
-                    int height = -1;
-                    item.MeasureItem(this, e.Graphics, out height);
-                    if (height < 1) continue;
-                    Rectangle itemRect = new Rectangle(0, yPos, Width, height);
+                using (var backColor = new SolidBrush(BackColor)) {
+                    foreach (var item in Items) {
+                        int height = -1;
+                        item.MeasureItem(this, e.Graphics, out height);
+                        if (height < 1) continue;
+                        Rectangle itemRect = new Rectangle(0, yPos, Width, height);
 
-                    using (var bmp = new Bitmap(Width, height)) {
-                        using (var g = Graphics.FromImage(bmp)) {
-                            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                            bool mouseHere = itemRect.Contains(PointToClient(Cursor.Position)) && MouseButtons == MouseButtons.Left;
-                            var oldForeColor = ForeColor;
-                            if (mouseHere) {
-                                g.FillRectangle(altColor, 0, 0, Width, height);
+                        using (var bmp = new Bitmap(Width, height)) {
+                            using (var g = Graphics.FromImage(bmp)) {
+                                bool mouseHere = itemRect.Contains(PointToClient(Cursor.Position)) && MouseButtons == MouseButtons.Left;
+                                g.FillRectangle(mouseHere ? altColor : backColor, 0, 0, Width, height);
+                                item.DrawItem(this, g, new Size(Width, height), mouseHere);
                             }
-                            item.DrawItem(this, g, new Size(Width, height), mouseHere);
+                            e.Graphics.DrawImageUnscaled(bmp, 0, yPos);
+                            yPos += height;
                         }
-                        e.Graphics.DrawImageUnscaled(bmp, 0, yPos);
-                        yPos += height;
                     }
                 }
             }
@@ -124,7 +122,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                         if (height < 1) continue;
                         Rectangle itemRect = new Rectangle(0, yPos, Width, height);
 
-                        bool mouseHere = itemRect.Contains(PointToClient(Cursor.Position)) && MouseButtons == MouseButtons.Left;
+                        bool mouseHere = itemRect.Contains(e.Location) && e.Button == MouseButtons.Left;
                         if (mouseHere) {
                             item.OnClick(e);
                             return;
