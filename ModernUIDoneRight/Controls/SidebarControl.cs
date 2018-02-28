@@ -75,6 +75,10 @@ namespace NickAc.ModernUIDoneRight.Controls
         {
             base.OnPaint(e);
             if (!wasPainted) {
+                if (IsClosed) {
+                    OriginalWidth = Width;
+                    Width = 0;
+                }
                 wasPainted = true;
                 this.CreateDropShadow();
             }
