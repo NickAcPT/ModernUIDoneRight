@@ -86,6 +86,7 @@
             // 
             this.appBar1.CastShadow = true;
             this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.appBar1.HamburgerButtonSize = 32;
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
@@ -97,7 +98,7 @@
             // sidebarControl1
             // 
             this.sidebarControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.sidebarControl1.IsClosed = false;
+            this.sidebarControl1.IsClosed = true;
             this.sidebarControl1.Location = new System.Drawing.Point(1, 83);
             this.sidebarControl1.Name = "sidebarControl1";
             this.sidebarControl1.Size = new System.Drawing.Size(231, 383);

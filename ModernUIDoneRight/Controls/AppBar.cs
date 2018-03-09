@@ -44,7 +44,7 @@ namespace NickAc.ModernUIDoneRight.Controls
         /// Called to signal to subscribers that this control loaded
         /// </summary>
         public event EventHandler Load;
-
+        
         #endregion
 
         #region Properties
@@ -59,9 +59,7 @@ namespace NickAc.ModernUIDoneRight.Controls
         public List<AppAction> Actions { get; set; } = new List<AppAction>();
 
         public ColorScheme ColorScheme {
-            get {
-                return Parent != null && Parent is ModernForm ? ((ModernForm)Parent).ColorScheme : colorScheme;
-            }
+            get => Parent != null && Parent is ModernForm ? ((ModernForm)Parent).ColorScheme : colorScheme;
             set {
                 colorScheme = value;
             }
@@ -328,7 +326,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             if (!CastShadow) return;
             //The control was drawn.
             //This means we can add the drop shadow
-            ShadowUtils.CreateDropShadow(this);
+            this.CreateDropShadow();
             if (Parent != null) {
                 Parent.Invalidate();
             }
