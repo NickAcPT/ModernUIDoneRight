@@ -45,27 +45,25 @@ namespace NickAc.ModernUIDoneRight.Controls
             return !(_isAnimating || IsClosed);
         }
 
-        /// <summary>
-        ///     Called to signal to subscribers that sidebar was opened
-        /// </summary>
-        public event EventHandler SidebarOpen;
 
-        protected virtual void OnSidebarOpen(EventArgs e)
+        /// <summary>
+        /// Called to signal to subscribers that 
+        /// </summary>
+        public event EventHandler AnimationStart;
+        protected virtual void OnAnimationStart(EventArgs e)
         {
-            var eh = SidebarOpen;
+            EventHandler eh = AnimationStart;
 
             eh?.Invoke(this, e);
         }
 
-
         /// <summary>
-        ///     Called to signal to subscribers that sidebar was closed
+        /// Called to signal to subscribers that Description
         /// </summary>
-        public event EventHandler SidebarClose;
-
-        protected virtual void OnSidebarClose(EventArgs e)
+        public event EventHandler AnimationStop;
+        protected virtual void OnAnimationStop(EventArgs e)
         {
-            var eh = SidebarClose;
+            EventHandler eh = AnimationStop;
 
             eh?.Invoke(this, e);
         }
@@ -181,8 +179,9 @@ namespace NickAc.ModernUIDoneRight.Controls
                 _isAnimating = false;
                 Parent?.ResumeLayout();
                 Parent?.Refresh();
-                OnSidebarOpen(EventArgs.Empty);
+                OnAnimationStop(EventArgs.Empty);
             });
+            OnAnimationStart(EventArgs.Empty);
             _isAnimating = true;
             Parent?.Invalidate(originalRect);
             Parent?.SuspendLayout();
@@ -207,8 +206,9 @@ namespace NickAc.ModernUIDoneRight.Controls
                 Hide();
                 _isAnimating = false;
                 Parent?.ResumeLayout();
-                OnSidebarClose(EventArgs.Empty);
+                OnAnimationStop(EventArgs.Empty);
             });
+            OnAnimationStart(EventArgs.Empty);
             _isAnimating = true;
             Parent?.Invalidate(originalRect);
             Parent?.SuspendLayout();
