@@ -224,7 +224,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         protected void OnPaintOuterRectParent(object sender, PaintEventArgs pevent)
         {
-            if (isHovered) {
+            if (isHovered && CanBeHovered) {
                 using (var br = new SolidBrush(lightBackColor)) {
                     pevent.Graphics.FillRectangle(br, GetOuterRectangle());
                 }
