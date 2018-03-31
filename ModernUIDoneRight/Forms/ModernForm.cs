@@ -21,12 +21,12 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// <summary>
         /// The default height of the titlebar
         /// </summary>
-        public const int DEFAULT_TITLEBAR_HEIGHT = 32;
+        public const int DefaultTitlebarHeight = 32;
 
         /// <summary>
         /// The size of the border
         /// </summary>
-        public const int SIZING_BORDER = 7;
+        public const int SizingBorder = 7;
 
         private readonly List<ModernTitlebarButton> titlebarButtons, nativeTitlebarButtons;
         ColorScheme colorScheme;
@@ -52,7 +52,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             SetStyle(ControlStyles.ResizeRedraw, true);
 
             titlebarButtons = new List<ModernTitlebarButton>();
-            nativeTitlebarButtons = GenerateNativeButtons(DEFAULT_TITLEBAR_HEIGHT, this);
+            nativeTitlebarButtons = GenerateNativeButtons(DefaultTitlebarHeight, this);
 
             BackColor = Color.White;
             FormBorderStyle = FormBorderStyle.None;
@@ -61,10 +61,20 @@ namespace NickAc.ModernUIDoneRight.Forms
         #endregion
 
         #region Properties
+        
+        public int HamburgerButtonSize { get; set; } = 32;
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle BottomSide => Rectangle.FromLTRB(SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER, FormBounds.Right - SIZING_BORDER, FormBounds.Bottom);
+        public bool IsSideBarAvailable => !IsAppBarAvailable && Controls.OfType<SidebarControl>().Any();
+
+        
+        public Rectangle HamburgerRectangle => IsSideBarAvailable ? Rectangle.FromLTRB(TextBarRectangle.Left - HamburgerButtonSize - 1, 0, TextBarRectangle.Left, TextBarRectangle.Bottom)
+            : Rectangle.Empty;
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Rectangle BottomSide => Rectangle.FromLTRB(SizingBorder, FormBounds.Bottom - SizingBorder, FormBounds.Right - SizingBorder, FormBounds.Bottom);
 
         /// <summary>
         /// The color scheme on this window
@@ -93,11 +103,11 @@ namespace NickAc.ModernUIDoneRight.Forms
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle LeftBottom => Rectangle.FromLTRB(0, FormBounds.Bottom - SIZING_BORDER, SIZING_BORDER, FormBounds.Bottom);
+        public Rectangle LeftBottom => Rectangle.FromLTRB(0, FormBounds.Bottom - SizingBorder, SizingBorder, FormBounds.Bottom);
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle LeftSide => Rectangle.FromLTRB(0, TitlebarRectangle.Bottom, SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER);
+        public Rectangle LeftSide => Rectangle.FromLTRB(0, TitlebarRectangle.Bottom, SizingBorder, FormBounds.Bottom - SizingBorder);
 
         public override Size MaximumSize {
             get {
@@ -113,7 +123,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             get {
                 if (minimumSize.IsEmpty) {
                     int v = GetTitleBarButtonsWidth();
-                    return new Size(v, TitlebarHeight + SIZING_BORDER);
+                    return new Size(v, TitlebarHeight + SizingBorder);
                 }
                 return minimumSize;
             }
@@ -124,11 +134,11 @@ namespace NickAc.ModernUIDoneRight.Forms
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle RightBottom => Rectangle.FromLTRB(FormBounds.Right - SIZING_BORDER, FormBounds.Bottom - SIZING_BORDER, FormBounds.Right, FormBounds.Bottom);
+        public Rectangle RightBottom => Rectangle.FromLTRB(FormBounds.Right - SizingBorder, FormBounds.Bottom - SizingBorder, FormBounds.Right, FormBounds.Bottom);
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle RightSide => Rectangle.FromLTRB(FormBounds.Right - SIZING_BORDER, TitlebarRectangle.Bottom, FormBounds.Right, FormBounds.Bottom - SIZING_BORDER);
+        public Rectangle RightSide => Rectangle.FromLTRB(FormBounds.Right - SizingBorder, TitlebarRectangle.Bottom, FormBounds.Right, FormBounds.Bottom - SizingBorder);
 
         public ShadowType ShadowType { get; set; } = ShadowType.Default;
 
@@ -146,7 +156,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle TextBarRectangle => Rectangle.FromLTRB(TitlebarRectangle.Left, TitlebarRectangle.Top, TitlebarRectangle.Right - GetTitleBarButtonsWidth(), TitlebarRectangle.Bottom);
+        public Rectangle TextBarRectangle => Rectangle.FromLTRB((IsSideBarAvailable ? HamburgerButtonSize : 0) + TitlebarRectangle.Left, TitlebarRectangle.Top, TitlebarRectangle.Right - GetTitleBarButtonsWidth(), TitlebarRectangle.Bottom);
 
         public List<ModernTitlebarButton> TitlebarButtons => titlebarButtons;
 
@@ -171,7 +181,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// <summary>
         /// The actual height of the titlebar
         /// </summary>
-        public int TitlebarHeight { get; set; } = DEFAULT_TITLEBAR_HEIGHT;
+        public int TitlebarHeight { get; set; } = DefaultTitlebarHeight;
 
         /// <summary>
         /// Rectangle that represents the complete titlebar
@@ -293,6 +303,19 @@ namespace NickAc.ModernUIDoneRight.Forms
                     HandleTitlebarButtonClick(e, ref titlebarButtonOffset, TitlebarButtons);
                     break;
             }
+            if (IsSideBarAvailable && HamburgerRectangle.Contains(e.Location))
+                Controls.OfType<SidebarControl>().All(ToggleSidebar);
+        }
+
+        private static bool ToggleSidebar(SidebarControl c)
+        {
+            if (c.IsClosed)
+            {
+                c.ShowSidebar();
+            }
+            else
+                c.HideSidebar();
+            return true;
         }
 
         bool isMouseDown;
@@ -311,6 +334,8 @@ namespace NickAc.ModernUIDoneRight.Forms
                 FormUtils.StartFormResizeFromEdge(this, FormUtils.ConvertToResizeResult(hitResult));
             }
             Invalidate(TitlebarButtonsRectangle);
+            if (IsSideBarAvailable)
+                Invalidate(HamburgerRectangle);
         }
 
         protected override void OnMouseEnter(EventArgs e)
@@ -333,6 +358,8 @@ namespace NickAc.ModernUIDoneRight.Forms
                 mouseChanged = false;
             }
             Invalidate(TitlebarButtonsRectangle);
+            if (IsSideBarAvailable)
+                Invalidate(HamburgerRectangle);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -360,6 +387,8 @@ namespace NickAc.ModernUIDoneRight.Forms
                 mouseChanged = false;
             }
             Invalidate(TitlebarButtonsRectangle);
+            if (IsSideBarAvailable)
+                Invalidate(HamburgerRectangle);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -385,8 +414,12 @@ namespace NickAc.ModernUIDoneRight.Forms
                         //Dectect if an app bar is available.
                         //If it is, draw the window title.
                         if (!IsAppBarAvailable) {
-                            GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SIZING_BORDER, TextBarRectangle.Top, TextBarRectangle.Right - SIZING_BORDER, TextBarRectangle.Bottom), ColorScheme.ForegroundColor, false, true);
+                            GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SizingBorder, TextBarRectangle.Top, TextBarRectangle.Right - SizingBorder, TextBarRectangle.Bottom), ColorScheme.ForegroundColor, false, true);
                         }
+
+                        if (IsSideBarAvailable)
+                            GraphicUtils.DrawHamburgerButton(e.Graphics, secondary, HamburgerRectangle, ColorScheme.ForegroundColor, this, true);
+
                     }
 
                 }

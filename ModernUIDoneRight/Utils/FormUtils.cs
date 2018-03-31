@@ -85,7 +85,7 @@ namespace NickAc.ModernUIDoneRight.Utils
                     f.Cursor = HitTestToCursor(result);
                     switch (resultEnum) {
                         case ResizeResult.Left:
-                            if (curLoc.X <= ModernForm.SIZING_BORDER && ((f.Width + changedSize) >= minimum.Width)) {
+                            if (curLoc.X <= ModernForm.SizingBorder && ((f.Width + changedSize) >= minimum.Width)) {
                                 f.Left -= changedSize;
                                 fLoc = new Point(f.Left, f.Top);
                                 f.Width += changedSize;
@@ -93,7 +93,7 @@ namespace NickAc.ModernUIDoneRight.Utils
                             }
                             break;
                         case ResizeResult.Right:
-                            if (curLoc.X >= minimum.Width - ModernForm.SIZING_BORDER) {
+                            if (curLoc.X >= minimum.Width - ModernForm.SizingBorder) {
                                 f.Left = fLoc.X;
                                 curLoc = f.PointToClient(Cursor.Position);
                                 f.Width = w - changedSize;
@@ -102,7 +102,7 @@ namespace NickAc.ModernUIDoneRight.Utils
                             }
                             break;
                         case ResizeResult.Bottom:
-                            if (curLoc.Y >= minimum.Height - ModernForm.SIZING_BORDER) {
+                            if (curLoc.Y >= minimum.Height - ModernForm.SizingBorder) {
                                 f.Top = fLoc.Y;
                                 curLoc = f.PointToClient(Cursor.Position);
                                 f.Height = h - changedSizeH;
@@ -111,7 +111,7 @@ namespace NickAc.ModernUIDoneRight.Utils
                             }
                             break;
                         case ResizeResult.BottomLeft:
-                            if (curLoc.X <= ModernForm.SIZING_BORDER && curLoc.Y >= minimum.Height - ModernForm.SIZING_BORDER && ((f.Width + changedSize) >= minimum.Width)) {
+                            if (curLoc.X <= ModernForm.SizingBorder && curLoc.Y >= minimum.Height - ModernForm.SizingBorder && ((f.Width + changedSize) >= minimum.Width)) {
                                 int ww = e.Location.X - f.Left;
                                 int hh = e.Location.Y - f.Bottom;
 

@@ -31,8 +31,8 @@
             this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn3 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelReborn4 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
-            this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.sidebarControl1 = new NickAc.ModernUIDoneRight.Controls.SidebarControl();
+            this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.SuspendLayout();
             // 
             // tilePanelReborn1
@@ -82,19 +82,6 @@
             this.tilePanelReborn4.Text = "tilePanelReborn1";
             this.tilePanelReborn4.Click += new System.EventHandler(this.tilePanelReborn4_Click);
             // 
-            // appBar1
-            // 
-            this.appBar1.CastShadow = true;
-            this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.appBar1.HamburgerButtonSize = 32;
-            this.appBar1.IconVisible = false;
-            this.appBar1.Location = new System.Drawing.Point(1, 33);
-            this.appBar1.Name = "appBar1";
-            this.appBar1.Size = new System.Drawing.Size(618, 50);
-            this.appBar1.TabIndex = 6;
-            this.appBar1.Text = "appBar1";
-            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
-            // 
             // sidebarControl1
             // 
             this.sidebarControl1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -108,19 +95,32 @@
             this.sidebarControl1.TopBarSize = 128;
             this.sidebarControl1.TopBarSpacing = 32;
             // 
+            // appBar1
+            // 
+            this.appBar1.CastShadow = true;
+            this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.appBar1.HamburgerButtonSize = 32;
+            this.appBar1.IconVisible = false;
+            this.appBar1.Location = new System.Drawing.Point(1, 33);
+            this.appBar1.Name = "appBar1";
+            this.appBar1.Size = new System.Drawing.Size(673, 50);
+            this.appBar1.TabIndex = 8;
+            this.appBar1.Text = "appBar1";
+            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(620, 467);
+            this.ClientSize = new System.Drawing.Size(675, 467);
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.sidebarControl1);
-            this.Controls.Add(this.appBar1);
             this.Controls.Add(this.tilePanelReborn4);
             this.Controls.Add(this.tilePanelReborn3);
             this.Controls.Add(this.tilePanelReborn1);
+            this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -133,8 +133,8 @@
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn1;
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn3;
         private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn4;
-        private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
         private NickAc.ModernUIDoneRight.Controls.SidebarControl sidebarControl1;
+        private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
     }
 }
 

@@ -26,7 +26,7 @@ namespace ModernUITest
             btn1.Click += (s, e) => MessageBox.Show("1");
             TitlebarButtons.Add(btn1);
 
-            AppAction item = new AppAction
+            /*AppAction item = new AppAction
             {
                 Image = Icon.ToBitmap()
             };
@@ -50,7 +50,7 @@ namespace ModernUITest
                 MessageBox.Show(this, "3");
             };
             appBar1.MenuItems.Add(item3);
-
+            */
             var item11 = new SidebarTextItem("Text 1");
             item11.Click += (s, e) => {
                 MessageBox.Show(this, "3");

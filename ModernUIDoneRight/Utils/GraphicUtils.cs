@@ -1,16 +1,55 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace NickAc.ModernUIDoneRight.Utils
 {
     public static class GraphicUtils
     {
 
+        public static void DrawHamburgerButton(Graphics g, SolidBrush secondary, Rectangle hamburgerRectangle, Color foreColor, Control c, bool smallButton = false)
+        {
+            if (Control.MouseButtons != MouseButtons.None && hamburgerRectangle.Contains(c.PointToClient(Cursor.Position)))
+            {
+                g.FillRectangle(secondary, hamburgerRectangle);
+            }
+
+            using (var forePen = new Pen(foreColor, 3))
+            {
+                //Draw hamburger icon
+                var rect = hamburgerRectangle;
+                const int barSize = 2;
+                int spacingSides = smallButton ? 6 : 4;
+                const int interval = 3;
+                var centerX = rect.Right - (rect.Width / 2);
+                var centerY = rect.Bottom - (rect.Height / 2);
+                var topLine = centerY - (barSize * 2) - interval;
+                var bottomLine = centerY + (barSize * 2) + interval;
+
+                var oldMode = g.SmoothingMode;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+                //Top
+                g.DrawLine(forePen, rect.Left + spacingSides, topLine, rect.Right - spacingSides,
+                    topLine);
+
+                //Middle
+                g.DrawLine(forePen, rect.Left + spacingSides, centerY, rect.Right - spacingSides,
+                    centerY);
+
+                //Bottom
+                g.DrawLine(forePen, rect.Left + spacingSides, bottomLine, rect.Right - spacingSides,
+                    bottomLine);
+
+                g.SmoothingMode = oldMode;
+            }
+        }
+
         public static Rectangle OffsetAndReturn(this Rectangle rect, Point offset)
         {
             if (offset.Equals(Point.Empty))
                 return rect;
-            Rectangle newR = new Rectangle(rect.Location, rect.Size);
+            var newR = new Rectangle(rect.Location, rect.Size);
             newR.Offset(offset);
             return newR;
         }
@@ -19,7 +58,7 @@ namespace NickAc.ModernUIDoneRight.Utils
         {
             if (x.Equals(Point.Empty.X) && y.Equals(Point.Empty.Y))
                 return rect;
-            Rectangle newR = new Rectangle(rect.Location, rect.Size);
+            var newR = new Rectangle(rect.Location, rect.Size);
             newR.Offset(x, y);
             return newR;
         }
@@ -43,7 +82,7 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         public static void DrawRectangleBorder(Rectangle rect, Graphics g, Color borderColor)
         {
-            using (Pen p = new Pen(borderColor))
+            using (var p = new Pen(borderColor))
             {
                 //Top
                 g.DrawLine(p, rect.Left + 1, rect.Top, rect.Right - 1, rect.Top);

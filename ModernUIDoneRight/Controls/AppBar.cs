@@ -31,7 +31,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
-            Size = new Size(10, RoundUp((int)(ModernForm.DEFAULT_TITLEBAR_HEIGHT * 1.5d)));
+            Size = new Size(10, RoundUp((int) (ModernForm.DefaultTitlebarHeight * 1.5d)));
             Dock = DockStyle.Top;
             Load += AppBar_Load;
         }
@@ -44,7 +44,7 @@ namespace NickAc.ModernUIDoneRight.Controls
         /// Called to signal to subscribers that this control loaded
         /// </summary>
         public event EventHandler Load;
-        
+
         #endregion
 
         #region Properties
@@ -58,27 +58,38 @@ namespace NickAc.ModernUIDoneRight.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public List<AppAction> Actions { get; set; } = new List<AppAction>();
 
-        public ColorScheme ColorScheme {
-            get => Parent != null && Parent is ModernForm ? ((ModernForm)Parent).ColorScheme : colorScheme;
-            set {
-                colorScheme = value;
-            }
+        public ColorScheme ColorScheme
+        {
+            get => Parent != null && Parent is ModernForm ? ((ModernForm) Parent).ColorScheme : colorScheme;
+            set { colorScheme = value; }
         }
 
         public int HamburgerButtonSize { get; set; } = 32;
 
         public Rectangle ControlBounds => new Rectangle(Point.Empty, Size);
 
-        public bool IconVisible { get { return iconVisible; } set { iconVisible = value; Invalidate(); } }
+        public bool IconVisible
+        {
+            get { return iconVisible; }
+            set
+            {
+                iconVisible = value;
+                Invalidate();
+            }
+        }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public List<AppBarMenuItem> MenuItems { get; set; } = new List<AppBarMenuItem>();
 
         public Font TextFont { get; set; } = new Font(SystemFonts.CaptionFont.FontFamily, 14f);
 
-        public Rectangle TextRectangle => Rectangle.FromLTRB((IsSideBarAvailable ? HamburgerButtonSize : 0) + XTextOffset * (IconVisible ? 2 : 1), 0, ControlBounds.Right - XTextOffset, ControlBounds.Bottom);
+        public Rectangle TextRectangle =>
+            Rectangle.FromLTRB((IsSideBarAvailable ? HamburgerButtonSize : 0) + XTextOffset * (IconVisible ? 2 : 1), 0,
+                ControlBounds.Right - XTextOffset, ControlBounds.Bottom);
 
-        public Rectangle HamburgerRectangle => IsSideBarAvailable ? Rectangle.FromLTRB(TextRectangle.Left - 8 - HamburgerButtonSize, TextRectangle.Top + 8, TextRectangle.Left - 8, TextRectangle.Bottom - 8)
+        public Rectangle HamburgerRectangle => IsSideBarAvailable
+            ? Rectangle.FromLTRB(TextRectangle.Left - 8 - HamburgerButtonSize, TextRectangle.Top + 8,
+                TextRectangle.Left - 8, TextRectangle.Bottom - 8)
             : Rectangle.Empty;
 
         public int XTextOffset => 20;
@@ -109,6 +120,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             base.OnMouseDown(e);
             if (IsSideBarAvailable) Invalidate(HamburgerRectangle);
         }
+
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -118,17 +130,24 @@ namespace NickAc.ModernUIDoneRight.Controls
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
-            if (IsSideBarAvailable && HamburgerRectangle.Contains(e.Location)) {
-                Parent.Controls.OfType<SidebarControl>().All(c => {
-                    if (c.IsClosed) {
+            if (IsSideBarAvailable && HamburgerRectangle.Contains(e.Location))
+            {
+                Parent.Controls.OfType<SidebarControl>().All(c =>
+                {
+                    if (c.IsClosed)
+                    {
                         c.ShowSidebar();
-                    } else
+                    }
+                    else
                         c.HideSidebar();
+
                     return true;
                 });
             }
+
             Rectangle menuRect = GetMenuRectangle();
-            if (MenuItems != null && MenuItems.Count > 0 && menuRect.Contains(e.Location)) {
+            if (MenuItems != null && MenuItems.Count > 0 && menuRect.Contains(e.Location))
+            {
                 //Open new "window" to act as menu
                 Color splitterColor = Color.Gray;
                 const float splitterPercentage = 0.75f;
@@ -143,32 +162,42 @@ namespace NickAc.ModernUIDoneRight.Controls
                 };
 
                 bool mouseDown = false;
-                form.MouseDown += (s, ee) => {
+                form.MouseDown += (s, ee) =>
+                {
                     mouseDown = true;
                     form.Invalidate();
                 };
-                form.MouseUp += (s, ee) => {
+                form.MouseUp += (s, ee) =>
+                {
                     mouseDown = false;
                     form.Invalidate();
                 };
-                form.MouseMove += (s, ee) => {
-                    form.Refresh();
-                };
+                form.MouseMove += (s, ee) => { form.Refresh(); };
 
-                form.Click += (s, ee) => {
+                form.Click += (s, ee) =>
+                {
                     //Check the click
-                    if (form.Tag != null) {
-                        if (form.Tag is List<AppBarMenuItem> items) {
-                            using (var g = form.CreateGraphics()) {
+                    if (form.Tag != null)
+                    {
+                        if (form.Tag is List<AppBarMenuItem> items)
+                        {
+                            using (var g = form.CreateGraphics())
+                            {
                                 int yOffset = 0;
-                                foreach (var item in items) {
+                                foreach (var item in items)
+                                {
                                     Size itemSize = item.GetSize(Font, g);
-                                    Rectangle rect = new Rectangle(new Point(form.DisplayRectangle.Left, yOffset + form.DisplayRectangle.Top), new Size(itemSize.Width, itemSize.Height - 1));
+                                    Rectangle rect =
+                                        new Rectangle(
+                                            new Point(form.DisplayRectangle.Left, yOffset + form.DisplayRectangle.Top),
+                                            new Size(itemSize.Width, itemSize.Height - 1));
 
-                                    if (rect.Contains(form.PointToClient(Cursor.Position))) {
+                                    if (rect.Contains(form.PointToClient(Cursor.Position)))
+                                    {
                                         item.PerformClick();
                                         return;
                                     }
+
                                     yOffset += itemSize.Height;
                                 }
                             }
@@ -176,30 +205,44 @@ namespace NickAc.ModernUIDoneRight.Controls
                     }
                 };
 
-                form.Deactivate += (s, ee) => {
-                    if (Parent is Form frm) {
+                form.Deactivate += (s, ee) =>
+                {
+                    if (Parent is Form frm)
+                    {
                         frm.Activate();
                     }
+
                     form.Dispose();
                 };
-                form.Paint += (s, ee) => {
+                form.Paint += (s, ee) =>
+                {
                     //Draw the menu
                     int yOffset = 0;
-                    using (var splitterPen = new Pen(splitterColor)) {
-                        for (int i = 0, MenuItemsCount = MenuItems.Count; i < MenuItemsCount; i++) {
+                    using (var splitterPen = new Pen(splitterColor))
+                    {
+                        for (int i = 0, MenuItemsCount = MenuItems.Count; i < MenuItemsCount; i++)
+                        {
                             var item = MenuItems[i];
                             Size itemSize = item.GetSize(Font, ee.Graphics);
-                            Rectangle rect = new Rectangle(new Point(form.DisplayRectangle.Left, yOffset + form.DisplayRectangle.Top), new Size(itemSize.Width, itemSize.Height - 1));
+                            Rectangle rect =
+                                new Rectangle(
+                                    new Point(form.DisplayRectangle.Left, yOffset + form.DisplayRectangle.Top),
+                                    new Size(itemSize.Width, itemSize.Height - 1));
 
-                            if (mouseDown && rect.Contains(form.PointToClient(Cursor.Position))) {
+                            if (mouseDown && rect.Contains(form.PointToClient(Cursor.Position)))
+                            {
                                 ee.Graphics.FillRectangle(Brushes.LightGray, rect);
                             }
+
                             item.DrawItem(ee.Graphics, rect, Font);
-                            if (i < MenuItemsCount - 1) {
-                                int lineWidth = (int)(form.Width * splitterPercentage);
+                            if (i < MenuItemsCount - 1)
+                            {
+                                int lineWidth = (int) (form.Width * splitterPercentage);
                                 int side = (form.Width - lineWidth) / 2;
-                                ee.Graphics.DrawLine(splitterPen, side, (yOffset + (itemSize.Height)), form.Width - side, (yOffset + (itemSize.Height)));
+                                ee.Graphics.DrawLine(splitterPen, side, (yOffset + (itemSize.Height)),
+                                    form.Width - side, (yOffset + (itemSize.Height)));
                             }
+
                             yOffset += itemSize.Height;
                         }
                     }
@@ -207,24 +250,30 @@ namespace NickAc.ModernUIDoneRight.Controls
 
                 int maxWidth = -1;
                 int maxHeight = -1;
-                using (Graphics g = CreateGraphics()) {
-                    foreach (var item in MenuItems) {
+                using (Graphics g = CreateGraphics())
+                {
+                    foreach (var item in MenuItems)
+                    {
                         var size = item.GetSize(Font, g);
 
                         maxWidth = Math.Max(maxWidth, size.Width);
                         maxHeight += size.Height;
                     }
                 }
+
                 form.Size = new Size(maxWidth + 2, maxHeight + 2);
                 Point screenLoc = PointToScreen(new Point(menuRect.Right, menuRect.Top));
                 form.Location = new Point(screenLoc.X - maxWidth, screenLoc.Y);
                 form.Show(this.Parent);
             }
 
-            if (Actions != null) {
-                Actions.ForEach(a => {
+            if (Actions != null)
+            {
+                Actions.ForEach(a =>
+                {
                     Rectangle rect = a.GetRectangle(this, Actions);
-                    if (rect != Rectangle.Empty && rect.Contains(e.Location)) {
+                    if (rect != Rectangle.Empty && rect.Contains(e.Location))
+                    {
                         a.OnClick(EventArgs.Empty);
                     }
                 });
@@ -233,35 +282,49 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!hasStartedYet) {
+            if (!hasStartedYet)
+            {
                 hasStartedYet = true;
                 OnLoad(EventArgs.Empty);
             }
-            if (Actions != null) {
-                Actions.ForEach(a => {
+
+            if (Actions != null)
+            {
+                Actions.ForEach(a =>
+                {
                     Rectangle rect = a.GetRectangle(this, Actions);
-                    if (rect != Rectangle.Empty && a.Image != null) {
+                    if (rect != Rectangle.Empty && a.Image != null)
+                    {
                         ControlPaintWrapper.ZoomDrawImage(e.Graphics, a.Image, rect);
                     }
                 });
             }
+
             base.OnPaint(e);
         }
 
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
             base.OnPaintBackground(pevent);
-            using (var primary = new SolidBrush(ColorScheme.PrimaryColor)) {
-                using (var secondary = new SolidBrush(ColorScheme.SecondaryColor)) {
-                    using (var foreColor = new SolidBrush(ColorScheme.ForegroundColor)) {
+            using (var primary = new SolidBrush(ColorScheme.PrimaryColor))
+            {
+                using (var secondary = new SolidBrush(ColorScheme.SecondaryColor))
+                {
+                    using (var foreColor = new SolidBrush(ColorScheme.ForegroundColor))
+                    {
                         pevent.Graphics.FillRectangle(primary, ControlBounds);
-                        if (IconVisible) {
-                            pevent.Graphics.DrawIcon(((Form)Parent).Icon, Rectangle.FromLTRB(XTextOffset / 2, XTextOffset / 2, XTextOffset * 2, Height - (XTextOffset / 2)));
+                        if (IconVisible)
+                        {
+                            pevent.Graphics.DrawIcon(((Form) Parent).Icon,
+                                Rectangle.FromLTRB(XTextOffset / 2, XTextOffset / 2, XTextOffset * 2,
+                                    Height - (XTextOffset / 2)));
                         }
 
-                        GraphicUtils.DrawCenteredText(pevent.Graphics, Parent.Text, TextFont, TextRectangle, ColorScheme.ForegroundColor, false, true);
+                        GraphicUtils.DrawCenteredText(pevent.Graphics, Parent.Text, TextFont, TextRectangle,
+                            ColorScheme.ForegroundColor, false, true);
 
-                        if (MenuItems != null && MenuItems.Count > 0) {
+                        if (MenuItems != null && MenuItems.Count > 0)
+                        {
                             //Draw menu icon
                             Rectangle rect = GetMenuRectangle();
                             const int circleRadius = 2;
@@ -275,47 +338,22 @@ namespace NickAc.ModernUIDoneRight.Controls
                             pevent.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
                             //Top
-                            pevent.Graphics.FillEllipse(foreColor, centerX - circleRadius, topCircle - circleRadius, circleRadius * 2, circleRadius * 2);
+                            pevent.Graphics.FillEllipse(foreColor, centerX - circleRadius, topCircle - circleRadius,
+                                circleRadius * 2, circleRadius * 2);
 
                             //Middle
-                            pevent.Graphics.FillEllipse(foreColor, centerX - circleRadius, centerY - circleRadius, circleRadius * 2, circleRadius * 2);
+                            pevent.Graphics.FillEllipse(foreColor, centerX - circleRadius, centerY - circleRadius,
+                                circleRadius * 2, circleRadius * 2);
 
                             //Bottom
-                            pevent.Graphics.FillEllipse(foreColor, centerX - circleRadius, bottomCircle - circleRadius, circleRadius * 2, circleRadius * 2);
+                            pevent.Graphics.FillEllipse(foreColor, centerX - circleRadius, bottomCircle - circleRadius,
+                                circleRadius * 2, circleRadius * 2);
 
                             pevent.Graphics.SmoothingMode = oldMode;
                         }
-                        if (IsSideBarAvailable) {
-                            if (MouseButtons != MouseButtons.None && HamburgerRectangle.Contains(PointToClient(Cursor.Position))) {
-                                pevent.Graphics.FillRectangle(secondary, HamburgerRectangle);
-                            }
 
-                            using (var forePen = new Pen(ColorScheme.ForegroundColor, 3)) {
-                                //Draw hamburger icon
-                                Rectangle rect = HamburgerRectangle;
-                                const int circleRadius = 2;
-                                const int spacingSides = 4;
-                                const int interval = 3;
-                                int centerX = rect.Right - (rect.Width / 2);
-                                int centerY = rect.Bottom - (rect.Height / 2);
-                                int topCircle = centerY - (circleRadius * 2) - interval;
-                                int bottomCircle = centerY + (circleRadius * 2) + interval;
-
-                                var oldMode = pevent.Graphics.SmoothingMode;
-                                pevent.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-
-                                //Top
-                                pevent.Graphics.DrawLine(forePen, rect.Left + spacingSides, topCircle, rect.Right - spacingSides, topCircle);
-
-                                //Middle
-                                pevent.Graphics.DrawLine(forePen, rect.Left + spacingSides, centerY, rect.Right - spacingSides, centerY);
-
-                                //Bottom
-                                pevent.Graphics.DrawLine(forePen, rect.Left + spacingSides, bottomCircle, rect.Right - spacingSides, bottomCircle);
-
-                                pevent.Graphics.SmoothingMode = oldMode;
-                            }
-                        }
+                        if (IsSideBarAvailable)
+                            GraphicUtils.DrawHamburgerButton(pevent.Graphics, secondary, HamburgerRectangle, ColorScheme.ForegroundColor, this);
                     }
                 }
             }
@@ -327,7 +365,8 @@ namespace NickAc.ModernUIDoneRight.Controls
             //The control was drawn.
             //This means we can add the drop shadow
             this.CreateDropShadow();
-            if (Parent != null) {
+            if (Parent != null)
+            {
                 Parent.Invalidate();
             }
         }
