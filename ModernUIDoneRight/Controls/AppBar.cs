@@ -81,6 +81,18 @@ namespace NickAc.ModernUIDoneRight.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public List<AppBarMenuItem> MenuItems { get; set; } = new List<AppBarMenuItem>();
 
+        [Browsable(true)]
+        public override string Text {
+            get => FindForm()?.Text;
+            set {
+                var findForm = FindForm();
+                if (findForm == null) return;
+                findForm.Text = value;
+                findForm.Refresh();
+                Refresh();
+            }
+        }
+
         public Font TextFont { get; set; } = new Font(SystemFonts.CaptionFont.FontFamily, 14f);
 
         public Rectangle TextRectangle =>

@@ -22,14 +22,15 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         #region Properties
 
-        public ColorScheme ColorScheme {
-            get {
-                return Parent != null && Parent is ModernForm ? ((ModernForm)Parent).ColorScheme : colorScheme;
-            }
+        public bool CustomColorScheme { get; set; }
 
-            set {
-                colorScheme = value;
+        public ColorScheme ColorScheme {
+            get
+            {
+                var form = FindForm();
+                return form != null && form is ModernForm mdF && !CustomColorScheme ? mdF.ColorScheme : colorScheme;
             }
+            set => colorScheme = value;
         }
 
         [Browsable(false)]
