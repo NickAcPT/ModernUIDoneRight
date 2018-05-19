@@ -13,18 +13,6 @@ namespace NickAc.ModernUIDoneRight.Controls
 {
     public class ModernButton : Button
     {
-        #region Enums
-
-        [Flags]
-        private enum MouseState
-        {
-            Outside = 1 << 0,
-            Inside = 1 << 1,
-            Down = 1 << 2,
-            Up = 1 << 3,
-        }
-        #endregion
-
         #region Fields
 
         private ColorScheme _colorScheme = DefaultColorSchemes.Blue;
@@ -53,7 +41,11 @@ namespace NickAc.ModernUIDoneRight.Controls
                 var form = FindForm();
                 return form != null && form is ModernForm mdF && !CustomColorScheme ? mdF.ColorScheme : _colorScheme;
             }
-            set { _colorScheme = value; Refresh(); }
+            set
+            {
+                _colorScheme = value;
+                Refresh();
+            }
         }
 
         [Browsable(false)]
@@ -63,6 +55,18 @@ namespace NickAc.ModernUIDoneRight.Controls
         #endregion
 
         #region Methods
+        
+        protected override void OnMouseDown(MouseEventArgs mevent)
+        {
+            base.OnMouseDown(mevent);
+            Invalidate();
+        }
+
+        protected override void OnMouseUp(MouseEventArgs mevent)
+        {
+            base.OnMouseUp(mevent);
+            Invalidate();
+        }
 
         protected override void OnPaint(PaintEventArgs pevent)
         {
@@ -70,16 +74,21 @@ namespace NickAc.ModernUIDoneRight.Controls
             base.OnPaint(pevent);
             using (var primary = new SolidBrush(ColorScheme.PrimaryColor))
             {
-                using (var secondary = new SolidBrush(ColorScheme.SecondaryColor))
+                using (var mouseDown = new SolidBrush(ColorScheme.MouseDownColor))
                 {
-                    pevent.Graphics.FillRectangle(
-                        DisplayRectangle.Contains(cursorLoc) && MouseButtons == MouseButtons.Left ? secondary : primary,
-                        ControlBounds);
-                    using (var sF = ControlPaintWrapper.StringFormatForAlignment(TextAlign))
+                    using (var mouseHover = new SolidBrush(ColorScheme.MouseHoverColor))
                     {
-                        using (var brush = new SolidBrush(ColorScheme.ForegroundColor))
+                        var isHover = DisplayRectangle.Contains(cursorLoc);
+                        var isDown = MouseButtons == MouseButtons.Left;
+                        pevent.Graphics.FillRectangle(
+                            isDown && !DesignMode ? mouseDown : isHover && !DesignMode ? mouseHover : primary,
+                            ControlBounds);
+                        using (var sF = ControlPaintWrapper.StringFormatForAlignment(TextAlign))
                         {
-                            pevent.Graphics.DrawString(Text, Font, brush, DisplayRectangle, sF);
+                            using (var brush = new SolidBrush(ColorScheme.ForegroundColor))
+                            {
+                                pevent.Graphics.DrawString(Text, Font, brush, DisplayRectangle, sF);
+                            }
                         }
                     }
                 }

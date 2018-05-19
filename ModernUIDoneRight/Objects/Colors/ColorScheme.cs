@@ -16,6 +16,11 @@ namespace NickAc.ModernUIDoneRight.Objects
             SecondaryColor = secondaryColor;
             MouseDownColor = DarkenColor(primaryColor, 0.2f);
             MouseHoverColor = LightenColor(secondaryColor, 0.2F);
+            if (primaryColor.IsDarker())
+            {
+                MouseDownColor = LightenColor(MouseDownColor, 0.2f);
+                MouseHoverColor = LightenColor(MouseDownColor, 0.25f);
+            }
         }
         #endregion
 

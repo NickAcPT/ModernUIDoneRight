@@ -75,9 +75,17 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         public static Color ForegroundColorForBackground(Color back)
         {
-            return PerceivedBrightness(back) > 130 ? Color.Black : Color.White;
+            return !IsDark(back) ? Color.Black : Color.White;
         }
-
+        
+        public static bool IsDark(this Color c)
+        {
+            return PerceivedBrightness(c) < 130;
+        }
+        public static bool IsDarker(this Color c)
+        {
+            return PerceivedBrightness(c) < 100;
+        }
 
 
         public static void DrawRectangleBorder(Rectangle rect, Graphics g, Color borderColor)
