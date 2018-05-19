@@ -15,11 +15,12 @@ namespace NickAc.ModernUIDoneRight.Controls
     {
         #region Fields
 
-        private ColorScheme colorScheme = DefaultColorSchemes.Blue;
+        private ColorScheme _colorScheme = DefaultColorSchemes.Blue;
 
-        private bool hasStartedYet;
-
-        private bool iconVisible;
+        private bool _hasStartedYet;
+        private string _text = "";
+        private bool _iconVisible;
+        private bool _overrideParentText = true;
 
         #endregion
 
@@ -49,6 +50,16 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         #region Properties
 
+        public bool OverrideParentText
+        {
+            get => _overrideParentText;
+            set
+            {
+                _overrideParentText = value;
+                Invalidate();
+            }
+        }
+
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool IsSideBarAvailable => Parent != null && Parent.Controls.OfType<SidebarControl>().Any();
@@ -60,8 +71,8 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public ColorScheme ColorScheme
         {
-            get => Parent != null && Parent is ModernForm ? ((ModernForm) Parent).ColorScheme : colorScheme;
-            set { colorScheme = value; }
+            get => Parent != null && Parent is ModernForm ? ((ModernForm) Parent).ColorScheme : _colorScheme;
+            set => _colorScheme = value;
         }
 
         public int HamburgerButtonSize { get; set; } = 32;
@@ -70,10 +81,10 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public bool IconVisible
         {
-            get { return iconVisible; }
+            get => _iconVisible;
             set
             {
-                iconVisible = value;
+                _iconVisible = value;
                 Invalidate();
             }
         }
@@ -81,14 +92,22 @@ namespace NickAc.ModernUIDoneRight.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public List<AppBarMenuItem> MenuItems { get; set; } = new List<AppBarMenuItem>();
 
+
         [Browsable(true)]
-        public override string Text {
-            get => FindForm()?.Text;
-            set {
-                var findForm = FindForm();
-                if (findForm == null) return;
-                findForm.Text = value;
-                findForm.Refresh();
+        public override string Text
+        {
+            get => OverrideParentText ? FindForm()?.Text : _text;
+            set
+            {
+                if (!OverrideParentText)
+                    _text = value;
+                else
+                {
+                    var findForm = FindForm();
+                    if (findForm == null) return;
+                    findForm.Text = value;
+                    findForm.Refresh();
+                }
                 Refresh();
             }
         }
@@ -232,7 +251,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                     int yOffset = 0;
                     using (var splitterPen = new Pen(splitterColor))
                     {
-                        for (int i = 0, MenuItemsCount = MenuItems.Count; i < MenuItemsCount; i++)
+                        for (int i = 0, menuItemsCount = MenuItems.Count; i < menuItemsCount; i++)
                         {
                             var item = MenuItems[i];
                             Size itemSize = item.GetSize(Font, ee.Graphics);
@@ -247,7 +266,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                             }
 
                             item.DrawItem(ee.Graphics, rect, Font);
-                            if (i < MenuItemsCount - 1)
+                            if (i < menuItemsCount - 1)
                             {
                                 int lineWidth = (int) (form.Width * splitterPercentage);
                                 int side = (form.Width - lineWidth) / 2;
@@ -294,9 +313,9 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!hasStartedYet)
+            if (!_hasStartedYet)
             {
-                hasStartedYet = true;
+                _hasStartedYet = true;
                 OnLoad(EventArgs.Empty);
             }
 
@@ -365,7 +384,8 @@ namespace NickAc.ModernUIDoneRight.Controls
                         }
 
                         if (IsSideBarAvailable)
-                            GraphicUtils.DrawHamburgerButton(pevent.Graphics, secondary, HamburgerRectangle, ColorScheme.ForegroundColor, this);
+                            GraphicUtils.DrawHamburgerButton(pevent.Graphics, secondary, HamburgerRectangle,
+                                ColorScheme.ForegroundColor, this);
                     }
                 }
             }
