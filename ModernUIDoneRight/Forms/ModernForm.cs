@@ -324,11 +324,18 @@ namespace NickAc.ModernUIDoneRight.Forms
             _windowHit = hitResult;
 
             if (hitResult == WindowHitTestResult.TitleBar) {
+                if (e.Button == MouseButtons.Left && e.Clicks == 2 && MaximizeBox)
+                {
+                    WindowState = (WindowState == FormWindowState.Normal
+                        ? FormWindowState.Maximized
+                        : FormWindowState.Normal);
+                    return;
+                }
                 FormUtils.StartFormDragFromTitlebar(this);
             } else if (hitResult != WindowHitTestResult.TitleBarButtons && hitResult != WindowHitTestResult.None && Sizable) {
                 if (!Sizable) return;
                 FormUtils.StartFormResizeFromEdge(this, FormUtils.ConvertToResizeResult(hitResult));
-            }
+            } 
             Invalidate(TitlebarButtonsRectangle);
             if (IsSideBarAvailable)
                 Invalidate(HamburgerRectangle);
@@ -546,7 +553,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             {
                 if (!btn.Visible) continue;
                 var rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
-                if (rect.Contains(curLoc))
+                if (rect.Contains(curLoc) && !DesignMode)
                     e.Graphics.FillRectangle(_isMouseDown ? secondaryDown : secondaryHover, rect);
                 GraphicUtils.DrawCenteredText(e.Graphics, btn.Text, btn.Font, rect, ColorScheme.ForegroundColor);
                 titlebarButtonOffset += btn.Width;
