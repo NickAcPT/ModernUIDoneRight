@@ -19,7 +19,7 @@ namespace NickAc.ModernUIDoneRight.Utils
                 //Draw hamburger icon
                 var rect = hamburgerRectangle;
                 const int barSize = 2;
-                int spacingSides = smallButton ? 6 : 4;
+                var spacingSides = smallButton ? 6 : 4;
                 const int interval = 3;
                 var centerX = rect.Right - (rect.Width / 2);
                 var centerY = rect.Bottom - (rect.Height / 2);

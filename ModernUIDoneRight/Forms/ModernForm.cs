@@ -394,28 +394,40 @@ namespace NickAc.ModernUIDoneRight.Forms
 
             using (var primary = new SolidBrush(ColorScheme.PrimaryColor)) {
                 using (var secondary = new SolidBrush(ColorScheme.SecondaryColor)) {
-                    using (var secondary2 = new SolidBrush(IsAppBarAvailable ? ColorScheme.DarkenColor(ColorScheme.SecondaryColor) : ColorScheme.SecondaryColor)) {
-                        //Draw titlebar
-                        if (TitlebarVisible)
-                            e.Graphics.FillRectangle(IsAppBarAvailable ? secondary : primary, TitlebarRectangle);
-                        //Draw form border
-                        GraphicUtils.DrawRectangleBorder(FormBounds, e.Graphics, ColorScheme.SecondaryColor);
+                    using (var mouseDownColor = new SolidBrush(ColorScheme.MouseDownColor))
+                    {
+                        using (var mouseHoverColor = new SolidBrush(ColorScheme.MouseHoverColor))
+                        {
+                            //Draw titlebar
+                            if (TitlebarVisible)
+                                e.Graphics.FillRectangle(IsAppBarAvailable ? secondary : primary, TitlebarRectangle);
+                            //Draw form border
+                            GraphicUtils.DrawRectangleBorder(FormBounds, e.Graphics, ColorScheme.SecondaryColor);
 
-                        if (!TitlebarVisible)
-                            return;
-                        //Start rendering the titlebar buttons
-                        var titlebarButtonOffset = 0;
-                        titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary2, NativeTitlebarButtons, ref titlebarButtonOffset);
-                        titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, secondary2, TitlebarButtons, ref titlebarButtonOffset);
-                        //Dectect if an app bar is available.
-                        //If it is, draw the window title.
-                        if (!IsAppBarAvailable || (Controls.OfType<AppBar>().FirstOrDefault()?.OverrideParentText ?? false)) {
-                            GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont, Rectangle.FromLTRB(TextBarRectangle.Left + SizingBorder, TextBarRectangle.Top, TextBarRectangle.Right - SizingBorder, TextBarRectangle.Bottom), ColorScheme.ForegroundColor, false, true);
+                            if (!TitlebarVisible)
+                                return;
+                            //Start rendering the titlebar buttons
+                            var titlebarButtonOffset = 0;
+                            titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, mouseDownColor, mouseHoverColor,
+                                NativeTitlebarButtons, ref titlebarButtonOffset);
+                            titlebarButtonOffset = RenderTitlebarButtons(e, curLoc, mouseDownColor, mouseHoverColor, TitlebarButtons,
+                                ref titlebarButtonOffset);
+                            //Dectect if an app bar is available.
+                            //If it is, draw the window title.
+                            if (!IsAppBarAvailable ||
+                                (Controls.OfType<AppBar>().FirstOrDefault()?.OverrideParentText ?? false))
+                            {
+                                GraphicUtils.DrawCenteredText(e.Graphics, Text, TitleBarFont,
+                                    Rectangle.FromLTRB(TextBarRectangle.Left + SizingBorder, TextBarRectangle.Top,
+                                        TextBarRectangle.Right - SizingBorder, TextBarRectangle.Bottom),
+                                    ColorScheme.ForegroundColor, false, true);
+                            }
+
+                            if (IsSideBarAvailable)
+                                GraphicUtils.DrawHamburgerButton(e.Graphics, secondary, HamburgerRectangle,
+                                    ColorScheme.ForegroundColor, this, true);
+
                         }
-
-                        if (IsSideBarAvailable)
-                            GraphicUtils.DrawHamburgerButton(e.Graphics, secondary, HamburgerRectangle, ColorScheme.ForegroundColor, this, true);
-
                     }
 
                 }
@@ -518,7 +530,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             var c = ((Control)sender);
 
             //Check if window is maximized, if it is, stop!
-            if (!(WindowState != FormWindowState.Maximized)) return;
+            if (WindowState == FormWindowState.Maximized) return;
             //Try to see where the mouse was
             var result = HitTest(e.Location, c.Location);
             var cur = FormUtils.HitTestToCursor(FormUtils.ConvertToResizeResult(result));
@@ -528,14 +540,14 @@ namespace NickAc.ModernUIDoneRight.Forms
                 _mouseChanged = !cur.Equals(Cursors.Default);
             }
         }
-        private int RenderTitlebarButtons(PaintEventArgs e, Point curLoc, SolidBrush secondary, List<ModernTitlebarButton> buttons, ref int titlebarButtonOffset)
+        private int RenderTitlebarButtons(PaintEventArgs e, Point curLoc, SolidBrush secondaryDown, SolidBrush secondaryHover, IEnumerable<ModernTitlebarButton> buttons, ref int titlebarButtonOffset)
         {
-            for (var i = 0; i < buttons.Count; i++) {
-                var btn = buttons[i];
+            foreach (var btn in buttons)
+            {
                 if (!btn.Visible) continue;
                 var rect = GetTitlebarButtonRectangle(titlebarButtonOffset, btn);
-                if (rect.Contains(curLoc) && _isMouseDown)
-                    e.Graphics.FillRectangle(secondary, rect);
+                if (rect.Contains(curLoc))
+                    e.Graphics.FillRectangle(_isMouseDown ? secondaryDown : secondaryHover, rect);
                 GraphicUtils.DrawCenteredText(e.Graphics, btn.Text, btn.Font, rect, ColorScheme.ForegroundColor);
                 titlebarButtonOffset += btn.Width;
             }

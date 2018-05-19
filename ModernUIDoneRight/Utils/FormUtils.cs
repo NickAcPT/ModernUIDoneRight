@@ -34,7 +34,7 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         private static int ConvertRange(int originalStart, int originalEnd, int newStart, int newEnd, int value)
         {
-            double scale = (double)(newEnd - newStart) / (originalEnd - originalStart);
+            var scale = (double)(newEnd - newStart) / (originalEnd - originalStart);
             return (int)(newStart + ((value - originalStart) * scale));
         }
 
@@ -67,21 +67,21 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         public static void StartFormResizeFromEdge(Form f, ResizeResult result, Control c = null)
         {
-            Size minimum = f is ModernForm ? ((ModernForm)f).MinimumSize : f.MinimumSize;
-            Size maximum = f is ModernForm ? ((ModernForm)f).MaximumSize : f.MaximumSize;
+            var minimum = f is ModernForm modernForm ? modernForm.MinimumSize : f.MinimumSize;
+            var maximum = f is ModernForm form ? form.MaximumSize : f.MaximumSize;
             //Cursor.Clip = Screen.GetWorkingArea(f);
-            Point curLoc = f.PointToClient(Cursor.Position);
-            Point fLoc = new Point(f.Left, f.Top);
-            int w = f.Width;
-            int h = f.Height;
-            ResizeResult resultEnum = ((ResizeResult)result);
+            var curLoc = f.PointToClient(Cursor.Position);
+            var fLoc = new Point(f.Left, f.Top);
+            var w = f.Width;
+            var h = f.Height;
+            var resultEnum = ((ResizeResult)result);
 
-            Action<Object, MouseEventArgs> mouseMove = (Object s, MouseEventArgs e) => {
+            Action<Object, MouseEventArgs> mouseMove = (s, e) => {
 
 
                 if (f.WindowState != FormWindowState.Maximized) {
-                    int changedSize = (new Size(curLoc) - new Size(e.Location)).Width;
-                    int changedSizeH = (new Size(curLoc) - new Size(e.Location)).Height;
+                    var changedSize = (new Size(curLoc) - new Size(e.Location)).Width;
+                    var changedSizeH = (new Size(curLoc) - new Size(e.Location)).Height;
                     f.Cursor = HitTestToCursor(result);
                     switch (resultEnum) {
                         case ResizeResult.Left:
@@ -112,8 +112,8 @@ namespace NickAc.ModernUIDoneRight.Utils
                             break;
                         case ResizeResult.BottomLeft:
                             if (curLoc.X <= ModernForm.SizingBorder && curLoc.Y >= minimum.Height - ModernForm.SizingBorder && ((f.Width + changedSize) >= minimum.Width)) {
-                                int ww = e.Location.X - f.Left;
-                                int hh = e.Location.Y - f.Bottom;
+                                var ww = e.Location.X - f.Left;
+                                var hh = e.Location.Y - f.Bottom;
 
                                 f.Height = f.Bottom + hh;
                                 f.Left -= changedSize;
@@ -126,8 +126,8 @@ namespace NickAc.ModernUIDoneRight.Utils
                             break;
 
                         case ResizeResult.BottomRight:
-                            int ww2 = e.Location.X - f.Right;
-                            int hh2 = e.Location.Y - f.Bottom;
+                            var ww2 = e.Location.X - f.Right;
+                            var hh2 = e.Location.Y - f.Bottom;
 
                             f.Height = f.Bottom + hh2;
 
@@ -143,9 +143,9 @@ namespace NickAc.ModernUIDoneRight.Utils
             MouseEventHandler invoke = mouseMove.Invoke;
             f.MouseMove += invoke;
             MouseEventHandler invokeCMove = (s, e) => {
-                Point pt = f.PointToClient(((Control)s).PointToScreen(e.Location));
-                int x = pt.X;
-                int y = pt.Y;
+                var pt = f.PointToClient(((Control)s).PointToScreen(e.Location));
+                var x = pt.X;
+                var y = pt.Y;
 
 
                 invoke(f, new MouseEventArgs(e.Button, e.Clicks, x, y, e.Delta));
@@ -174,12 +174,12 @@ namespace NickAc.ModernUIDoneRight.Utils
         public static void StartFormDragFromTitlebar(Form f, Control c = null)
         {
             //Cursor.Clip = Screen.GetWorkingArea(f);
-            Point startCursorPosition = (c ?? f).PointToClient(Cursor.Position);
+            var startCursorPosition = (c ?? f).PointToClient(Cursor.Position);
             Action<Object, MouseEventArgs> mouseMove = (Object s, MouseEventArgs e) => {
                 if (f.WindowState == FormWindowState.Maximized) {
-                    int beforeW = (f is ModernForm ? (((ModernForm)f).TextBarRectangle.Width) : f.Width);
+                    var beforeW = (f is ModernForm ? (((ModernForm)f).TextBarRectangle.Width) : f.Width);
                     f.WindowState = FormWindowState.Normal;
-                    int afterW = (f is ModernForm ? (((ModernForm)f).TextBarRectangle.Width) : f.Width);
+                    var afterW = (f is ModernForm ? (((ModernForm)f).TextBarRectangle.Width) : f.Width);
                     startCursorPosition = new Point(ConvertRange(0, beforeW, 0, afterW, startCursorPosition.X), startCursorPosition.Y);
                 }
                 f.Location += (new Size(e.Location) - new Size(startCursorPosition));

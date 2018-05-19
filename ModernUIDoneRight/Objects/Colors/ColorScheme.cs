@@ -14,19 +14,28 @@ namespace NickAc.ModernUIDoneRight.Objects
         {
             PrimaryColor = primaryColor;
             SecondaryColor = secondaryColor;
+            MouseDownColor = DarkenColor(primaryColor, 0.2f);
+            MouseHoverColor = LightenColor(secondaryColor, 0.2F);
         }
         #endregion
 
         #region Properties
         public Color PrimaryColor { get; set; }
         public Color SecondaryColor { get; set; }
+        public Color MouseDownColor { get; set; }
+        public Color MouseHoverColor { get; set; }
         public Color ForegroundColor => ForegroundColorForBackground(PrimaryColor);
         #endregion
 
         #region Static Methods
-        public static Color DarkenColor(Color original)
+        public static Color DarkenColor(Color original, float value = 0.05f)
         {
-            return ControlPaint.Dark(original, 0.05F);
+            return ControlPaint.Dark(original, value);
+        }
+
+        public static Color LightenColor(Color original, float value = 0.05f)
+        {
+            return ControlPaint.Light(original, value);
         }
         
         public static ColorScheme CreateSimpleColorScheme(Color original)

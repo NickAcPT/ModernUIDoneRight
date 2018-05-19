@@ -28,72 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
-            this.tilePanelReborn3 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
-            this.tilePanelReborn4 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
-            this.sidebarControl1 = new NickAc.ModernUIDoneRight.Controls.SidebarControl();
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.SuspendLayout();
-            // 
-            // tilePanelReborn1
-            // 
-            this.tilePanelReborn1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
-            this.tilePanelReborn1.BrandedTile = false;
-            this.tilePanelReborn1.CanBeHovered = true;
-            this.tilePanelReborn1.Checkable = true;
-            this.tilePanelReborn1.Flat = true;
-            this.tilePanelReborn1.ForeColor = System.Drawing.Color.White;
-            this.tilePanelReborn1.Image = null;
-            this.tilePanelReborn1.Location = new System.Drawing.Point(325, 181);
-            this.tilePanelReborn1.Name = "tilePanelReborn1";
-            this.tilePanelReborn1.Size = new System.Drawing.Size(210, 100);
-            this.tilePanelReborn1.TabIndex = 2;
-            this.tilePanelReborn1.Text = "tilePanelReborn1";
-            // 
-            // tilePanelReborn3
-            // 
-            this.tilePanelReborn3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
-            this.tilePanelReborn3.BrandedTile = false;
-            this.tilePanelReborn3.CanBeHovered = true;
-            this.tilePanelReborn3.Checkable = true;
-            this.tilePanelReborn3.Flat = true;
-            this.tilePanelReborn3.ForeColor = System.Drawing.Color.White;
-            this.tilePanelReborn3.Image = null;
-            this.tilePanelReborn3.Location = new System.Drawing.Point(325, 288);
-            this.tilePanelReborn3.Name = "tilePanelReborn3";
-            this.tilePanelReborn3.Size = new System.Drawing.Size(101, 100);
-            this.tilePanelReborn3.TabIndex = 2;
-            this.tilePanelReborn3.Text = "tilePanelReborn1";
-            this.tilePanelReborn3.Click += new System.EventHandler(this.tilePanelReborn3_Click);
-            // 
-            // tilePanelReborn4
-            // 
-            this.tilePanelReborn4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
-            this.tilePanelReborn4.BrandedTile = false;
-            this.tilePanelReborn4.CanBeHovered = true;
-            this.tilePanelReborn4.Checkable = true;
-            this.tilePanelReborn4.Flat = true;
-            this.tilePanelReborn4.ForeColor = System.Drawing.Color.White;
-            this.tilePanelReborn4.Image = null;
-            this.tilePanelReborn4.Location = new System.Drawing.Point(434, 288);
-            this.tilePanelReborn4.Name = "tilePanelReborn4";
-            this.tilePanelReborn4.Size = new System.Drawing.Size(101, 100);
-            this.tilePanelReborn4.TabIndex = 2;
-            this.tilePanelReborn4.Text = "tilePanelReborn1";
-            this.tilePanelReborn4.Click += new System.EventHandler(this.tilePanelReborn4_Click);
-            // 
-            // sidebarControl1
-            // 
-            this.sidebarControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.sidebarControl1.IsClosed = true;
-            this.sidebarControl1.Location = new System.Drawing.Point(1, 83);
-            this.sidebarControl1.Name = "sidebarControl1";
-            this.sidebarControl1.Size = new System.Drawing.Size(231, 383);
-            this.sidebarControl1.TabIndex = 7;
-            this.sidebarControl1.Text = "sidebarControl1";
-            this.sidebarControl1.TopBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
-            this.sidebarControl1.TopBarSize = 128;
-            this.sidebarControl1.TopBarSpacing = 32;
             // 
             // appBar1
             // 
@@ -103,37 +39,33 @@
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
-            this.appBar1.Size = new System.Drawing.Size(673, 50);
+            this.appBar1.OverrideParentText = true;
+            this.appBar1.Size = new System.Drawing.Size(795, 50);
             this.appBar1.TabIndex = 8;
-            this.appBar1.Text = "appBar1";
+            this.appBar1.Text = "Aaaaaaa";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(675, 467);
-            this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
-            this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
-            this.Controls.Add(this.sidebarControl1);
-            this.Controls.Add(this.tilePanelReborn4);
-            this.Controls.Add(this.tilePanelReborn3);
-            this.Controls.Add(this.tilePanelReborn1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.ClientSize = new System.Drawing.Size(797, 418);
+            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(27)))));
+            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(54)))));
+            this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(31)))));
             this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.ShadowType = NickAc.ModernUIDoneRight.Objects.ShadowType.AeroShadow;
+            this.Text = "ApexConversations";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn1;
-        private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn3;
-        private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn4;
-        private NickAc.ModernUIDoneRight.Controls.SidebarControl sidebarControl1;
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
     }
 }

@@ -20,7 +20,7 @@ namespace NickAc.ModernUIDoneRight.Controls
         private bool _hasStartedYet;
         private string _text = "";
         private bool _iconVisible;
-        private bool _overrideParentText = true;
+        private bool _overrideParentText;
 
         #endregion
 
@@ -96,19 +96,19 @@ namespace NickAc.ModernUIDoneRight.Controls
         [Browsable(true)]
         public override string Text
         {
-            get => OverrideParentText ? FindForm()?.Text : _text;
+            get => !OverrideParentText ? FindForm()?.Text : _text;
             set
             {
-                if (!OverrideParentText)
+                if (OverrideParentText)
                     _text = value;
                 else
                 {
                     var findForm = FindForm();
                     if (findForm == null) return;
                     findForm.Text = value;
-                    findForm.Refresh();
+                    findForm.Invalidate();
                 }
-                Refresh();
+                Invalidate();
             }
         }
 
@@ -351,7 +351,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                                     Height - (XTextOffset / 2)));
                         }
 
-                        GraphicUtils.DrawCenteredText(pevent.Graphics, Parent.Text, TextFont, TextRectangle,
+                        GraphicUtils.DrawCenteredText(pevent.Graphics, Text, TextFont, TextRectangle,
                             ColorScheme.ForegroundColor, false, true);
 
                         if (MenuItems != null && MenuItems.Count > 0)

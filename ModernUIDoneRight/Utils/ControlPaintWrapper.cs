@@ -94,9 +94,11 @@ namespace NickAc.ModernUIDoneRight.Utils
 
         public static Point Center(this Rectangle rect)
         {
-            Point center = new Point();
-            center.X = rect.X + rect.Size.Width / 2;
-            center.Y = rect.Y + rect.Size.Height / 2;
+            var center = new Point
+            {
+                X = rect.X + rect.Size.Width / 2,
+                Y = rect.Y + rect.Size.Height / 2
+            };
             return center;
         }
 
