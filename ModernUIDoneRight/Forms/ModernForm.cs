@@ -279,7 +279,29 @@ namespace NickAc.ModernUIDoneRight.Forms
                 } else if (ShadowType.Equals(ShadowType.Default) || ShadowType.Equals(ShadowType.FlatShadow)) {
                     //No aero for us! We must create the typical flat shadow.
                     new ShadowForm().Show(this);
-                }
+                } 
+                //else if (ShadowType.Equals(ShadowType.GlowShadow))
+                //{
+                //    var glowShadowForm = new PerPixelAlphaForm()
+                //    {/*
+                //        ShadowBlur = 5,
+                //        ShadowSpread = 5,
+                //        ShadowColor = ColorScheme.PrimaryColor*/
+                //    };
+                //    using (var bmp = new Bitmap(Width + 10, Height + 10))
+                //    {
+                //        using (var g = Graphics.FromImage(bmp))
+                //        {
+                //            g.FillRectangle(Brushes.Black, 0, 0, bmp.Width, bmp.Height);
+                //        }
+                //        glowShadowForm.SetBitmap(bmp);
+                //    }
+
+                //    glowShadowForm.Location = new Point(Location.X - 5, Location.Y - 5);
+                //    glowShadowForm.Show();
+                //    //SizeChanged += (s, ee) => glowShadowForm.RefreshShadow();
+                //    //glowShadowForm.RefreshShadow();
+                //}
             }
             base.OnLoad(e);
         }
@@ -573,8 +595,6 @@ namespace NickAc.ModernUIDoneRight.Forms
         }
 
         #endregion
-
-        /* Rectangles used to allow window resizing */
-        /* Rectangles used to allow window resizing */
+        
     }
 }

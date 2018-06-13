@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
-            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.SuspendLayout();
             // 
             // appBar1
@@ -46,16 +45,6 @@
             this.appBar1.Text = "Aaaaaaa";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
-            // modernButton1
-            // 
-            this.modernButton1.CustomColorScheme = false;
-            this.modernButton1.Location = new System.Drawing.Point(313, 180);
-            this.modernButton1.Name = "modernButton1";
-            this.modernButton1.Size = new System.Drawing.Size(243, 48);
-            this.modernButton1.TabIndex = 9;
-            this.modernButton1.Text = "modernButton1";
-            this.modernButton1.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -66,11 +55,10 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(69)))), ((int)(((byte)(78)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(31)))));
-            this.Controls.Add(this.modernButton1);
             this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "Form1";
-            this.ShadowType = NickAc.ModernUIDoneRight.Objects.ShadowType.AeroShadow;
+            this.ShadowType = NickAc.ModernUIDoneRight.Objects.ShadowType.GlowShadow;
             this.Text = "ApexConversations";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -79,7 +67,6 @@
 
         #endregion
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
-        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
     }
 }
 

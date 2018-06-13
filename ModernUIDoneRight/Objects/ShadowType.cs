@@ -10,6 +10,7 @@ namespace NickAc.ModernUIDoneRight.Objects
         Default,
         AeroShadow,
         FlatShadow,
+        //GlowShadow,
         None
     }
 }

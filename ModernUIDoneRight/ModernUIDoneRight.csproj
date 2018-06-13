@@ -57,9 +57,16 @@
     <Compile Include="Controls\SidebarControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\GlowShadowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GlowShadowFormAaaaaa.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\ModernForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\PerPixelAlphaForm.cs" />
     <Compile Include="Forms\ShadowForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,7 +12,6 @@ namespace ModernUITest
         public Form1()
         {
             InitializeComponent();
-            TopMost = true;
             var btn2 = new ModernTitlebarButton
             {
                 Text = "2"
