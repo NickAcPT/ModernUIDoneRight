@@ -161,7 +161,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle TitlebarButtonsRectangle {
+        public virtual Rectangle TitlebarButtonsRectangle {
             get {
                 var btnWidth = GetTitleBarButtonsWidth();
                 var titlebarRect = TitlebarRectangle;
@@ -184,7 +184,7 @@ namespace NickAc.ModernUIDoneRight.Forms
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rectangle TitlebarRectangle => Rectangle.FromLTRB(1, 1, FormBounds.Right - 1, TitlebarVisible ? TitlebarHeight + 1 : 1);
+        public virtual Rectangle TitlebarRectangle => Rectangle.FromLTRB(1, 1, FormBounds.Right - 1, TitlebarVisible ? TitlebarHeight + 1 : 1);
 
         public bool TitlebarVisible { get; set; } = true;
 

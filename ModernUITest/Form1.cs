@@ -1,4 +1,5 @@
-﻿using NickAc.ModernUIDoneRight;
+﻿using System.Drawing;
+using NickAc.ModernUIDoneRight;
 using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Objects.Interaction;
@@ -12,6 +13,7 @@ namespace ModernUITest
         public Form1()
         {
             InitializeComponent();
+            this.ColorScheme = ColorScheme.CreateSimpleColorScheme(ColorTranslator.FromHtml("#2D2D30"));
             var btn2 = new ModernTitlebarButton
             {
                 Text = "2"

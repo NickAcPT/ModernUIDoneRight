@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
+            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.sidebarControl1 = new NickAc.ModernUIDoneRight.Controls.SidebarControl();
+            this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.SuspendLayout();
             // 
             // appBar1
@@ -39,11 +43,57 @@
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
-            this.appBar1.OverrideParentText = true;
+            this.appBar1.OverrideParentText = false;
             this.appBar1.Size = new System.Drawing.Size(795, 50);
             this.appBar1.TabIndex = 8;
-            this.appBar1.Text = "Aaaaaaa";
+            this.appBar1.Text = "Form1";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            // 
+            // modernButton1
+            // 
+            this.modernButton1.CustomColorScheme = false;
+            this.modernButton1.Location = new System.Drawing.Point(303, 146);
+            this.modernButton1.Name = "modernButton1";
+            this.modernButton1.Size = new System.Drawing.Size(138, 48);
+            this.modernButton1.TabIndex = 9;
+            this.modernButton1.Text = "modernButton1";
+            this.modernButton1.UseVisualStyleBackColor = true;
+            // 
+            // modernButton2
+            // 
+            this.modernButton2.CustomColorScheme = false;
+            this.modernButton2.Location = new System.Drawing.Point(533, 146);
+            this.modernButton2.Name = "modernButton2";
+            this.modernButton2.Size = new System.Drawing.Size(138, 48);
+            this.modernButton2.TabIndex = 9;
+            this.modernButton2.Text = "modernButton1";
+            this.modernButton2.UseVisualStyleBackColor = true;
+            // 
+            // sidebarControl1
+            // 
+            this.sidebarControl1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sidebarControl1.IsClosed = false;
+            this.sidebarControl1.Location = new System.Drawing.Point(1, 83);
+            this.sidebarControl1.Name = "sidebarControl1";
+            this.sidebarControl1.Size = new System.Drawing.Size(210, 334);
+            this.sidebarControl1.TabIndex = 10;
+            this.sidebarControl1.Text = "sidebarControl1";
+            this.sidebarControl1.TopBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
+            this.sidebarControl1.TopBarSize = 100;
+            this.sidebarControl1.TopBarSpacing = 32;
+            // 
+            // tilePanelReborn1
+            // 
+            this.tilePanelReborn1.BrandedTile = false;
+            this.tilePanelReborn1.CanBeHovered = false;
+            this.tilePanelReborn1.Checkable = false;
+            this.tilePanelReborn1.Flat = false;
+            this.tilePanelReborn1.Image = null;
+            this.tilePanelReborn1.Location = new System.Drawing.Point(262, 232);
+            this.tilePanelReborn1.Name = "tilePanelReborn1";
+            this.tilePanelReborn1.Size = new System.Drawing.Size(217, 101);
+            this.tilePanelReborn1.TabIndex = 11;
+            this.tilePanelReborn1.Text = "tilePanelReborn1";
             // 
             // Form1
             // 
@@ -51,15 +101,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(797, 418);
-            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(51)))));
-            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(69)))), ((int)(((byte)(78)))));
-            this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(31)))));
+            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
+            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
+            this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
+            this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.tilePanelReborn1);
+            this.Controls.Add(this.sidebarControl1);
+            this.Controls.Add(this.modernButton2);
+            this.Controls.Add(this.modernButton1);
             this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "Form1";
-            this.ShadowType = NickAc.ModernUIDoneRight.Objects.ShadowType.GlowShadow;
-            this.Text = "ApexConversations";
+            this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
@@ -67,6 +120,10 @@
 
         #endregion
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
+        private NickAc.ModernUIDoneRight.Controls.SidebarControl sidebarControl1;
+        private NickAc.ModernUIDoneRight.Controls.TilePanelReborn tilePanelReborn1;
     }
 }
 
