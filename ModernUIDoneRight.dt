@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<DevTrackerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SolutionTotalEditTime="PT5H48M3.6804275S" SolutionTotalViewTime="PT9H51M46.2300496S" SolutionTotalDebugTime="PT12M34.1591008S">
+<DevTrackerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SolutionTotalEditTime="PT5H50M34.2146051S" SolutionTotalViewTime="PT9H56M9.4215198S" SolutionTotalDebugTime="PT12M34.1591008S">
   <FileVersion>
     <Major>1</Major>
     <Minor>0</Minor>
@@ -7,25 +7,15 @@
   <SolutionFolder>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight</SolutionFolder>
   <SessionTimeList />
   <LastSessionTimeList>
-    <DevTrackerDataItem ViewActiveTime="PT22.5511129S" EditActiveTime="PT0S">
-      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
-      <EditedCount>0</EditedCount>
-      <ViewedCount>1</ViewedCount>
-      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Utils\FormUtils.cs</Item>
-      <ItemType>ProjectItem</ItemType>
-      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
-      <CreatedDate>2018-06-17T15:18:31.2312522+01:00</CreatedDate>
-      <ViewedBy>User</ViewedBy>
-    </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT1M31.7412578S" EditActiveTime="PT19.7319294S">
-      <ModifiedDate>2018-06-17T15:19:27.0703697+01:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT4M23.1934731S" EditActiveTime="PT2M30.5341771S">
+      <ModifiedDate>2018-06-17T15:32:36.771906+01:00</ModifiedDate>
       <ModifiedBy>User</ModifiedBy>
       <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
       <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Forms\ModernForm.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
-      <CreatedDate>2018-06-17T15:18:56.9131925+01:00</CreatedDate>
+      <CreatedDate>2018-06-17T15:29:33.8192806+01:00</CreatedDate>
       <ViewedBy>User</ViewedBy>
     </DevTrackerDataItem>
   </LastSessionTimeList>
@@ -405,11 +395,11 @@
       <CreatedDate>2017-12-01T23:05:01.9535555+00:00</CreatedDate>
       <ViewedBy>User</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT1H1M51.0019097S" EditActiveTime="PT24M43.381003S">
-      <ModifiedDate>2018-06-17T15:19:27.0703697+01:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT1H6M14.1933804S" EditActiveTime="PT27M13.9151801S">
+      <ModifiedDate>2018-06-17T15:32:36.771906+01:00</ModifiedDate>
       <ModifiedBy>User</ModifiedBy>
-      <EditedCount>18</EditedCount>
-      <ViewedCount>28</ViewedCount>
+      <EditedCount>19</EditedCount>
+      <ViewedCount>29</ViewedCount>
       <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Forms\ModernForm.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
@@ -578,6 +568,17 @@
     </DevTrackerDataItem>
   </TotalTimeList>
   <HistoryTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT4M23.1924721S" EditActiveTime="PT2M30.5341771S">
+      <ModifiedDate>2018-06-17T15:32:36.771906+01:00</ModifiedDate>
+      <ModifiedBy>User</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\Forms\ModernForm.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\User\Documents\Visual Studio 2017\Projects\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj</ProjectName>
+      <CreatedDate>2018-06-17T15:29:33.8192806+01:00</CreatedDate>
+      <ViewedBy>User</ViewedBy>
+    </DevTrackerDataItem>
     <DevTrackerDataItem ViewActiveTime="PT1M31.7412578S" EditActiveTime="PT19.7319294S">
       <ModifiedDate>2018-06-17T15:19:27.0703697+01:00</ModifiedDate>
       <ModifiedBy>User</ModifiedBy>

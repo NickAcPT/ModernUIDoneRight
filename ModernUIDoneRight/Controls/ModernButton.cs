@@ -81,7 +81,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                         var isHover = DisplayRectangle.Contains(cursorLoc);
                         var isDown = MouseButtons == MouseButtons.Left;
                         pevent.Graphics.FillRectangle(
-                            isDown && !DesignMode ? mouseDown : isHover && !DesignMode ? mouseHover : primary,
+                            isDown && isHover && !DesignMode ? mouseDown : isHover && !DesignMode ? mouseHover : primary,
                             ControlBounds);
                         using (var sF = ControlPaintWrapper.StringFormatForAlignment(TextAlign))
                         {
