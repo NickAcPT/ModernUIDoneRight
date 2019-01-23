@@ -21,6 +21,7 @@ namespace NickAc.ModernUIDoneRight.Controls
         private string _text = "";
         private bool _iconVisible;
         private bool _overrideParentText;
+        private ToolTip _toolTip;
 
         #endregion
 
@@ -32,7 +33,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
-            Size = new Size(10, RoundUp((int) (ModernForm.DefaultTitlebarHeight * 1.5d)));
+            Size = new Size(10, RoundUp((int)(ModernForm.DefaultTitlebarHeight * 1.5d)));
             Dock = DockStyle.Top;
             Load += AppBar_Load;
         }
@@ -71,7 +72,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public ColorScheme ColorScheme
         {
-            get => Parent != null && Parent is ModernForm ? ((ModernForm) Parent).ColorScheme : _colorScheme;
+            get => Parent != null && Parent is ModernForm ? ((ModernForm)Parent).ColorScheme : _colorScheme;
             set => _colorScheme = value;
         }
 
@@ -125,6 +126,8 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         public int XTextOffset => 20;
 
+        public ToolTip ToolTip { get => _toolTip; set => _toolTip = value; }
+
         #endregion
 
         #region Methods
@@ -156,6 +159,33 @@ namespace NickAc.ModernUIDoneRight.Controls
         {
             base.OnMouseUp(e);
             if (IsSideBarAvailable) Invalidate(HamburgerRectangle);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            foreach (AppAction action in this.Actions)
+            {
+                var rect = action.GetRectangle(this, this.Actions);
+                if (rect.Contains(e.Location))
+                {
+                    if (ToolTip != null)
+                    {   
+                        ToolTip.SetToolTip(this, action.ToolTip);
+                    }
+                    if (action.Cursor != null)
+                    {
+                        Cursor = action.Cursor;
+                    }
+                    return;
+                }
+            }
+            Cursor = Cursors.Default;
+            if (ToolTip != null)
+            {
+                ToolTip.SetToolTip(this, "");
+            }
         }
 
         protected override void OnMouseClick(MouseEventArgs e)
@@ -245,6 +275,7 @@ namespace NickAc.ModernUIDoneRight.Controls
 
                     form.Dispose();
                 };
+
                 form.Paint += (s, ee) =>
                 {
                     //Draw the menu
@@ -268,7 +299,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                             item.DrawItem(ee.Graphics, rect, Font);
                             if (i < menuItemsCount - 1)
                             {
-                                int lineWidth = (int) (form.Width * splitterPercentage);
+                                int lineWidth = (int)(form.Width * splitterPercentage);
                                 int side = (form.Width - lineWidth) / 2;
                                 ee.Graphics.DrawLine(splitterPen, side, (yOffset + (itemSize.Height)),
                                     form.Width - side, (yOffset + (itemSize.Height)));
@@ -334,6 +365,7 @@ namespace NickAc.ModernUIDoneRight.Controls
             base.OnPaint(e);
         }
 
+
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
             base.OnPaintBackground(pevent);
@@ -346,7 +378,7 @@ namespace NickAc.ModernUIDoneRight.Controls
                         pevent.Graphics.FillRectangle(primary, ControlBounds);
                         if (IconVisible)
                         {
-                            pevent.Graphics.DrawIcon(((Form) Parent).Icon,
+                            pevent.Graphics.DrawIcon(((Form)Parent).Icon,
                                 Rectangle.FromLTRB(XTextOffset / 2, XTextOffset / 2, XTextOffset * 2,
                                     Height - (XTextOffset / 2)));
                         }

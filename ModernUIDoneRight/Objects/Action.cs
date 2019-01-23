@@ -4,13 +4,20 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace NickAc.ModernUIDoneRight.Objects
 {
     [Serializable]
     public class AppAction
-    {
+    {        
+
         public Image Image { get; set; }
+        public Cursor Cursor { get; set; }
+        public string ToolTip { get; set; }
+        
+        
+        
 
         /// <summary>
         /// Called to signal to subscribers that it was clicked.
@@ -26,7 +33,8 @@ namespace NickAc.ModernUIDoneRight.Objects
 
         public Rectangle GetRectangle(AppBar bar, List<AppAction> containerList)
         {
-            if (bar != null && containerList != null && containerList.Contains(this)) {
+            if (bar != null && containerList != null && containerList.Contains(this))
+            {
                 int index = containerList.IndexOf(this) + (bar.MenuItems != null && bar.MenuItems.Count > 0 ? 1 : 0);
                 int xTextOffset = bar.XTextOffset;
                 int size = bar.Height - xTextOffset;
