@@ -171,8 +171,12 @@ namespace NickAc.ModernUIDoneRight.Controls
                 if (rect.Contains(e.Location))
                 {
                     if (ToolTip != null)
-                    {   
+                    {
                         ToolTip.SetToolTip(this, action.ToolTip);
+                        if (ToolTip is ModernToolTip mtp)
+                        {
+                            mtp.Caption = action.ToolTip;
+                        }
                     }
                     if (action.Cursor != null)
                     {

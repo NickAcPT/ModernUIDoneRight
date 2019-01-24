@@ -9,13 +9,22 @@ namespace NickAc.ModernUIDoneRight.Controls
 {
     public class ModernToolTip : ToolTip
     {
+        #region Fields
         private readonly int _opacity = 128;
         private Font _font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
         private Size _size = new Size(300, 100);
-        private int _margin = 5;
+        private bool _autoSize = true;
+        private int _margin = 5;        
+        private string _caption;
+        #endregion
+
+        #region Properties 
         public Font Font { get => _font; set => _font = value; }
         public Size Size { get => _size; set => _size = value; }
         public int Margin { get => _margin; set => _margin = value; }
+        public bool AutoSize { get => _autoSize; set => _autoSize = value; }
+        internal string Caption {  set => _caption = value; }
+        #endregion
 
         public ModernToolTip()
         {
@@ -26,10 +35,20 @@ namespace NickAc.ModernUIDoneRight.Controls
 
         void Handle_Popup(object sender, PopupEventArgs e)
         {
-            e.ToolTipSize = Size;
+            if (_autoSize)
+            {
+                Graphics g = Graphics.FromImage(new Bitmap(1, 1));
+                SizeF size = g.MeasureString(_caption, Font, Size.Width);
+                size.Width += Margin * 2;
+                size.Height += Margin * 2;
+                e.ToolTipSize = new Size((int)size.Width, (int)size.Height);
+            }
+            else
+            {
+                e.ToolTipSize = Size;
+            }
         }
-
-
+        
         private void Handle_Draw(object sender, DrawToolTipEventArgs e)
         {
             if (string.IsNullOrEmpty(e.ToolTipText))
