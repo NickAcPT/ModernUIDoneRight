@@ -111,9 +111,9 @@
             this.Controls.Add(this.modernButton1);
             this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
